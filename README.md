@@ -1,7 +1,7 @@
 # BodyCapture
 Aplicativo que captura de dimensões do corpo humano com o Kinect for Windows v2
 
-# System Requirements Recommended
+## System Requirements Recommended
 
 Windows® 8/8.1/10 64-bit
 
