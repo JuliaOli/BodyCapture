@@ -1,0 +1,13 @@
+C:\Users\Wowo\Desktop\sept17\VS 2012\Desktop\XnaGeometry\bin\Debug\XnaGeometry.dll
+C:\Users\Wowo\Desktop\sept17\VS 2012\Desktop\XnaGeometry\bin\Debug\XnaGeometry.pdb
+C:\Users\Wowo\Desktop\sept17\VS 2012\Desktop\XnaGeometry\obj\Debug\XnaGeometry.dll
+C:\Users\Wowo\Desktop\sept17\VS 2012\Desktop\XnaGeometry\obj\Debug\XnaGeometry.pdb
+C:\Users\Wowo\Desktop\sept17\VS 2012\Desktop\Graphics\XnaGeometry\bin\Debug\XnaGeometry.dll
+C:\Users\Wowo\Desktop\sept17\VS 2012\Desktop\Graphics\XnaGeometry\bin\Debug\XnaGeometry.pdb
+C:\Users\Wowo\Desktop\sept17\VS 2012\Desktop\Graphics\XnaGeometry\obj\Debug\XnaGeometry.dll
+C:\Users\Wowo\Desktop\sept17\VS 2012\Desktop\Graphics\XnaGeometry\obj\Debug\XnaGeometry.pdb
+C:\Users\Wowo51\Desktop\sept17\VS 2012\Desktop\Graphics\XnaGeometry\bin\Debug\XnaGeometry.dll
+C:\Users\Wowo51\Desktop\sept17\VS 2012\Desktop\Graphics\XnaGeometry\bin\Debug\XnaGeometry.pdb
+C:\Users\Wowo51\Desktop\sept17\VS 2012\Desktop\Graphics\XnaGeometry\obj\Debug\XnaGeometry.csprojResolveAssemblyReference.cache
+C:\Users\Wowo51\Desktop\sept17\VS 2012\Desktop\Graphics\XnaGeometry\obj\Debug\XnaGeometry.dll
+C:\Users\Wowo51\Desktop\sept17\VS 2012\Desktop\Graphics\XnaGeometry\obj\Debug\XnaGeometry.pdb

@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="CaptureBody.KinectViewer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CaptureBody"
+             mc:Ignorable="d" 
+             d:DesignHeight="1080"
+             d:DesignWidth="1920">
+    <Viewbox>
+        <Grid x:Name="root" Background="Black">
+            <Image Name="Camera" Source="{Binding Image}"/>
+            <Canvas Name="Skeleton">
+                
+            </Canvas>
+        </Grid>
+    </Viewbox>
+</UserControl>

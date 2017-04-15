@@ -1,0 +1,56 @@
+﻿<Window x:Class="CaptureBody.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:CaptureBody"
+        mc:Ignorable="d"
+        Unloaded="Page_Unloaded"
+        Title="KinectUserDort" Height="700" Width="1090">
+
+    <Grid Grid.Row="1" Margin="0,10,0,10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.3*" />
+            <ColumnDefinition Width="0.7*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Margin="30,0">
+            <TextBlock Text="Playback" Margin="0,20" />
+            <Button Content="Playback" HorizontalAlignment="Stretch" Click="Playback_Click" Height="30" />
+            <Button Content="PLAY" Margin="0,10" HorizontalAlignment="Stretch" Click="Play_Click" Height="30" />
+            <TextBlock x:Name="ResultsName" FontSize="25" Margin="0,10" Text="Results"><Run Text="N/A"/></TextBlock>
+            <TextBlock x:Name="tblHeight" FontSize="10" Margin="0" ><Run Text="He"/><Run Text="ight: "/><Run Text="N/A"/></TextBlock>
+            <TextBlock Name="tblLeft" Text="Left: N/A" FontSize="10" Margin="3" />
+            <TextBlock Name="tblRight" Text="Right: N/A" FontSize="10" Margin="3" />
+            <TextBlock x:Name="tblAngleRight" FontSize="10" Margin="3" ><Run Text="Trunk Flexion: N/A"/></TextBlock>
+            <TextBlock x:Name="tblShoulderFlexion" FontSize="10" Margin="3" ><Run Text="Shoulder Flexion: N/A"/></TextBlock>
+            <TextBlock x:Name="tblNeckFlexion" FontSize="10" Margin="3" ><Run Text="Neck Flexion: N/A"/></TextBlock>
+            <TextBlock x:Name="tblNeckExtension" FontSize="10" Margin="3" ><Run Text="Neck Extension: N/A"/></TextBlock>
+            <TextBlock Name="tblPositionHeaderX" Text="Position Header X: N/A" FontSize="10" Margin="3" />
+            <TextBlock Name="tblPositionHeaderY" Text="Position Header Y: N/A" FontSize="10" Margin="3" />
+            <TextBlock Name="tblPositionHeaderZ" Text="Position Header Z: N/A" FontSize="10" Margin="3" />
+            <TextBlock Name="tblPositionShoulderRightX" Text="Position Shoulder Right X: N/A" FontSize="10" Margin="3" />
+            <TextBlock Name="tblPositionShoulderRightY" Text="Position Shoulder Right Y: N/A" FontSize="10" Margin="3" />
+            <TextBlock Name="tblPositionShoulderRightZ" Text="Position Shoulder Right Z: N/A" FontSize="10" Margin="3" />
+            <TextBlock Name="tblPositionElbowRightX" Text="Position Elbow RigthX: N/A" FontSize="10" Margin="3" />
+            <TextBlock Name="tblPositionElbowRightY" Text="Position Elbow RigthY: N/A" FontSize="10" Margin="3" />
+            <TextBlock x:Name="tblPositionElbowRightZ" FontSize="10" Margin="3" ><Run Text="Position Elbow RigthZ"/><Run Text=": N/A"/></TextBlock>
+            
+        </StackPanel>
+        <Grid Grid.Column="1" Margin="0,0,30,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.8*" />
+            </Grid.RowDefinitions>
+            <Viewbox Grid.Row="1">
+                    <controls:KinectViewer x:Name="viewer" Width="1920" Height="1080" />
+                </Viewbox>
+                <Viewbox Grid.Row="1">
+                    <Canvas x:Name="AngleCanvas" Width="1920" Height="1080">
+
+                    </Canvas>
+                </Viewbox>
+
+            </Grid>
+
+    </Grid>
+
+</Window>
