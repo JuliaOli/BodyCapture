@@ -87,7 +87,7 @@ namespace CaptureBody
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
-            viewer.stopKinect();
+            viewer.stopPlayback();
         }
 
         private void Playback_Click(object sender, RoutedEventArgs e)

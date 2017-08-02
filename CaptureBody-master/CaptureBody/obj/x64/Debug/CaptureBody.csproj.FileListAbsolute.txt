@@ -67,3 +67,26 @@ C:\Users\W8\Documents\Visual Studio 2015\Projects\CaptureBody2\CaptureBody-maste
 C:\Users\W8\Documents\Visual Studio 2015\Projects\CaptureBody2\CaptureBody-master\CaptureBody\obj\x64\Debug\CaptureBody.g.resources
 C:\Users\W8\Documents\Visual Studio 2015\Projects\CaptureBody2\CaptureBody-master\CaptureBody\obj\x64\Debug\CaptureBody.Properties.Resources.resources
 C:\Users\W8\Documents\Visual Studio 2015\Projects\CaptureBody2\CaptureBody-master\CaptureBody\obj\x64\Debug\CaptureBody.csproj.GenerateResource.Cache
+C:\Users\W8\Documents\refator\BodyCapture-master\CaptureBody-master\CaptureBody\bin\x64\Debug\CaptureBody.exe.config
+C:\Users\W8\Documents\refator\BodyCapture-master\CaptureBody-master\CaptureBody\obj\x64\Debug\CaptureBody.exe
+C:\Users\W8\Documents\refator\BodyCapture-master\CaptureBody-master\CaptureBody\obj\x64\Debug\CaptureBody.pdb
+C:\Users\W8\Documents\refator\BodyCapture-master\CaptureBody-master\CaptureBody\bin\x64\Debug\CaptureBody.exe
+C:\Users\W8\Documents\refator\BodyCapture-master\CaptureBody-master\CaptureBody\bin\x64\Debug\CaptureBody.pdb
+C:\Users\W8\Documents\refator\BodyCapture-master\CaptureBody-master\CaptureBody\bin\x64\Debug\Microsoft.Kinect.dll
+C:\Users\W8\Documents\refator\BodyCapture-master\CaptureBody-master\CaptureBody\bin\x64\Debug\Microsoft.Kinect.Tools.dll
+C:\Users\W8\Documents\refator\BodyCapture-master\CaptureBody-master\CaptureBody\bin\x64\Debug\XnaGeometry.dll
+C:\Users\W8\Documents\refator\BodyCapture-master\CaptureBody-master\CaptureBody\bin\x64\Debug\Microsoft.Kinect.xml
+C:\Users\W8\Documents\refator\BodyCapture-master\CaptureBody-master\CaptureBody\bin\x64\Debug\Microsoft.Kinect.Tools.xml
+C:\Users\W8\Documents\refator\BodyCapture-master\CaptureBody-master\CaptureBody\bin\x64\Debug\XnaGeometry.pdb
+C:\Users\W8\Documents\refator\BodyCapture-master\CaptureBody-master\CaptureBody\obj\x64\Debug\CaptureBody.csprojResolveAssemblyReference.cache
+C:\Users\W8\Documents\refator\BodyCapture-master\CaptureBody-master\CaptureBody\obj\x64\Debug\KinectViewer.g.cs
+C:\Users\W8\Documents\refator\BodyCapture-master\CaptureBody-master\CaptureBody\obj\x64\Debug\MainWindow.g.cs
+C:\Users\W8\Documents\refator\BodyCapture-master\CaptureBody-master\CaptureBody\obj\x64\Debug\App.g.cs
+C:\Users\W8\Documents\refator\BodyCapture-master\CaptureBody-master\CaptureBody\obj\x64\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\W8\Documents\refator\BodyCapture-master\CaptureBody-master\CaptureBody\obj\x64\Debug\CaptureBody_MarkupCompile.cache
+C:\Users\W8\Documents\refator\BodyCapture-master\CaptureBody-master\CaptureBody\obj\x64\Debug\CaptureBody_MarkupCompile.lref
+C:\Users\W8\Documents\refator\BodyCapture-master\CaptureBody-master\CaptureBody\obj\x64\Debug\KinectViewer.baml
+C:\Users\W8\Documents\refator\BodyCapture-master\CaptureBody-master\CaptureBody\obj\x64\Debug\MainWindow.baml
+C:\Users\W8\Documents\refator\BodyCapture-master\CaptureBody-master\CaptureBody\obj\x64\Debug\CaptureBody.g.resources
+C:\Users\W8\Documents\refator\BodyCapture-master\CaptureBody-master\CaptureBody\obj\x64\Debug\CaptureBody.Properties.Resources.resources
+C:\Users\W8\Documents\refator\BodyCapture-master\CaptureBody-master\CaptureBody\obj\x64\Debug\CaptureBody.csproj.GenerateResource.Cache

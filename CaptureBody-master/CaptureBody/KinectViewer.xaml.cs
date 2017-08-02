@@ -1,21 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Kinect;
 using Microsoft.Kinect.Tools;
 using System.IO;
-using System.Collections;
 //using CaptureAngles.Core;
 
 namespace CaptureBody
@@ -67,19 +59,19 @@ namespace CaptureBody
         private Joint ShoulderLeft;
         private Joint ElbowLeft;
         private Joint WristLeft;
-        private Joint HipLeft;
+        /*private Joint HipLeft;
         private Joint KneeLeft;
         private Joint AnkleLeft;
-        private Joint FootLeft;
+        private Joint FootLeft;*/
 
         // Right Joints
         private Joint ShoulderRight;
         private Joint ElbowRight;
         private Joint WristRight;
-        public Joint HipRight;
+        /*public Joint HipRight;
         public Joint KneeRight;
         public Joint AnkleRight;
-        private Joint FootRight;
+        private Joint FootRight;*/
 
         private int countFrames;
 
@@ -143,6 +135,7 @@ namespace CaptureBody
 
         private void Reader_MultiSourceFrameArrived(object sender, MultiSourceFrameArrivedEventArgs e)
         {
+
             // Gera um sinal
             OnChangesMethods(EventArgs.Empty);
 
@@ -165,7 +158,6 @@ namespace CaptureBody
                     {
 
                         Camera.Source = ToBitmap(frame);
-
                     }
                 }
             }
@@ -416,11 +408,6 @@ namespace CaptureBody
             Skeleton.Children.Add(line);
         }
 
-        //private void DrawLine(Point3D p1, Point3D p2, double borderWidth, SolidColorBrush border)
-        //{
-        //    DrawLine(MathKinect.ToJoint(p1), MathKinect.ToJoint(p2), borderWidth, border);
-        //}
-
         private void DrawBody(Body body)
         {
             updateJoint(body);
@@ -440,7 +427,7 @@ namespace CaptureBody
 
             // Right Torso
             DrawLine(SpineShoulder, ShoulderRight, borderWidth, Brushes.Red);
-            DrawLine(SpineBase, HipRight, borderWidth, Brushes.Red);
+            //DrawLine(SpineBase, HipRight, borderWidth, Brushes.Red);
 
             // Right Arm
             DrawLine(ShoulderRight, ElbowRight, borderWidth, Brushes.Red);
@@ -450,13 +437,13 @@ namespace CaptureBody
             DrawLine(WristRight, body.Joints[JointType.ThumbRight], borderWidth, Brushes.Red);
 
             // Right Leg
-            DrawLine(HipRight, KneeRight, borderWidth, Brushes.Red);
+            /*DrawLine(HipRight, KneeRight, borderWidth, Brushes.Red);
             DrawLine(KneeRight, AnkleRight, borderWidth, Brushes.Red);
-            DrawLine(AnkleRight, FootRight, borderWidth, Brushes.Red);
+            DrawLine(AnkleRight, FootRight, borderWidth, Brushes.Red);*/
 
             // Left Torso
             DrawLine(SpineShoulder, ShoulderLeft, borderWidth, Brushes.Red);
-            DrawLine(SpineBase, HipLeft, borderWidth, Brushes.Red);
+            //DrawLine(SpineBase, HipLeft, borderWidth, Brushes.Red);
 
             // Left Arm
             DrawLine(ShoulderLeft, ElbowLeft, borderWidth, Brushes.Red);
@@ -466,23 +453,10 @@ namespace CaptureBody
             DrawLine(WristLeft, body.Joints[JointType.ThumbLeft], borderWidth, Brushes.Red);
 
             // Left Leg
-            DrawLine(HipLeft, KneeLeft, borderWidth, Brushes.Red);
+            /*DrawLine(HipLeft, KneeLeft, borderWidth, Brushes.Red);
             DrawLine(KneeLeft, AnkleLeft, borderWidth, Brushes.Red);
-            DrawLine(AnkleLeft, FootLeft, borderWidth, Brushes.Red);
-
-            //// Center Line
-            //DrawLineWithSize(SpineShoulder, SpineBase, 1.5, 2, Brushes.Blue);
-
-            //// Line between the knees
-            //DrawLineWithSize(KneeRight, KneeLeft, 1, 2, Brushes.Blue);
-
-            //// Line between the Shouders
-            //DrawLineWithSize(ShoulderRight, ShoulderLeft, 1, 2, Brushes.Blue);
-
-            // hip Line
-            //DrawLine(AuxHipRight, AuxHipLeft, 3, Brushes.GreenYellow);
-
-
+            DrawLine(AnkleLeft, FootLeft, borderWidth, Brushes.Red);*/
+            
         }
 
         private void DrawBodyPoints(Body body)
@@ -532,7 +506,7 @@ namespace CaptureBody
                     case JointType.SpineBase:
                         DrawJoint(SpineBase, radius, fill, borderWidth, border);
                         break;
-                    case JointType.HipLeft:
+                    /*case JointType.HipLeft:
                         DrawJoint(HipLeft, radius, fill, borderWidth, border);
                         break;
                     case JointType.HipRight:
@@ -556,7 +530,7 @@ namespace CaptureBody
                         break;
                     case JointType.FootRight:
                         DrawJoint(FootRight, radius, fill, borderWidth, border);
-                        break;
+                        break;*/
 
                 }
 
@@ -566,14 +540,14 @@ namespace CaptureBody
 
         private void updateJoint(Body body)
         {
-            FootRight = body.Joints[JointType.FootRight];
+            /*FootRight = body.Joints[JointType.FootRight];
             FootLeft = body.Joints[JointType.FootLeft];
             AnkleRight = body.Joints[JointType.AnkleRight];
             AnkleLeft = body.Joints[JointType.AnkleLeft];
             KneeRight = body.Joints[JointType.KneeRight];
             KneeLeft = body.Joints[JointType.KneeLeft];
             HipRight = body.Joints[JointType.HipRight];
-            HipLeft = body.Joints[JointType.HipLeft];
+            HipLeft = body.Joints[JointType.HipLeft];*/
             SpineBase = body.Joints[JointType.SpineBase];
             SpineMid = body.Joints[JointType.SpineMid];
             WristRight = body.Joints[JointType.WristRight];
@@ -642,13 +616,11 @@ namespace CaptureBody
                     {
                         _playback.LoopCount = loopCount;
                         _playback.Start();
-                        //_playback.Pause();
 
                         while (_playback.State == KStudioPlaybackState.Playing || _playback.State == KStudioPlaybackState.Paused)
                         {
                             System.Threading.Thread.Sleep(500);
                         }
-                        //_playback.Stop();
                         _playback.Dispose();
                         _playback = null;
                     }
@@ -659,10 +631,18 @@ namespace CaptureBody
 
         public void playPause()
         {
-            if (Playback == null) return;
-            if (_playback.State == KStudioPlaybackState.Playing)
+            if (Playback != null)
+            {
+                if (_playback.State == KStudioPlaybackState.Playing)
+                {
+                    Pause();
+                }
+                return;
+            }
+            if (_kinect != null)
             {
                 Pause();
+                return;
             }
             else
             {
@@ -680,7 +660,7 @@ namespace CaptureBody
             InitializeReader();
         }
 
-        public void stopKinect()
+        public void stopPlayback()
         {
             if (_playback != null)
             {
@@ -689,6 +669,27 @@ namespace CaptureBody
             }
         }
 
+
+        /// <Stop Kinect Stream>
+        /// The only way of stopping the kinect stream and freeze the screen was closing all the sensor.
+        /// Don't know if there is other option besides this one.
+        /// </Stop Kinect Stream>
+
+        public void stopKinect()
+        {
+
+            try
+            {
+                _kinect.Close();
+
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("unknown Exception {0}", e.Message);
+            }
+        }
+
+        
         public void Clear()
         {
             Camera.Source = null;
@@ -730,15 +731,37 @@ namespace CaptureBody
 
         public void Play()
         {
-            if (_playback == null) return;
-            if (_playback.State == KStudioPlaybackState.Paused) _playback.Resume();
+            if (_playback != null)
+            {
+                if (_playback.State == KStudioPlaybackState.Paused) _playback.Resume();
+                return;
+            }
+            if(_kinect != null)
+            {
+                startKinect();
+                return;
+            }
+
 
         }
 
         public void Pause()
         {
-            if (Playback == null) return;
-            if (_playback.State == KStudioPlaybackState.Playing) _playback.Pause();
+            if (Playback != null)
+            {
+
+                if (_playback.State == KStudioPlaybackState.Playing)
+                {
+                    _playback.Pause();
+                }
+                return;
+            }
+            if(_kinect != null)
+            {
+                
+                stopKinect();
+                return;
+            }
 
         }
 
@@ -757,7 +780,7 @@ namespace CaptureBody
             if (Playback == null) return;
             countFrames++;
             filePathSequanceFrames = filePath;
-            //MessageBox.Show("Captura de sequencia de fremes iniciada");
+
             Play();
         }
 
@@ -792,7 +815,7 @@ namespace CaptureBody
 
             FileInfo file = new FileInfo(fileName + ".txt");
 
-
+            
 
             StreamWriter escrever = file.CreateText();
             ushort[,] depth = new ushort[424, 512];
