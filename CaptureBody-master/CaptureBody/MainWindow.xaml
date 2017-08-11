@@ -43,12 +43,6 @@
             <Viewbox Margin="0,0,0,330">
                 <controls:KinectViewer x:Name="viewer" Width="1920" Height="1080" />
             </Viewbox>
-            
-            <Viewbox Margin="0,330,0,0">
-                <Canvas x:Name="AngleCanvas" Width="1920" Height="1080">
-                    <Ellipse x:Name="Circle2" Fill="Red" Height="1000" Width="1000"></Ellipse>
-                </Canvas>
-            </Viewbox>
 
         </Grid>
     </Grid>

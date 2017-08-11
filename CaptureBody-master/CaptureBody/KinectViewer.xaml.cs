@@ -27,7 +27,7 @@ namespace CaptureBody
 
         //Emula o Kinect
         KStudioClient _client = null;
-
+        
         //Receber o Arquivo .xef
         KStudioPlayback _playback = null;
 
@@ -413,7 +413,6 @@ namespace CaptureBody
             updateJoint(body);
             DrawBodyBones(body);
             DrawBodyPoints(body);
-
         }
 
         private void DrawBodyBones(Body body)
@@ -526,7 +525,6 @@ namespace CaptureBody
                         break;
                     case JointType.FootLeft:
                         DrawJoint(FootLeft, radius, fill, borderWidth, border);
-
                         break;
                     case JointType.FootRight:
                         DrawJoint(FootRight, radius, fill, borderWidth, border);

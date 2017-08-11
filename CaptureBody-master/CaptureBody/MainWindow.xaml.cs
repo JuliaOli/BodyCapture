@@ -2,6 +2,7 @@
 using Microsoft.Kinect;
 using System.Windows;
 using System.Windows.Forms;
+using Microsoft.Kinect.Tools;
 
 namespace CaptureBody
 {
@@ -29,7 +30,7 @@ namespace CaptureBody
             double shoulderFlexion = Math.Round(body.ShoulderFlexion(), 2);
             double neckFlexion = Math.Round(body.neckFlexion(), 2);
             double neckExtension = Math.Round(body.neckExtension(), 2);
-            
+
 
             // Display height.
             tblHeight.Text = "Height: " + height.ToString() + "m";
@@ -54,7 +55,7 @@ namespace CaptureBody
             tblPositionElbowRightX.Text = "Position Rigth Elbow Y: " + body.Joints[JointType.ElbowRight].Position.Y;
             tblPositionElbowRightY.Text = "Position Rigth Elbow X: " + body.Joints[JointType.ElbowRight].Position.X;
             tblPositionElbowRightZ.Text = "Position Rigth Elbow Y: " + body.Joints[JointType.ElbowRight].Position.Y;
-
+      
         }
 
         private void viewer_ChangesMethods(object sender, EventArgs e)
@@ -69,6 +70,7 @@ namespace CaptureBody
             this.body = viewer.BodyTracked;
             if (body == null) return;
             Sensor_SkeletonFrameReady();
+            
 
         }
         /*<Button x:Name="btnRecord" Content="Record" HorizontalAlignment="Left" Margin="0,10" VerticalAlignment="Top" Width="200" Height="20" ToolTip="Gravar" Click="btnRecord_Click"/>
@@ -78,7 +80,6 @@ namespace CaptureBody
             btnStop.IsEnabled = true;
             Sensor_SkeletonFrameReady();
         }
-
         private void btnStop_Click(object sender, RoutedEventArgs e)
         {
             btnRecord.Focus();
@@ -98,10 +99,17 @@ namespace CaptureBody
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 string filePath = openFileDialog1.FileName;
-
                 viewer.startPlayback(filePath);
+
+
+
+
+
+
             }
         }
+
+        
 
         private void Play_Click(object sender, RoutedEventArgs e)
         {
@@ -111,5 +119,6 @@ namespace CaptureBody
 
 
     }
+
 
 }

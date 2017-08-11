@@ -8,27 +8,16 @@
              d:DesignHeight="1080"
              d:DesignWidth="1920">
     
-    <Grid x:Name="root" Background="Black">
+    <Grid x:Name="root">
 
-            <Viewbox Margin="0,0,980,540">
-                <Image Name="Camera" Source="{Binding Image}"/>
-            </Viewbox>
+        <Grid Margin="0,0,0,540">
+            <Image Name="Camera" Source="{Binding Image}"/>
+        </Grid>
 
-            <Viewbox Margin="980,540,0,0">
-                <Ellipse x:Name="Circle1" Fill="Green" Height="5" Width="5"></Ellipse>
-            </Viewbox>
 
-        <Viewbox Margin="980,0,0,540">
-
-            <Ellipse x:Name="Circle2" Fill="Yellow" Height="5" Width="5"></Ellipse>
-
-        </Viewbox>
-
-        <Viewbox Margin="0,540,980,0">
-            <Canvas Name="Skeleton">
-
-            </Canvas>
-        </Viewbox>
-
+        <Grid Margin="0,540, 0, 0">
+            <Canvas Background="Transparent" Name="Skeleton" />
+        </Grid>
+        
     </Grid>
 </UserControl>
