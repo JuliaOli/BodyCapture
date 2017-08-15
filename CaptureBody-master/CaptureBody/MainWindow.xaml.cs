@@ -173,8 +173,18 @@ namespace CaptureBody
             Debug.WriteLine(csvContent);
             string time = System.DateTime.UtcNow.ToString("hh'-'mm'-'ss", CultureInfo.CurrentUICulture.DateTimeFormat);
 
-            string myPhotos = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-            string path = Path.Combine(myPhotos, "KinectScreenshot-BodyIndex-" + time + ".png");
+            string myPhotos = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string path = Path.Combine(myPhotos, "KinectSaveBodyInformation-BodyIndex-" + time + ".csv");
+            
+            
+            try
+            {
+                File.AppendAllText(path, csvContent.ToString());
+            }
+            catch (IOException)
+            {
+                Debug.WriteLine("Erro writing the file");
+            }
 
             /*if (this.bodyIndexBitmap != null)
             {
