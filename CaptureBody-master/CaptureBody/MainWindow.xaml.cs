@@ -123,69 +123,80 @@ namespace CaptureBody
         private void AngleString(StringBuilder csvContent, Body body)
         {
             string aux;
-            aux = "Height," + height.ToString() + "m";
+            aux = "Height;" + height.ToString() + "m";
             csvContent.AppendLine(aux);
             // Display height.
 
             //Display Arms
-            aux = "Left," + left.ToString() + "m";
+            aux = "Left;" + left.ToString() + "m";
             csvContent.AppendLine(aux);
-            aux = "Right," + right.ToString() + "m";
+            aux = "Right;" + right.ToString() + "m";
             csvContent.AppendLine(aux);
 
             //tblAngleLeft.Text = "Relative Angle Left: " + leftArmRelativeAngle.ToString() + "º";
-            aux = "Angle Hip Right," + rightHipAngle.ToString() + "º";
+            aux = "Angle Hip Right;" + rightHipAngle.ToString() + " graus";
             csvContent.AppendLine(aux);
-            aux = "Shoulder Flexion," + shoulderFlexion.ToString() + "º";
+            aux = "Shoulder Flexion;" + shoulderFlexion.ToString() + " graus";
             csvContent.AppendLine(aux);
-            aux = "Neck Flexion," + neckFlexion.ToString() + "º";
+            aux = "Neck Flexion;" + neckFlexion.ToString() + " graus";
             csvContent.AppendLine(aux);
-            aux = "Neck Extension," + neckExtension.ToString() + "º";
+            aux = "Neck Extension;" + neckExtension.ToString() + " graus";
             csvContent.AppendLine(aux);
 
             //Display bodyPositions
             //Display LeftArmPositions
-            aux = "Position Head X," + body.Joints[JointType.Head].Position.X;
-            csvContent.AppendLine(aux);
-            aux = "Position Head Y," + body.Joints[JointType.Head].Position.Y;
-            csvContent.AppendLine(aux);
-            aux = "Position Head Z: " + body.Joints[JointType.Head].Position.Z;
-            csvContent.AppendLine(aux);
-            aux = "Position Right Shoulder Y," + body.Joints[JointType.ShoulderRight].Position.Y;
-            csvContent.AppendLine(aux);
-            aux = "Position Right Shoulder X," + body.Joints[JointType.ShoulderRight].Position.X;
-            csvContent.AppendLine(aux);
-            aux = "Position Right Shoulder Y," + body.Joints[JointType.ShoulderRight].Position.Y;
-            csvContent.AppendLine(aux);
-            aux = "Position Rigth Elbow Y," + body.Joints[JointType.ElbowRight].Position.Y;
-            csvContent.AppendLine(aux);
-            aux = "Position Rigth Elbow X," + body.Joints[JointType.ElbowRight].Position.X;
-            csvContent.AppendLine(aux);
-            aux = "Position Rigth Elbow Y," + body.Joints[JointType.ElbowRight].Position.Y;
-            csvContent.AppendLine(aux);
+            try
+            {
+                // FileStream is IDisposable
+                aux = "Position Head X;" + body.Joints[JointType.Head].Position.X.ToString();
+                csvContent.AppendLine(aux);
+                aux = "Position Head Y;" + body.Joints[JointType.Head].Position.Y.ToString();
+                csvContent.AppendLine(aux);
+                aux = "Position Head Z," + body.Joints[JointType.Head].Position.Z.ToString();
+                csvContent.AppendLine(aux);
+                aux = "Position Right Shoulder Y;" + body.Joints[JointType.ShoulderRight].Position.Y.ToString();
+                csvContent.AppendLine(aux);
+                aux = "Position Right Shoulder X;" + body.Joints[JointType.ShoulderRight].Position.X.ToString();
+                csvContent.AppendLine(aux);
+                aux = "Position Right Shoulder Y;" + body.Joints[JointType.ShoulderRight].Position.Y.ToString();
+                csvContent.AppendLine(aux).ToString();
+                aux = "Position Rigth Elbow Y;" + body.Joints[JointType.ElbowRight].Position.Y.ToString();
+                csvContent.AppendLine(aux);
+                aux = "Position Rigth Elbow X;" + body.Joints[JointType.ElbowRight].Position.X.ToString();
+                csvContent.AppendLine(aux);
+                aux = "Position Rigth Elbow Y;" + body.Joints[JointType.ElbowRight].Position.Y.ToString();
+                csvContent.AppendLine(aux);
+            }
+            catch (NullReferenceException)
+            {
+                Debug.WriteLine("Erro loading the file. " + "Variable body hasn't been set yet");
+            }
+            
         }
 
         private void ScreenshotButton_Click(object sender, RoutedEventArgs e)
         {
+            
             StringBuilder csvContent = new StringBuilder();
-            csvContent.AppendLine("Type,Angle");
-            AngleString(csvContent, body);
-            Debug.WriteLine(csvContent);
-            string time = System.DateTime.UtcNow.ToString("hh'-'mm'-'ss", CultureInfo.CurrentUICulture.DateTimeFormat);
-
-            string myPhotos = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            string path = Path.Combine(myPhotos, "KinectSaveBodyInformation-BodyIndex-" + time + ".csv");
-            
-            
-            try
+            if(body != null)
             {
-                File.AppendAllText(path, csvContent.ToString());
-            }
-            catch (IOException)
-            {
-                Debug.WriteLine("Erro writing the file");
-            }
+                csvContent.AppendLine("Type;Angle/Lenght/Position");
+                AngleString(csvContent, body);
+                Debug.WriteLine(csvContent);
+                string time = System.DateTime.UtcNow.ToString("hh'-'mm'-'ss", CultureInfo.CurrentUICulture.DateTimeFormat);
+                string myPhotos = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                string path = Path.Combine(myPhotos, "KinectSaveBodyInformation-BodyIndex-" + time + ".csv");
 
+                try
+                {
+                    File.AppendAllText(path, csvContent.ToString());
+                }
+                catch (IOException)
+                {
+                    Debug.WriteLine("Erro writing the file");
+                }
+            }
+           
             /*if (this.bodyIndexBitmap != null)
             {
                 // create a png bitmap encoder which knows how to save a .png file

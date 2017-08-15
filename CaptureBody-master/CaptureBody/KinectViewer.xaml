@@ -16,7 +16,7 @@
 
 
         <Grid Margin="0,540, 0, 0">
-            <Canvas Background="Transparent" Name="Skeleton" />
+            <Canvas Background="Black" Name="Skeleton" />
         </Grid>
         
     </Grid>
