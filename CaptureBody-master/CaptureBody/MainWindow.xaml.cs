@@ -122,6 +122,10 @@ namespace CaptureBody
             }
         }
 
+
+
+        //FUNCTION DIRECT TO NEW CLASSE (CONSTRUCTOR RECIEVE VARIABLE BODY) 
+
         private void AngleString(StringBuilder csvContent, Body body)
         {
             string aux;
@@ -189,8 +193,8 @@ namespace CaptureBody
                 string myPhotos = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                 
                 // create a png bitmap encoder which knows how to save a .png file
-                System.Windows.Media.Imaging.BitmapEncoder encoder = new PngBitmapEncoder();
-                System.Windows.Media.Imaging.BitmapEncoder encoderCanvas = new PngBitmapEncoder();
+                BitmapEncoder encoder = new PngBitmapEncoder();
+                BitmapEncoder encoderCanvas = new PngBitmapEncoder();
 
                 // create frame from the writable bitmap and add to encoder
                 encoder.Frames.Add(BitmapFrame.Create((BitmapSource)viewer.Camera.Source));
