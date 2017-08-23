@@ -7,6 +7,8 @@ using System.IO;
 using System.Windows.Forms;
 using System.Globalization;
 using Microsoft.Kinect.Tools;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
 
 namespace CaptureBody
 {
@@ -178,17 +180,83 @@ namespace CaptureBody
         {
             
             StringBuilder csvContent = new StringBuilder();
-            if(body != null)
+            if(body != null && viewer.Camera != null)
             {
                 csvContent.AppendLine("Type;Angle/Lenght/Position");
                 AngleString(csvContent, body);
-                Debug.WriteLine(csvContent);
+                
                 string time = System.DateTime.UtcNow.ToString("hh'-'mm'-'ss", CultureInfo.CurrentUICulture.DateTimeFormat);
                 string myPhotos = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                string path = Path.Combine(myPhotos, "KinectSaveBodyInformation-BodyIndex-" + time + ".csv");
+                
+                // create a png bitmap encoder which knows how to save a .png file
+                System.Windows.Media.Imaging.BitmapEncoder encoder = new PngBitmapEncoder();
+                System.Windows.Media.Imaging.BitmapEncoder encoderCanvas = new PngBitmapEncoder();
+
+                // create frame from the writable bitmap and add to encoder
+                encoder.Frames.Add(BitmapFrame.Create((BitmapSource)viewer.Camera.Source));
+                
+                Int32 width = (Int32)viewer.Skeleton.ActualWidth;
+                Int32 height = (Int32)viewer.Skeleton.ActualHeight;
+                
+                RenderTargetBitmap renderBitmap = new RenderTargetBitmap(width, height, 96d, 96d, PixelFormats.Pbgra32);
+                renderBitmap.Render(viewer.Skeleton);
+
+                //JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+                PngBitmapEncoder pngEncoder = new PngBitmapEncoder();
+                pngEncoder.Frames.Add(BitmapFrame.Create(renderBitmap));
+                
+                //Create a new folder
+                string folderName = "KinectSaveBodyInformation-BodyIndex-" + time;
+                string subFolder = Path.Combine(myPhotos, folderName);
 
                 try
                 {
+                    // Determine whether the directory exists.
+                    if (Directory.Exists(subFolder))
+                    {
+                        Console.WriteLine("That path exists already.");
+                        return;
+                    }
+
+                    // Try to create the directory.
+                    DirectoryInfo di = Directory.CreateDirectory(subFolder);
+                    Console.WriteLine("The directory was created successfully at {0}.", Directory.GetCreationTime(subFolder));
+                    
+                }
+                catch (IOException)
+                {
+                    Console.WriteLine("The process failed: {0}", e.ToString());
+                }
+                finally { }
+                
+
+        
+                //Name of the files (csv,png,png(canvas))
+                string path = Path.Combine(subFolder, "KinectSaveBodyInformation-" + time + ".csv");
+
+                //Debug.WriteLine(subFolder);
+                
+                string imagePath = Path.Combine(subFolder, "CameraImage-" + time + ".png");
+
+                //canvas
+
+                string imagePathCanvas = Path.Combine(subFolder, "Skeleton-" + time + ".png");
+
+                Debug.WriteLine(imagePath);
+
+
+                try
+                {
+                    using (FileStream fs = new FileStream(imagePath, FileMode.Create))
+                    {
+                        encoder.Save(fs);
+                    }
+
+                    using (FileStream fs = new FileStream(imagePathCanvas, FileMode.Create))
+                    {
+                        pngEncoder.Save(fs);
+                    }
+
                     File.AppendAllText(path, csvContent.ToString());
                 }
                 catch (IOException)
@@ -196,37 +264,6 @@ namespace CaptureBody
                     Debug.WriteLine("Erro writing the file");
                 }
             }
-           
-            /*if (this.bodyIndexBitmap != null)
-            {
-                // create a png bitmap encoder which knows how to save a .png file
-                BitmapEncoder encoder = new PngBitmapEncoder();
-
-                // create frame from the writable bitmap and add to encoder
-                encoder.Frames.Add(BitmapFrame.Create(this.bodyIndexBitmap));
-
-                string time = System.DateTime.UtcNow.ToString("hh'-'mm'-'ss", CultureInfo.CurrentUICulture.DateTimeFormat);
-
-                string myPhotos = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-
-                string path = Path.Combine(myPhotos, "KinectScreenshot-BodyIndex-" + time + ".png");
-
-                // write the new file to disk
-                try
-                {
-                    // FileStream is IDisposable
-                    using (FileStream fs = new FileStream(path, FileMode.Create))
-                    {
-                        encoder.Save(fs);
-                    }
-
-                    this.StatusText = string.Format(CultureInfo.CurrentCulture, Properties.Resources.SavedScreenshotStatusTextFormat, path);
-                }
-                catch (IOException)
-                {
-                    this.StatusText = string.Format(CultureInfo.CurrentCulture, Properties.Resources.FailedScreenshotStatusTextFormat, path);
-                }
-            }*/
 
         }
 
@@ -241,6 +278,5 @@ namespace CaptureBody
 
 
     }
-
 
 }

@@ -610,7 +610,6 @@ namespace CaptureBody
                 using (_client = KStudio.CreateClient())
                 {
                     _client.ConnectToService();
-                   Debug.WriteLine(_client.IsServiceConnected);
                     
                     using (_playback = _client.CreatePlayback(filePath))
                     {
