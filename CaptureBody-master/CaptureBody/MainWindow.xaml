@@ -6,7 +6,7 @@
         xmlns:controls="clr-namespace:CaptureBody"
         mc:Ignorable="d"
         Unloaded="Page_Unloaded"
-        Title="KinectUserDort" Height="700" Width="1090">
+        Title="BodyCapture" Height="700" Width="1090">
     <Window.Resources>
         <SolidColorBrush x:Key="MediumGreyBrush" Color="#ff6e6e6e" />
         <SolidColorBrush x:Key="KinectPurpleBrush" Color="#ff52318f" />
