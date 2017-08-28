@@ -72,8 +72,8 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.8*" />
             </Grid.RowDefinitions>
-            <Viewbox Margin="0,0,0,264">
-                <controls:KinectViewer x:Name="viewer" Width="1920" Height="1006" />
+            <Viewbox>
+                <controls:KinectViewer x:Name="viewer" Width="2078" Height="1857" />
             </Viewbox>
 
         </Grid>
