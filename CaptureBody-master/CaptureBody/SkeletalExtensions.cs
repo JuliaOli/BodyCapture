@@ -168,7 +168,8 @@ namespace CaptureBody
             return ThetaInDegrees;
         }
 
-        public static double ShoulderFlexion(this Body body)
+        //eixos y e z
+        public static double RightShoulderFlexion(this Body body)
         {
             Joint rightElbow = body.Joints[JointType.ElbowRight];
             Joint rightShoulder = body.Joints[JointType.ShoulderRight];
@@ -176,9 +177,9 @@ namespace CaptureBody
 
 
             //Vector3 v = new Vector3(3,3,3);
-            Vector3 u = new Vector3(rightElbow.Position.X - rightShoulder.Position.X, rightElbow.Position.Y - rightShoulder.Position.Y,
+            Vector3 u = new Vector3(0, rightElbow.Position.Y - rightShoulder.Position.Y,
                 rightElbow.Position.Z - rightShoulder.Position.Z);
-            Vector3 v = new Vector3(rightHip.Position.X - rightShoulder.Position.X, rightHip.Position.Y - rightShoulder.Position.Y,
+            Vector3 v = new Vector3(0, rightHip.Position.Y - rightShoulder.Position.Y,
                 rightHip.Position.Z - rightShoulder.Position.Z);
 
             Double cosTheta = Vector3.Dot(Vector3.Normalize(u), Vector3.Normalize(v));
@@ -188,8 +189,30 @@ namespace CaptureBody
             return ThetaInDegrees;
         }
 
+        //eixos y e z
+        public static double LeftShoulderFlexion(this Body body)
+        {
+            Joint leftElbow = body.Joints[JointType.ElbowLeft];
+            Joint leftShoulder = body.Joints[JointType.ShoulderLeft];
+            Joint leftHip = body.Joints[JointType.HipLeft];
+
+
+            //Vector3 v = new Vector3(3,3,3);
+            Vector3 u = new Vector3(0, leftElbow.Position.Y - leftShoulder.Position.Y,
+                leftElbow.Position.Z - leftShoulder.Position.Z);
+            Vector3 v = new Vector3(0, leftHip.Position.Y - leftShoulder.Position.Y,
+                leftHip.Position.Z - leftShoulder.Position.Z);
+
+            Double cosTheta = Vector3.Dot(Vector3.Normalize(u), Vector3.Normalize(v));
+
+            Double ThetaInDegrees = Math.Acos(cosTheta) * 180 / Math.PI;
+
+            return ThetaInDegrees;
+        }
+
         //Adicionando abducao
-        public static double ShoulderAbduction(this Body body)
+        //eixos x e y
+        public static double RightShoulderAbduction(this Body body)
         {
             Joint rightElbow = body.Joints[JointType.ElbowRight];
             Joint rightShoulder = body.Joints[JointType.ShoulderRight];
@@ -200,6 +223,28 @@ namespace CaptureBody
             Vector3 u = new Vector3(rightElbow.Position.X - rightShoulder.Position.X, rightElbow.Position.Y - rightShoulder.Position.Y,
                 0);
             Vector3 v = new Vector3(rightHip.Position.X - rightShoulder.Position.X, rightHip.Position.Y - rightShoulder.Position.Y,
+                0);
+
+            Double cosTheta = Vector3.Dot(Vector3.Normalize(u), Vector3.Normalize(v));
+
+            Double ThetaInDegrees = Math.Acos(cosTheta) * 180 / Math.PI;
+
+            return ThetaInDegrees;
+        }
+
+        //Adicionando abducao
+        //eixos x e y
+        public static double LeftShoulderAbduction(this Body body)
+        {
+            Joint leftElbow = body.Joints[JointType.ElbowLeft];
+            Joint leftShoulder = body.Joints[JointType.ShoulderLeft];
+            Joint leftHip = body.Joints[JointType.HipLeft];
+
+
+            //Vector3 v = new Vector3(3,3,3);
+            Vector3 u = new Vector3(leftElbow.Position.X - leftShoulder.Position.X, leftElbow.Position.Y - leftShoulder.Position.Y,
+                0);
+            Vector3 v = new Vector3(leftHip.Position.X - leftShoulder.Position.X, leftHip.Position.Y - leftShoulder.Position.Y,
                 0);
 
             Double cosTheta = Vector3.Dot(Vector3.Normalize(u), Vector3.Normalize(v));

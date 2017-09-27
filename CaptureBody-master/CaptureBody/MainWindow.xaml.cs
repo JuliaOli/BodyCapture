@@ -22,11 +22,17 @@ namespace CaptureBody
         double left = 0;
         double right = 0;
         double rightHipAngle = 0;
-        double shoulderFlexion = 0;
+        
         double neckFlexion = 0;
         double neckExtension = 0;
-        //Adicionando abducao
-        double shoulderAbduction = 0;
+        
+        //abducao de ombro
+        double rightShoulderAbduction = 0;
+        double leftShoulderAbduction = 0;
+
+        //flexao de ombro
+        double rightShoulderFlexion = 0;
+        double leftShoulderFlexion = 0;
 
         public MainWindow()
         {
@@ -42,12 +48,20 @@ namespace CaptureBody
             left = Math.Round(body.LeftHand(), 2);
             right = Math.Round(body.RightHand(), 2);
             rightHipAngle = Math.Round(body.HipRelativeAngle(), 2);
-            shoulderFlexion = Math.Round(body.ShoulderFlexion(), 2);
+
+            //Flexao de ombro
+            rightShoulderFlexion = Math.Round(body.RightShoulderFlexion(), 2);
+            leftShoulderFlexion = Math.Round(body.LeftShoulderFlexion(), 2);
+
+            //Neck
             neckFlexion = Math.Round(body.neckFlexion(), 2);
             neckExtension = Math.Round(body.neckExtension(), 2);
-            //Adicionando abducao
-            shoulderAbduction = Math.Round(body.ShoulderAbduction(), 2);
-            Console.WriteLine(shoulderAbduction);
+
+            //Abducao de ombro
+            rightShoulderAbduction = Math.Round(body.RightShoulderAbduction(), 2);
+            leftShoulderAbduction = Math.Round(body.LeftShoulderAbduction(), 2);
+            
+            Debug.WriteLine(leftShoulderFlexion);
         }
 
         void Sensor_SkeletonFrameReady()
@@ -63,7 +77,7 @@ namespace CaptureBody
             tblRight.Text = "Right: " + right.ToString() + "m";
             //tblAngleLeft.Text = "Relative Angle Left: " + leftArmRelativeAngle.ToString() + "º";
             tblAngleRight.Text = "Angle Hip Right: " + rightHipAngle.ToString() + "º";
-            tblShoulderFlexion.Text = "Shoulder Flexion: " + shoulderFlexion.ToString() + "º";
+            tblShoulderFlexion.Text = "Shoulder Flexion: " + rightShoulderFlexion.ToString() + "º";
             tblNeckFlexion.Text = "Neck Flexion: " + neckFlexion.ToString() + "º";
             tblNeckExtension.Text = "Neck Extension: " + neckExtension.ToString() + "º";
 
@@ -147,7 +161,7 @@ namespace CaptureBody
             //tblAngleLeft.Text = "Relative Angle Left: " + leftArmRelativeAngle.ToString() + "º";
             aux = "Angle Hip Right;" + rightHipAngle.ToString() + " graus";
             csvContent.AppendLine(aux);
-            aux = "Shoulder Flexion;" + shoulderFlexion.ToString() + " graus";
+            aux = "Shoulder Flexion;" + rightShoulderFlexion.ToString() + " graus";
             csvContent.AppendLine(aux);
             aux = "Neck Flexion;" + neckFlexion.ToString() + " graus";
             csvContent.AppendLine(aux);
