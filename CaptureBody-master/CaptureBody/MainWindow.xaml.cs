@@ -67,13 +67,20 @@ namespace CaptureBody
             tblPositionHeaderX.Text = "Position Head X: " + body.Joints[JointType.Head].Position.X;
             tblPositionHeaderY.Text = "Position Head Y: " + body.Joints[JointType.Head].Position.Y;
             tblPositionHeaderZ.Text = "Position Head Z: " + body.Joints[JointType.Head].Position.Z;
-            tblPositionShoulderRightX.Text = "Position Right Shoulder Y: " + body.Joints[JointType.ShoulderRight].Position.Y;
-            tblPositionShoulderRightY.Text = "Position Right Shoulder X: " + body.Joints[JointType.ShoulderRight].Position.X;
-            tblPositionShoulderRightZ.Text = "Position Right Shoulder Y: " + body.Joints[JointType.ShoulderRight].Position.Y;
-            tblPositionElbowRightX.Text = "Position Rigth Elbow Y: " + body.Joints[JointType.ElbowRight].Position.Y;
-            tblPositionElbowRightY.Text = "Position Rigth Elbow X: " + body.Joints[JointType.ElbowRight].Position.X;
-            tblPositionElbowRightZ.Text = "Position Rigth Elbow Y: " + body.Joints[JointType.ElbowRight].Position.Y;
-      
+
+            tblPositionShoulderLeftX.Text = "Position Shoulder Right X: " + body.Joints[JointType.ShoulderLeft].Position.X;
+            tblPositionShoulderLeftY.Text = "Position Shoulder Right Y: " + body.Joints[JointType.ShoulderLeft].Position.Y;
+            tblPositionShoulderLeftZ.Text = "Position Shoulder Right Z: " + body.Joints[JointType.ShoulderLeft].Position.Z;
+            tblPositionElbowLeftX.Text = "Position Rigth Elbow X: " + body.Joints[JointType.ElbowRight].Position.X;
+            tblPositionElbowLeftY.Text = "Position Rigth Elbow Y: " + body.Joints[JointType.ElbowRight].Position.Y;
+            tblPositionElbowLeftZ.Text = "Position Rigth Elbow Z: " + body.Joints[JointType.ElbowRight].Position.Z;
+
+            tblPositionShoulderRightX.Text = "Position Right Shoulder X: " + body.Joints[JointType.ShoulderRight].Position.X;
+            tblPositionShoulderRightY.Text = "Position Right Shoulder Y: " + body.Joints[JointType.ShoulderRight].Position.Y;
+            tblPositionShoulderRightZ.Text = "Position Right Shoulder Z: " + body.Joints[JointType.ShoulderRight].Position.Z;
+            tblPositionElbowRightX.Text = "Position Rigth Elbow Y: " + body.Joints[JointType.ElbowRight].Position.X;
+            tblPositionElbowRightY.Text = "Position Rigth Elbow X: " + body.Joints[JointType.ElbowRight].Position.Y;
+            tblPositionElbowRightZ.Text = "Position Rigth Elbow Y: " + body.Joints[JointType.ElbowRight].Position.Z;
         }
 
         private void viewer_ChangesMethods(object sender, EventArgs e)

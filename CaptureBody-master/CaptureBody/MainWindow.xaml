@@ -49,7 +49,7 @@
             <TextBlock Text="Playback" Margin="0,20" />
             <Button Content="Playback" HorizontalAlignment="Stretch" Click="Playback_Click" Height="30" />
             <Button Content="PLAY" Margin="0,10" HorizontalAlignment="Stretch" Click="Play_Click" Height="30" />
-            <TextBlock x:Name="ResultsName" FontSize="25" Margin="0,10" Text="Results"><Run Text="N/A"/></TextBlock>
+            <TextBlock x:Name="ResultsName" FontSize="20" Margin="0,10" Text="Results"><Run Text="N/A"/></TextBlock>
             <TextBlock x:Name="tblHeight" FontSize="10" Margin="0" ><Run Text="He"/><Run Text="ight: "/><Run Text="N/A"/></TextBlock>
             <TextBlock Name="tblLeft" Text="Left: N/A" FontSize="10" Margin="3" />
             <TextBlock Name="tblRight" Text="Right: N/A" FontSize="10" Margin="3" />
@@ -60,6 +60,14 @@
             <TextBlock Name="tblPositionHeaderX" Text="Position Header X: N/A" FontSize="10" Margin="3" />
             <TextBlock Name="tblPositionHeaderY" Text="Position Header Y: N/A" FontSize="10" Margin="3" />
             <TextBlock Name="tblPositionHeaderZ" Text="Position Header Z: N/A" FontSize="10" Margin="3" />
+            
+            <TextBlock Name="tblPositionShoulderLeftX" Text="Position Shoulder Right X: N/A" FontSize="10" Margin="3" />
+            <TextBlock Name="tblPositionShoulderLeftY" Text="Position Shoulder Right Y: N/A" FontSize="10" Margin="3" />
+            <TextBlock Name="tblPositionShoulderLeftZ" Text="Position Shoulder Right Z: N/A" FontSize="10" Margin="3" />
+            <TextBlock Name="tblPositionElbowLeftX" Text="Position Elbow RigthX: N/A" FontSize="10" Margin="3" />
+            <TextBlock Name="tblPositionElbowLeftY" Text="Position Elbow RigthY: N/A" FontSize="10" Margin="3" />
+            <TextBlock x:Name="tblPositionElbowLeftZ" FontSize="10" Margin="3" ><Run Text="Position Elbow RigthZ"/><Run Text=": N/A"/></TextBlock>
+
             <TextBlock Name="tblPositionShoulderRightX" Text="Position Shoulder Right X: N/A" FontSize="10" Margin="3" />
             <TextBlock Name="tblPositionShoulderRightY" Text="Position Shoulder Right Y: N/A" FontSize="10" Margin="3" />
             <TextBlock Name="tblPositionShoulderRightZ" Text="Position Shoulder Right Z: N/A" FontSize="10" Margin="3" />

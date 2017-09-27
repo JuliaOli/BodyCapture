@@ -103,8 +103,8 @@ namespace CaptureBody
 
             //return Length(shoulderLeft, elbowLeft, wristLeft, handLeft);
             //returnL ength(hipLeft, handLeft);
-            //return graus;
-            return 6;
+            return graus;
+            //return 6;
         }
 
         /// <summary>
