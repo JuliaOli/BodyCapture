@@ -188,6 +188,27 @@ namespace CaptureBody
             return ThetaInDegrees;
         }
 
+        //Adicionando abducao
+        public static double ShoulderAbduction(this Body body)
+        {
+            Joint rightElbow = body.Joints[JointType.ElbowRight];
+            Joint rightShoulder = body.Joints[JointType.ShoulderRight];
+            Joint rightHip = body.Joints[JointType.HipRight];
+
+
+            //Vector3 v = new Vector3(3,3,3);
+            Vector3 u = new Vector3(rightElbow.Position.X - rightShoulder.Position.X, rightElbow.Position.Y - rightShoulder.Position.Y,
+                0);
+            Vector3 v = new Vector3(rightHip.Position.X - rightShoulder.Position.X, rightHip.Position.Y - rightShoulder.Position.Y,
+                0);
+
+            Double cosTheta = Vector3.Dot(Vector3.Normalize(u), Vector3.Normalize(v));
+
+            Double ThetaInDegrees = Math.Acos(cosTheta) * 180 / Math.PI;
+
+            return ThetaInDegrees;
+        }
+
         //Baseado no artigo:http://www.efdeportes.com/efd182/condicoes-de-trabalho-de-um-setor-de-secretaria.htm
         //Figura: Avaliação postural por meio do Software de Avaliação Postura
         public static double HipRelativeAngle(this Body body)

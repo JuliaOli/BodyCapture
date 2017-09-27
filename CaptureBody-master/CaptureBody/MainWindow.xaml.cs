@@ -25,6 +25,8 @@ namespace CaptureBody
         double shoulderFlexion = 0;
         double neckFlexion = 0;
         double neckExtension = 0;
+        //Adicionando abducao
+        double shoulderAbduction = 0;
 
         public MainWindow()
         {
@@ -43,6 +45,9 @@ namespace CaptureBody
             shoulderFlexion = Math.Round(body.ShoulderFlexion(), 2);
             neckFlexion = Math.Round(body.neckFlexion(), 2);
             neckExtension = Math.Round(body.neckExtension(), 2);
+            //Adicionando abducao
+            shoulderAbduction = Math.Round(body.ShoulderAbduction(), 2);
+            Console.WriteLine(shoulderAbduction);
         }
 
         void Sensor_SkeletonFrameReady()
