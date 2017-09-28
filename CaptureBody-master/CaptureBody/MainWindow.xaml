@@ -54,7 +54,7 @@
             <TextBlock Name="tblLeft" Text="Left: N/A" FontSize="10" Margin="3" />
             <TextBlock Name="tblRight" Text="Right: N/A" FontSize="10" Margin="3" />
             <TextBlock x:Name="tblAngleRight" FontSize="10" Margin="3" ><Run Text="Trunk Flexion: N/A"/></TextBlock>
-            <TextBlock x:Name="tblShoulderFlexion" FontSize="10" Margin="3" ><Run Text="Shoulder Flexion: N/A"/></TextBlock>
+            <TextBlock Foreground="{Binding Path=DataContext.ForegroundColor}" x:Name="tblShoulderFlexion" FontSize="10" Margin="3" ><Run Text="Shoulder Flexion: N/A"/></TextBlock>
             <TextBlock x:Name="tblNeckFlexion" FontSize="10" Margin="3" ><Run Text="Neck Flexion: N/A"/></TextBlock>
             <TextBlock x:Name="tblNeckExtension" FontSize="10" Margin="3" ><Run Text="Neck Extension: N/A"/></TextBlock>
             <TextBlock Name="tblPositionHeaderX" Text="Position Header X: N/A" FontSize="10" Margin="3" />

@@ -31,7 +31,7 @@ namespace CaptureBody
             left = Math.Round(body.LeftHand(), 2);
             right = Math.Round(body.RightHand(), 2);
             rightHipAngle = Math.Round(body.HipRelativeAngle(), 2);
-            shoulderFlexion = Math.Round(body.ShoulderFlexion(), 2);
+            shoulderFlexion = Math.Round(body.RightShoulderFlexion(), 2);
             neckFlexion = Math.Round(body.neckFlexion(), 2);
             neckExtension = Math.Round(body.neckExtension(), 2);
 

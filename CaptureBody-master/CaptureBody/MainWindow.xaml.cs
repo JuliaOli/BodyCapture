@@ -100,6 +100,8 @@ namespace CaptureBody
             tblPositionElbowRightX.Text = "Position Rigth Elbow Y: " + body.Joints[JointType.ElbowRight].Position.X;
             tblPositionElbowRightY.Text = "Position Rigth Elbow X: " + body.Joints[JointType.ElbowRight].Position.Y;
             tblPositionElbowRightZ.Text = "Position Rigth Elbow Y: " + body.Joints[JointType.ElbowRight].Position.Z;
+
+            tblPositionShoulderRightX.Foreground = new SolidColorBrush(Colors.Red);
         }
 
         private void viewer_ChangesMethods(object sender, EventArgs e)
