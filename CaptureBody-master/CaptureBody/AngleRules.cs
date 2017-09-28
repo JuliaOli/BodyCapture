@@ -43,15 +43,13 @@ namespace CaptureBody
             left = Math.Round(body.LeftHand(), 2);
             right = Math.Round(body.RightHand(), 2);
             rightHipAngle = Math.Round(body.HipRelativeAngle(), 2);
-<<<<<<< HEAD
             shoulderFlexion = Math.Round(body.RightShoulderFlexion(), 2);
-=======
+
             //Flexao de ombro
             rightShoulderFlexion = Math.Round(body.RightShoulderFlexion(), 2);
             leftShoulderFlexion = Math.Round(body.LeftShoulderFlexion(), 2);
 
             //Neck
->>>>>>> b38fa6df47fc2268d33d91e72ecf766996f97e5f
             neckFlexion = Math.Round(body.neckFlexion(), 2);
             neckExtension = Math.Round(body.neckExtension(), 2);
 
@@ -161,7 +159,7 @@ namespace CaptureBody
 
         public void CsvBuilder(Body body, KinectViewer viewer)
         {
-            StringBuilder csvContent = new StringBuilder();
+            StringBuilder csvContent = AngleString(body);
             if (body != null && viewer.Camera != null)
             {
                 csvContent.AppendLine("Type;Angle/Lenght/Position");

@@ -37,7 +37,6 @@ namespace CaptureBody
 
         public MainWindow()
         {
-            anglesrules = new AngleRules(body);
             InitializeComponent();
             viewer.ChangesMethods += viewer_ChangesMethods;
             viewer.startKinect();
@@ -70,6 +69,7 @@ namespace CaptureBody
         {
 
             AngleVariables(body);
+            anglesrules = new AngleRules(body);
 
             // Display height.
             tblHeight.Text = "Height: " + height.ToString() + "m";
