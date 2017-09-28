@@ -17,6 +17,7 @@ namespace CaptureBody
     /// </summary>
     public partial class MainWindow : Window
     {
+        AngleRules anglesrules;
         private Body body = null;
         double height = 0;
         double left = 0;
@@ -36,6 +37,7 @@ namespace CaptureBody
 
         public MainWindow()
         {
+            anglesrules = new AngleRules(body);
             InitializeComponent();
             viewer.ChangesMethods += viewer_ChangesMethods;
             viewer.startKinect();
@@ -82,18 +84,20 @@ namespace CaptureBody
             tblNeckExtension.Text = "Neck Extension: " + neckExtension.ToString() + "º";
 
             //Display bodyPositions
-            //Display LeftArmPositions
+            //Display Head positions
             tblPositionHeaderX.Text = "Position Head X: " + body.Joints[JointType.Head].Position.X;
             tblPositionHeaderY.Text = "Position Head Y: " + body.Joints[JointType.Head].Position.Y;
             tblPositionHeaderZ.Text = "Position Head Z: " + body.Joints[JointType.Head].Position.Z;
 
-            tblPositionShoulderLeftX.Text = "Position Shoulder Right X: " + body.Joints[JointType.ShoulderLeft].Position.X;
-            tblPositionShoulderLeftY.Text = "Position Shoulder Right Y: " + body.Joints[JointType.ShoulderLeft].Position.Y;
-            tblPositionShoulderLeftZ.Text = "Position Shoulder Right Z: " + body.Joints[JointType.ShoulderLeft].Position.Z;
-            tblPositionElbowLeftX.Text = "Position Rigth Elbow X: " + body.Joints[JointType.ElbowRight].Position.X;
-            tblPositionElbowLeftY.Text = "Position Rigth Elbow Y: " + body.Joints[JointType.ElbowRight].Position.Y;
-            tblPositionElbowLeftZ.Text = "Position Rigth Elbow Z: " + body.Joints[JointType.ElbowRight].Position.Z;
+            // Display Left Shoulder Positions
+            tblPositionShoulderLeftX.Text = "Position Shoulder Left X: " + body.Joints[JointType.ShoulderLeft].Position.X;
+            tblPositionShoulderLeftY.Text = "Position Shoulder Left Y: " + body.Joints[JointType.ShoulderLeft].Position.Y;
+            tblPositionShoulderLeftZ.Text = "Position Shoulder Left Z: " + body.Joints[JointType.ShoulderLeft].Position.Z;
+            tblPositionElbowLeftX.Text = "Position Left Elbow X: " + body.Joints[JointType.ElbowRight].Position.X;
+            tblPositionElbowLeftY.Text = "Position Left Elbow Y: " + body.Joints[JointType.ElbowRight].Position.Y;
+            tblPositionElbowLeftZ.Text = "Position Left Elbow Z: " + body.Joints[JointType.ElbowRight].Position.Z;
 
+            //Display Right Shoulder Positions
             tblPositionShoulderRightX.Text = "Position Right Shoulder X: " + body.Joints[JointType.ShoulderRight].Position.X;
             tblPositionShoulderRightY.Text = "Position Right Shoulder Y: " + body.Joints[JointType.ShoulderRight].Position.Y;
             tblPositionShoulderRightZ.Text = "Position Right Shoulder Z: " + body.Joints[JointType.ShoulderRight].Position.Z;
@@ -153,7 +157,7 @@ namespace CaptureBody
 
 
         //FUNCTION DIRECT TO NEW CLASSE (CONSTRUCTOR RECIEVE VARIABLE BODY) 
-
+        /*
         private void AngleString(StringBuilder csvContent, Body body)
         {
             string aux;
@@ -170,8 +174,20 @@ namespace CaptureBody
             //tblAngleLeft.Text = "Relative Angle Left: " + leftArmRelativeAngle.ToString() + "º";
             aux = "Angle Hip Right;" + rightHipAngle.ToString() + " graus";
             csvContent.AppendLine(aux);
-            aux = "Shoulder Flexion;" + rightShoulderFlexion.ToString() + " graus";
+            
+            //flexion
+            aux = "Right Shoulder Flexion;" + rightShoulderFlexion.ToString() + " graus";
             csvContent.AppendLine(aux);
+            aux = "Left Shoulder Flexion;" + leftShoulderFlexion.ToString() + " graus";
+            csvContent.AppendLine(aux);
+            
+            //abduction
+            aux = "Right Shoulder Abduction;" + rightShoulderAbduction.ToString() + " graus";
+            csvContent.AppendLine(aux);
+            aux = "Left Shoulder Abduction;" + leftShoulderAbduction.ToString() + " graus";
+            csvContent.AppendLine(aux);
+
+            //Neck
             aux = "Neck Flexion;" + neckFlexion.ToString() + " graus";
             csvContent.AppendLine(aux);
             aux = "Neck Extension;" + neckExtension.ToString() + " graus";
@@ -188,17 +204,34 @@ namespace CaptureBody
                 csvContent.AppendLine(aux);
                 aux = "Position Head Z," + body.Joints[JointType.Head].Position.Z.ToString();
                 csvContent.AppendLine(aux);
-                aux = "Position Right Shoulder Y;" + body.Joints[JointType.ShoulderRight].Position.Y.ToString();
+
+                //Left Shoulder and Elbow Positions
+                aux = "Position Left Shoulder X;" + body.Joints[JointType.ShoulderLeft].Position.X.ToString();
                 csvContent.AppendLine(aux);
-                aux = "Position Right Shoulder X;" + body.Joints[JointType.ShoulderRight].Position.X.ToString();
+                aux = "Position Left Shoulder Y;" + body.Joints[JointType.ShoulderLeft].Position.Y.ToString();
                 csvContent.AppendLine(aux);
-                aux = "Position Right Shoulder Y;" + body.Joints[JointType.ShoulderRight].Position.Y.ToString();
+                aux = "Position Left Shoulder Z;" + body.Joints[JointType.ShoulderLeft].Position.Z.ToString();
                 csvContent.AppendLine(aux).ToString();
-                aux = "Position Rigth Elbow Y;" + body.Joints[JointType.ElbowRight].Position.Y.ToString();
+                aux = "Position Left Elbow X;" + body.Joints[JointType.ElbowLeft].Position.X.ToString();
                 csvContent.AppendLine(aux);
-                aux = "Position Rigth Elbow X;" + body.Joints[JointType.ElbowRight].Position.X.ToString();
+                aux = "Position Left Elbow Y;" + body.Joints[JointType.ElbowLeft].Position.Y.ToString();
                 csvContent.AppendLine(aux);
-                aux = "Position Rigth Elbow Y;" + body.Joints[JointType.ElbowRight].Position.Y.ToString();
+                aux = "Position Left Elbow Z;" + body.Joints[JointType.ElbowLeft].Position.Z.ToString();
+                csvContent.AppendLine(aux);
+                
+                //Right Shoulder and Elbow Positions
+                aux = "Position Right Shoulder Y;" + body.Joints[JointType.ShoulderRight].Position.X.ToString();
+                csvContent.AppendLine(aux);
+                aux = "Position Right Shoulder X;" + body.Joints[JointType.ShoulderRight].Position.Y.ToString();
+                csvContent.AppendLine(aux);
+                aux = "Position Right Shoulder Y;" + body.Joints[JointType.ShoulderRight].Position.Z.ToString();
+                csvContent.AppendLine(aux).ToString();
+                aux = "Position Rigth Elbow Y;" + body.Joints[JointType.ElbowRight].Position.X.ToString();
+                csvContent.AppendLine(aux);
+                aux = "Position Rigth Elbow X;" + body.Joints[JointType.ElbowRight].Position.Y.ToString();
+                csvContent.AppendLine(aux);
+                aux = "Position Rigth Elbow Y;" + body.Joints[JointType.ElbowRight].Position.Z.ToString();
+
                 csvContent.AppendLine(aux);
             }
             catch (NullReferenceException)
@@ -206,11 +239,12 @@ namespace CaptureBody
                 Debug.WriteLine("Erro loading the file. " + "Variable body hasn't been set yet");
             }
             
-        }
+        }*/
 
         private void ScreenshotButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            anglesrules.CsvBuilder(body, viewer);
+            /*
             StringBuilder csvContent = new StringBuilder();
             if(body != null && viewer.Camera != null)
             {
@@ -295,7 +329,7 @@ namespace CaptureBody
                 {
                     Debug.WriteLine("Erro writing the file");
                 }
-            }
+            }*/
 
         }
 
