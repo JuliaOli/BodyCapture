@@ -58,6 +58,21 @@ namespace CaptureBody
             leftShoulderAbduction = Math.Round(body.LeftShoulderAbduction(), 2);
         }
 
+        //Postura ombro e braco
+        //Se postura inadequada o braço e abdução do braço &gt;60° e ombro elevado então
+        //não recomendado
+        public Color abductionRisk(double shoulderAbduction)
+        {
+            if(shoulderAbduction > 60)
+            {
+                return Colors.Purple;
+            }
+            else
+            {
+                return Colors.Green;
+            }
+        }
+
 
         ///Change color based on risks
         ///

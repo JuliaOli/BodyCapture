@@ -83,14 +83,20 @@ namespace CaptureBody
             //Flexion
             tblRightShoulderFlexion.Text = "Right Shoulder Flexion: " + rightShoulderFlexion.ToString() + "º";
             tblLeftShoulderFlexion.Text = "Left Shoulder Flexion: " + leftShoulderFlexion.ToString() + "º";
+            tblRightShoulderFlexion.Foreground = new SolidColorBrush(anglesrules.getRiskColor(rightShoulderFlexion, neckFlexion, neckExtension));
+            tblLeftShoulderFlexion.Foreground = new SolidColorBrush(anglesrules.getRiskColor(rightShoulderFlexion, neckFlexion, neckExtension));
 
             //abduction
             tblRightShoulderAbduction.Text = "Right Shoulder Abduction: " + rightShoulderAbduction.ToString() + "º";
             tblLeftShoulderAbduction.Text = "Left Shoulder Abduction: " + leftShoulderAbduction.ToString() + "º";
+            tblLeftShoulderAbduction.Foreground = new SolidColorBrush(anglesrules.abductionRisk(leftShoulderAbduction));
+            tblRightShoulderAbduction.Foreground = new SolidColorBrush(anglesrules.abductionRisk(rightShoulderAbduction));
 
             //Neck 
             tblNeckFlexion.Text = "Neck Flexion: " + neckFlexion.ToString() + "º";
             tblNeckExtension.Text = "Neck Extension: " + neckExtension.ToString() + "º";
+            tblNeckFlexion.Foreground = new SolidColorBrush(anglesrules.getRiskColor(rightShoulderFlexion, neckFlexion, neckExtension));
+            tblNeckExtension.Foreground = new SolidColorBrush(anglesrules.getRiskColor(leftShoulderFlexion, neckFlexion, neckExtension));
 
             //Display bodyPositions
             //Display Head positions
@@ -114,10 +120,6 @@ namespace CaptureBody
             tblPositionElbowRightY.Text = "Position Rigth Elbow X: " + body.Joints[JointType.ElbowRight].Position.Y;
             tblPositionElbowRightZ.Text = "Position Rigth Elbow Y: " + body.Joints[JointType.ElbowRight].Position.Z;
             
-            tblNeckFlexion.Foreground = new SolidColorBrush(anglesrules.getRiskColor(rightShoulderFlexion, neckFlexion, neckExtension));
-            tblNeckExtension.Foreground = new SolidColorBrush(anglesrules.getRiskColor(leftShoulderFlexion, neckFlexion, neckExtension));
-            tblRightShoulderFlexion.Foreground = new SolidColorBrush(anglesrules.getRiskColor(rightShoulderFlexion, neckFlexion, neckExtension));
-            tblLeftShoulderFlexion.Foreground = new SolidColorBrush(anglesrules.getRiskColor(rightShoulderFlexion, neckFlexion, neckExtension));
         }
 
         private void viewer_ChangesMethods(object sender, EventArgs e)
