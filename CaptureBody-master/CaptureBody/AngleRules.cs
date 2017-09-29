@@ -58,6 +58,35 @@ namespace CaptureBody
             leftShoulderAbduction = Math.Round(body.LeftShoulderAbduction(), 2);
         }
 
+
+        ///Change color based on risks
+        ///
+        public Color getRiskColor(double shoulderFlextion, double neckFlexion, double neckExtension) {
+
+            if (shoulderFlextion > 35)
+            {
+                return Colors.Red;
+            }
+            else if (neckFlexion > 25)
+            {
+                return Colors.Red;
+            }
+            else if (neckExtension < 0)
+            {
+                return Colors.Red;
+            }
+            else if (shoulderFlextion > 35 && neckFlexion > 30)
+            {
+                return Colors.OrangeRed;
+            }
+            else if (shoulderFlextion > 35 && neckExtension < 0)
+            {
+                return Colors.OrangeRed;
+            }
+ 
+            return Colors.Green;
+        }
+
         /// <Csv File Preparations>
         /// The Strings are treated to be in the format that is more suited 
         /// </Csv File Preparations>
