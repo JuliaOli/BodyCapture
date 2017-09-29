@@ -79,8 +79,16 @@ namespace CaptureBody
             tblRight.Text = "Right: " + right.ToString() + "m";
             //tblAngleLeft.Text = "Relative Angle Left: " + leftArmRelativeAngle.ToString() + "º";
             tblAngleRight.Text = "Angle Hip Right: " + rightHipAngle.ToString() + "º";
+
+            //Flexion
             tblRightShoulderFlexion.Text = "Right Shoulder Flexion: " + rightShoulderFlexion.ToString() + "º";
             tblLeftShoulderFlexion.Text = "Left Shoulder Flexion: " + leftShoulderFlexion.ToString() + "º";
+
+            //abduction
+            tblRightShoulderAbduction.Text = "Right Shoulder Abduction: " + rightShoulderAbduction.ToString() + "º";
+            tblLeftShoulderAbduction.Text = "Left Shoulder Abduction: " + leftShoulderAbduction.ToString() + "º";
+
+            //Neck 
             tblNeckFlexion.Text = "Neck Flexion: " + neckFlexion.ToString() + "º";
             tblNeckExtension.Text = "Neck Extension: " + neckExtension.ToString() + "º";
 

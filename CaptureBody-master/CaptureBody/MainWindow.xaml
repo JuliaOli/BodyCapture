@@ -56,6 +56,10 @@
             <TextBlock x:Name="tblAngleRight" FontSize="10" Margin="3" ><Run Text="Trunk Flexion: N/A"/></TextBlock>
             <TextBlock Foreground="{Binding Path=DataContext.ForegroundColor}" x:Name="tblRightShoulderFlexion" FontSize="10" Margin="3" ><Run Text="Right Shoulder Flexion: N/A"/></TextBlock>
             <TextBlock Foreground="{Binding Path=DataContext.ForegroundColor}" x:Name="tblLeftShoulderFlexion" FontSize="10" Margin="3" ><Run Text="Left Shoulder Flexion: N/A"/></TextBlock>
+
+            <TextBlock Foreground="{Binding Path=DataContext.ForegroundColor}" x:Name="tblRightShoulderAbduction" FontSize="10" Margin="3" ><Run Text="Right Shoulder Abduction: N/A"/></TextBlock>
+            <TextBlock Foreground="{Binding Path=DataContext.ForegroundColor}" x:Name="tblLeftShoulderAbduction" FontSize="10" Margin="3" ><Run Text="Left ShoulderAbduction: N/A"/></TextBlock>            
+            
             <TextBlock x:Name="tblNeckFlexion" FontSize="10" Margin="3" ><Run Text="Neck Flexion: N/A"/></TextBlock>
             <TextBlock x:Name="tblNeckExtension" FontSize="10" Margin="3" ><Run Text="Neck Extension: N/A"/></TextBlock>
             <TextBlock Name="tblPositionHeaderX" Text="Position Header X: N/A" FontSize="10" Margin="3" />

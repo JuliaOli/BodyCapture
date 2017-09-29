@@ -63,28 +63,30 @@ namespace CaptureBody
         ///
         public Color getRiskColor(double shoulderFlextion, double neckFlexion, double neckExtension) {
 
+            //Risco 1
+            //flexao do ombro > 35
+            //flexao do pescoco > 25
+            //extensao do pescoco < 0
+
+            //Risco2
+            //flexao do ombro > 35 e flexao do pescoco > 30
+            //flexao do ombro > 35 e extensao do pescoco < 0
+
             if (shoulderFlextion > 35)
             {
-                return Colors.Red;
+                if (neckFlexion > 30 || neckExtension < 0)
+                {
+                    return Colors.Purple;
+                }
+                else
+                {
+                    return Colors.Red;
+                }
             }
-            else if (neckFlexion > 25)
+            else
             {
-                return Colors.Red;
+                return Colors.Green;
             }
-            else if (neckExtension < 0)
-            {
-                return Colors.Red;
-            }
-            else if (shoulderFlextion > 35 && neckFlexion > 30)
-            {
-                return Colors.OrangeRed;
-            }
-            else if (shoulderFlextion > 35 && neckExtension < 0)
-            {
-                return Colors.OrangeRed;
-            }
- 
-            return Colors.Green;
         }
 
         /// <Csv File Preparations>
