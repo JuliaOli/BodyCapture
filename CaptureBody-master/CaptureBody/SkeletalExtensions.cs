@@ -168,6 +168,32 @@ namespace CaptureBody
             return ThetaInDegrees;
         }
 
+
+        public static double TrunkFlexion(this Body body)
+        {
+            Joint spineBase = body.Joints[JointType.SpineBase];
+            Joint spineShoulder = body.Joints[JointType.SpineShoulder];
+            Joint spineShoulder2 = new Joint();
+
+            spineShoulder2.Position.X = spineBase.Position.X;
+            spineShoulder2.Position.X = spineBase.Position.Z;
+            spineShoulder2.Position.X = spineShoulder.Position.Y;
+            
+
+            //Vector3 v = new Vector3(3,3,3);
+            Vector3 u = new Vector3(0, spineBase.Position.Y - spineShoulder2.Position.Y,
+                spineBase.Position.Z - spineShoulder2.Position.Z);
+            Vector3 v = new Vector3(0, spineBase.Position.Y - spineShoulder.Position.Y,
+                spineBase.Position.Z - spineShoulder.Position.Z);
+
+            Double cosTheta = Vector3.Dot(Vector3.Normalize(u), Vector3.Normalize(v));
+
+            Double ThetaInDegrees = Math.Acos(cosTheta) * 180 / Math.PI;
+
+            return ThetaInDegrees;
+
+        }
+
         //eixos y e z
         public static double RightShoulderFlexion(this Body body)
         {
@@ -230,7 +256,10 @@ namespace CaptureBody
             Double ThetaInDegrees = Math.Acos(cosTheta) * 180 / Math.PI;
 
             return ThetaInDegrees;
+
+            
         }
+
 
         //Adicionando abducao
         //eixos x e y
@@ -270,6 +299,8 @@ namespace CaptureBody
                 kneeRight.Position.Z - hipRight.Position.Z);
 
             Double cosTheta = Vector3.Dot(Vector3.Normalize(u), Vector3.Normalize(v));
+
+            
 
             Double ThetaInDegrees = Math.Acos(cosTheta) * 180 / Math.PI;
 
