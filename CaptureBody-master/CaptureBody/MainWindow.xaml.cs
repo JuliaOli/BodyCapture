@@ -48,7 +48,7 @@ namespace CaptureBody
             height = Math.Round(body.UpperHeight(), 2);
             left = Math.Round(body.LeftHand(), 2);
             right = Math.Round(body.RightHand(), 2);
-            rightHipAngle = Math.Round(body.HipRelativeAngle(), 2);
+            rightHipAngle = Math.Round(body.TrunkFlexion(), 2);
 
             //Flexao de ombro
             rightShoulderFlexion = Math.Round(body.RightShoulderFlexion(), 2);

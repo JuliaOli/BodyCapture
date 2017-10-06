@@ -176,15 +176,15 @@ namespace CaptureBody
             Joint spineShoulder2 = new Joint();
 
             spineShoulder2.Position.X = spineBase.Position.X;
-            spineShoulder2.Position.X = spineBase.Position.Z;
-            spineShoulder2.Position.X = spineShoulder.Position.Y;
+            spineShoulder2.Position.Z = spineBase.Position.Z;
+            spineShoulder2.Position.Y = spineShoulder.Position.Y;
             
 
             //Vector3 v = new Vector3(3,3,3);
-            Vector3 u = new Vector3(0, spineBase.Position.Y - spineShoulder2.Position.Y,
-                spineBase.Position.Z - spineShoulder2.Position.Z);
-            Vector3 v = new Vector3(0, spineBase.Position.Y - spineShoulder.Position.Y,
-                spineBase.Position.Z - spineShoulder.Position.Z);
+            Vector3 u = new Vector3(spineBase.Position.X - spineShoulder2.Position.X, spineBase.Position.Y - spineShoulder2.Position.Y,
+                0);
+            Vector3 v = new Vector3(spineBase.Position.X - spineShoulder.Position.X, spineBase.Position.Y - spineShoulder.Position.Y, 
+                0);
 
             Double cosTheta = Vector3.Dot(Vector3.Normalize(u), Vector3.Normalize(v));
 
