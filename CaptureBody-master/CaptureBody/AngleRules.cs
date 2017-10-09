@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 namespace CaptureBody
 {
@@ -17,6 +18,7 @@ namespace CaptureBody
         double height = 0;
         double left = 0;
         double right = 0;
+        double trunk = 0;
         double rightHipAngle = 0;
         double shoulderFlexion = 0; //replace 
         //neck 
@@ -30,6 +32,17 @@ namespace CaptureBody
         double rightShoulderFlexion = 0;
         double leftShoulderFlexion = 0;
 
+        //Timer Checker
+
+        bool incremenTrunk = false;
+        bool incremenFlexLeft = false;
+        bool incremenFlexRight = false;
+        bool incremenAbdLeft = false;
+        bool incremenAbdRight = false;
+
+
+
+        DispatcherTimer t;
 
         /// <Body Angles Variables>
         /// Here the formulas to calculate the angles of the body parts are setted
@@ -97,6 +110,38 @@ namespace CaptureBody
                 {
                     return Colors.Red;
                 }
+            }
+            else
+            {
+                return Colors.Green;
+            }
+        }
+
+        public Color trunkRisk(double shoulderFlextion, double neckFlexion, double neckExtension)
+        {
+            //Inclinação de tronco anterior <20° (verde), > 20° (vermelho)
+            //Inclinação de tronco posterior < 20°(verde), > 20(vermelho) NÃO TEM
+            //Extensão / flexão de fêmur < 90 - 110° (verde) < 90° ou > 110° (vermelho)
+
+            if (trunk > 20)
+            {
+                return Colors.Red;
+            }
+            else
+            {
+                return Colors.Green;
+            }
+        }
+
+        public Color hipRisk(double shoulderFlextion, double neckFlexion, double neckExtension)
+        {
+            //Inclinação de tronco anterior <20° (verde), > 20° (vermelho)
+            //Inclinação de tronco posterior < 20°(verde), > 20(vermelho) NÃO TEM
+            //Extensão / flexão de fêmur < 90 - 110° (verde) < 90° ou > 110° (vermelho)
+
+            if (trunk > 20)
+            {
+                return Colors.Red;
             }
             else
             {

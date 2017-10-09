@@ -9,6 +9,7 @@ using System.Globalization;
 using Microsoft.Kinect.Tools;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace CaptureBody
 {
@@ -23,7 +24,11 @@ namespace CaptureBody
         double left = 0;
         double right = 0;
         double rightHipAngle = 0;
-        
+
+        //Trunk
+        double trunk = 0;
+
+        //neck flexion
         double neckFlexion = 0;
         double neckExtension = 0;
         
@@ -34,6 +39,9 @@ namespace CaptureBody
         //flexao de ombro
         double rightShoulderFlexion = 0;
         double leftShoulderFlexion = 0;
+
+        //Timer
+        double increment = 0;
 
         public MainWindow()
         {
@@ -48,7 +56,8 @@ namespace CaptureBody
             height = Math.Round(body.UpperHeight(), 2);
             left = Math.Round(body.LeftHand(), 2);
             right = Math.Round(body.RightHand(), 2);
-            rightHipAngle = Math.Round(body.TrunkFlexion(), 2);
+            rightHipAngle = Math.Round(body.HipRelativeAngle(), 2);
+            trunk = Math.Round(body.TrunkFlexion(), 2);
 
             //Flexao de ombro
             rightShoulderFlexion = Math.Round(body.RightShoulderFlexion(), 2);
@@ -79,6 +88,9 @@ namespace CaptureBody
             tblRight.Text = "Right: " + right.ToString() + "m";
             //tblAngleLeft.Text = "Relative Angle Left: " + leftArmRelativeAngle.ToString() + "º";
             tblAngleRight.Text = "Angle Hip Right: " + rightHipAngle.ToString() + "º";
+
+            //Trunk 
+            tblTrunk.Text = "Anterior trunk inclination" + trunk.ToString() + "º";
 
             //Flexion
             tblRightShoulderFlexion.Text = "Right Shoulder Flexion: " + rightShoulderFlexion.ToString() + "º";
@@ -255,9 +267,31 @@ namespace CaptureBody
             
         }*/
 
+        private void Timer()
+        {
+
+            DispatcherTimer dt = new DispatcherTimer();
+            dt.Interval = TimeSpan.FromSeconds(1);
+            dt.Tick += dtTicker;
+            dt.Start();
+        }
+
+        private void dtTicker(object sender, EventArgs e)
+        {
+            ++increment;
+            //LabelTimer = increment.toString();
+            
+        }
+
+
         private void ScreenshotButton_Click(object sender, RoutedEventArgs e)
         {
             anglesrules.CsvBuilder(body, viewer);
+
+
+
+
+
             /*
             StringBuilder csvContent = new StringBuilder();
             if(body != null && viewer.Camera != null)

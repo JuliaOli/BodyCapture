@@ -53,7 +53,8 @@
             <TextBlock x:Name="tblHeight" FontSize="10" Margin="0" ><Run Text="He"/><Run Text="ight: "/><Run Text="N/A"/></TextBlock>
             <TextBlock Name="tblLeft" Text="Left: N/A" FontSize="10" Margin="3" />
             <TextBlock Name="tblRight" Text="Right: N/A" FontSize="10" Margin="3" />
-            <TextBlock x:Name="tblAngleRight" FontSize="10" Margin="3" ><Run Text="Trunk Flexion: N/A"/></TextBlock>
+            <TextBlock x:Name="tblAngleRight" FontSize="10" Margin="3" ><Run Text="HipAngle Flexion: N/A"/></TextBlock>
+            <TextBlock x:Name="tblTrunk" FontSize="10" Margin="3" ><Run Text="Trunk Flexion: N/A"/></TextBlock>
             <TextBlock Foreground="{Binding Path=DataContext.ForegroundColor}" x:Name="tblRightShoulderFlexion" FontSize="10" Margin="3" ><Run Text="Right Shoulder Flexion: N/A"/></TextBlock>
             <TextBlock Foreground="{Binding Path=DataContext.ForegroundColor}" x:Name="tblLeftShoulderFlexion" FontSize="10" Margin="3" ><Run Text="Left Shoulder Flexion: N/A"/></TextBlock>
 
