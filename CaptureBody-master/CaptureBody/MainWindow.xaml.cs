@@ -41,13 +41,21 @@ namespace CaptureBody
         double leftShoulderFlexion = 0;
 
         //Timer
-        double increment = 0;
+        private int incrementSeconds = 0;
+        private int incrementMinuts = 0;
+        //Timer Checker
+        bool incrementTrunk = false;
+        bool incrementHip = false;
+        bool incrementFlex = false;
+        bool incrementAbd = false;
+        bool incrementNeck = false;
 
         public MainWindow()
         {
             InitializeComponent();
             viewer.ChangesMethods += viewer_ChangesMethods;
             viewer.startKinect();
+            Timer();
         }
 
         void AngleVariables(Body body)
@@ -87,20 +95,35 @@ namespace CaptureBody
             tblLeft.Text = "Left: " + left.ToString() + "m";
             tblRight.Text = "Right: " + right.ToString() + "m";
             //tblAngleLeft.Text = "Relative Angle Left: " + leftArmRelativeAngle.ToString() + "º";
+
+            //Hip Angle
             tblAngleRight.Text = "Angle Hip Right: " + rightHipAngle.ToString() + "º";
+            tblAngleRight.Foreground = new SolidColorBrush(anglesrules.hipRisk(rightHipAngle));
+            incrementHip = anglesrules.colorCheck(anglesrules.hipRisk(rightHipAngle),
+                anglesrules.hipRisk(rightHipAngle));
 
             //Trunk 
             tblTrunk.Text = "Anterior trunk inclination" + trunk.ToString() + "º";
+            tblTrunk.Foreground = new SolidColorBrush(anglesrules.trunkRisk(trunk));
+            incrementTrunk = anglesrules.colorCheck(anglesrules.trunkRisk(trunk),
+                anglesrules.trunkRisk(trunk));
+
 
             //Flexion
             tblRightShoulderFlexion.Text = "Right Shoulder Flexion: " + rightShoulderFlexion.ToString() + "º";
             tblLeftShoulderFlexion.Text = "Left Shoulder Flexion: " + leftShoulderFlexion.ToString() + "º";
+
+            incrementFlex = anglesrules.colorCheck(anglesrules.getRiskColor(rightShoulderFlexion, neckFlexion, neckExtension), 
+                anglesrules.getRiskColor(rightShoulderFlexion, neckFlexion, neckExtension));
             tblRightShoulderFlexion.Foreground = new SolidColorBrush(anglesrules.getRiskColor(rightShoulderFlexion, neckFlexion, neckExtension));
             tblLeftShoulderFlexion.Foreground = new SolidColorBrush(anglesrules.getRiskColor(rightShoulderFlexion, neckFlexion, neckExtension));
 
             //abduction
             tblRightShoulderAbduction.Text = "Right Shoulder Abduction: " + rightShoulderAbduction.ToString() + "º";
             tblLeftShoulderAbduction.Text = "Left Shoulder Abduction: " + leftShoulderAbduction.ToString() + "º";
+
+            incrementFlex = anglesrules.colorCheck(anglesrules.getRiskColor(rightShoulderFlexion, neckFlexion, neckExtension),
+                anglesrules.getRiskColor(rightShoulderFlexion, neckFlexion, neckExtension));
             tblLeftShoulderAbduction.Foreground = new SolidColorBrush(anglesrules.abductionRisk(leftShoulderAbduction));
             tblRightShoulderAbduction.Foreground = new SolidColorBrush(anglesrules.abductionRisk(rightShoulderAbduction));
 
@@ -179,9 +202,7 @@ namespace CaptureBody
 
             }
         }
-
-
-
+        
         //FUNCTION DIRECT TO NEW CLASSE (CONSTRUCTOR RECIEVE VARIABLE BODY) 
         /*
         private void AngleString(StringBuilder csvContent, Body body)
@@ -278,9 +299,15 @@ namespace CaptureBody
 
         private void dtTicker(object sender, EventArgs e)
         {
-            ++increment;
-            //LabelTimer = increment.toString();
+            ++incrementSeconds;
             
+            if(incrementSeconds == 60)
+            {
+                incrementSeconds = 0;
+                ++incrementMinuts;
+            }
+            tblTimer.Content = incrementMinuts.ToString() + ":" + incrementSeconds.ToString();
+
         }
 
 

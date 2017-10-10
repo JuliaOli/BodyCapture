@@ -32,17 +32,6 @@ namespace CaptureBody
         double rightShoulderFlexion = 0;
         double leftShoulderFlexion = 0;
 
-        //Timer Checker
-
-        bool incremenTrunk = false;
-        bool incremenFlexLeft = false;
-        bool incremenFlexRight = false;
-        bool incremenAbdLeft = false;
-        bool incremenAbdRight = false;
-
-
-
-        DispatcherTimer t;
 
         /// <Body Angles Variables>
         /// Here the formulas to calculate the angles of the body parts are setted
@@ -117,7 +106,7 @@ namespace CaptureBody
             }
         }
 
-        public Color trunkRisk(double shoulderFlextion, double neckFlexion, double neckExtension)
+        public Color trunkRisk(double trunk)
         {
             //Inclinação de tronco anterior <20° (verde), > 20° (vermelho)
             //Inclinação de tronco posterior < 20°(verde), > 20(vermelho) NÃO TEM
@@ -133,13 +122,13 @@ namespace CaptureBody
             }
         }
 
-        public Color hipRisk(double shoulderFlextion, double neckFlexion, double neckExtension)
+        public Color hipRisk(double hightHipAngle)
         {
             //Inclinação de tronco anterior <20° (verde), > 20° (vermelho)
             //Inclinação de tronco posterior < 20°(verde), > 20(vermelho) NÃO TEM
             //Extensão / flexão de fêmur < 90 - 110° (verde) < 90° ou > 110° (vermelho)
 
-            if (trunk > 20)
+            if (hightHipAngle > 20)
             {
                 return Colors.Red;
             }
@@ -149,6 +138,15 @@ namespace CaptureBody
             }
         }
 
+        public bool colorCheck(Color color1, Color color2)
+        {
+            if (color1 == Colors.Red || color2 == Colors.Red)
+            {
+                return true;
+            }
+            return false;
+        }
+        
         /// <Csv File Preparations>
         /// The Strings are treated to be in the format that is more suited 
         /// </Csv File Preparations>
