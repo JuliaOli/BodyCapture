@@ -48,7 +48,8 @@ namespace CaptureBody
         bool incrementHip = false;
         bool incrementFlex = false;
         bool incrementAbd = false;
-        bool incrementNeck = false;
+        bool incrementNeckFlex = false;
+        bool incrementNeckExt = false;
 
         public MainWindow()
         {
@@ -87,6 +88,8 @@ namespace CaptureBody
 
             AngleVariables(body);
             anglesrules = new AngleRules(body);
+            Color colorAux1;
+            Color colorAux2;
 
             // Display height.
             tblHeight.Text = "Height: " + height.ToString() + "m";
@@ -97,39 +100,51 @@ namespace CaptureBody
             //tblAngleLeft.Text = "Relative Angle Left: " + leftArmRelativeAngle.ToString() + "º";
 
             //Hip Angle
+            colorAux1 = anglesrules.hipRisk(rightHipAngle);
+            colorAux2 = anglesrules.hipRisk(rightHipAngle);
             tblAngleRight.Text = "Angle Hip Right: " + rightHipAngle.ToString() + "º";
-            tblAngleRight.Foreground = new SolidColorBrush(anglesrules.hipRisk(rightHipAngle));
-            incrementHip = anglesrules.colorCheck(anglesrules.hipRisk(rightHipAngle),
-                anglesrules.hipRisk(rightHipAngle));
+            tblAngleRight.Foreground = new SolidColorBrush(colorAux1);
+            incrementHip = anglesrules.colorCheck(colorAux1,
+               colorAux1);
 
-            //Trunk 
+            //Trunk
+
+            colorAux1 = anglesrules.trunkRisk(trunk);
+            colorAux2 = anglesrules.trunkRisk(trunk);
             tblTrunk.Text = "Anterior trunk inclination" + trunk.ToString() + "º";
-            tblTrunk.Foreground = new SolidColorBrush(anglesrules.trunkRisk(trunk));
-            incrementTrunk = anglesrules.colorCheck(anglesrules.trunkRisk(trunk),
-                anglesrules.trunkRisk(trunk));
+            tblTrunk.Foreground = new SolidColorBrush(colorAux1);
+            incrementTrunk = anglesrules.colorCheck(colorAux1,
+                colorAux1);
 
 
             //Flexion
             tblRightShoulderFlexion.Text = "Right Shoulder Flexion: " + rightShoulderFlexion.ToString() + "º";
             tblLeftShoulderFlexion.Text = "Left Shoulder Flexion: " + leftShoulderFlexion.ToString() + "º";
-
+            colorAux1 = anglesrules.getRiskColor(rightShoulderFlexion, neckFlexion, neckExtension);
+            colorAux2 = anglesrules.getRiskColor(leftShoulderFlexion, neckFlexion, neckExtension);
             incrementFlex = anglesrules.colorCheck(anglesrules.getRiskColor(rightShoulderFlexion, neckFlexion, neckExtension), 
                 anglesrules.getRiskColor(rightShoulderFlexion, neckFlexion, neckExtension));
-            tblRightShoulderFlexion.Foreground = new SolidColorBrush(anglesrules.getRiskColor(rightShoulderFlexion, neckFlexion, neckExtension));
-            tblLeftShoulderFlexion.Foreground = new SolidColorBrush(anglesrules.getRiskColor(rightShoulderFlexion, neckFlexion, neckExtension));
+            tblRightShoulderFlexion.Foreground = new SolidColorBrush(colorAux1);
+            tblLeftShoulderFlexion.Foreground = new SolidColorBrush(colorAux2);
 
             //abduction
             tblRightShoulderAbduction.Text = "Right Shoulder Abduction: " + rightShoulderAbduction.ToString() + "º";
             tblLeftShoulderAbduction.Text = "Left Shoulder Abduction: " + leftShoulderAbduction.ToString() + "º";
-
-            incrementFlex = anglesrules.colorCheck(anglesrules.getRiskColor(rightShoulderFlexion, neckFlexion, neckExtension),
-                anglesrules.getRiskColor(rightShoulderFlexion, neckFlexion, neckExtension));
-            tblLeftShoulderAbduction.Foreground = new SolidColorBrush(anglesrules.abductionRisk(leftShoulderAbduction));
-            tblRightShoulderAbduction.Foreground = new SolidColorBrush(anglesrules.abductionRisk(rightShoulderAbduction));
+            colorAux1 = anglesrules.abductionRisk(leftShoulderAbduction);
+            colorAux2 = anglesrules.abductionRisk(rightShoulderAbduction);
+            incrementAbd = anglesrules.colorCheck(anglesrules.abductionRisk(leftShoulderAbduction),
+                anglesrules.abductionRisk(rightShoulderAbduction));
+            tblLeftShoulderAbduction.Foreground = new SolidColorBrush(colorAux1);
+            tblRightShoulderAbduction.Foreground = new SolidColorBrush(colorAux2);
 
             //Neck 
             tblNeckFlexion.Text = "Neck Flexion: " + neckFlexion.ToString() + "º";
             tblNeckExtension.Text = "Neck Extension: " + neckExtension.ToString() + "º";
+            colorAux1 = anglesrules.getRiskColor(rightShoulderFlexion, neckFlexion, neckExtension);
+            colorAux2 = anglesrules.getRiskColor(rightShoulderFlexion, neckFlexion, neckExtension);
+            //Só vou confiar que está certo
+            incrementNeckFlex = anglesrules.colorCheck(colorAux1, colorAux1);
+            incrementNeckExt = anglesrules.colorCheck(colorAux2, colorAux2);
             tblNeckFlexion.Foreground = new SolidColorBrush(anglesrules.getRiskColor(rightShoulderFlexion, neckFlexion, neckExtension));
             tblNeckExtension.Foreground = new SolidColorBrush(anglesrules.getRiskColor(leftShoulderFlexion, neckFlexion, neckExtension));
 
