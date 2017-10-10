@@ -314,6 +314,8 @@ namespace CaptureBody
 
         private void dtTicker(object sender, EventArgs e)
         {
+            string timerSec = incrementSeconds.ToString();
+            string timerMin = incrementMinuts.ToString();
             ++incrementSeconds;
             
             if(incrementSeconds == 60)
@@ -321,7 +323,16 @@ namespace CaptureBody
                 incrementSeconds = 0;
                 ++incrementMinuts;
             }
-            tblTimer.Content = incrementMinuts.ToString() + ":" + incrementSeconds.ToString();
+            if(incrementMinuts < 10)
+            {
+                timerMin = '0' + incrementMinuts.ToString();
+            }
+            if (incrementSeconds < 10)
+            {
+                timerSec = '0' + incrementSeconds.ToString();
+            }
+            
+            tblTimer.Content = timerMin.ToString() + ":" + timerSec.ToString();
 
         }
 
