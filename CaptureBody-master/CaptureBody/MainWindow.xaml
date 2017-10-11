@@ -6,7 +6,7 @@
         xmlns:controls="clr-namespace:CaptureBody"
         mc:Ignorable="d"
         Unloaded="Page_Unloaded"
-        Title="BodyCapture" Height="900" Width="1400">
+        Title="Body Track" Height="900" Width="1400">
     <Window.Resources>
         <SolidColorBrush x:Key="MediumGreyBrush" Color="#ff6e6e6e" />
         <SolidColorBrush x:Key="KinectPurpleBrush" Color="#ff52318f" />
@@ -94,10 +94,10 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" Margin="30,0" HorizontalAlignment="Left">
-            <Button Style="{StaticResource ScreenshotButton}" Content="Screenshot" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10" Click="ScreenshotButton_Click" RenderTransformOrigin="0.568,5.982" />
-            <Button Style="{StaticResource PlayButton}" Content="Play/Pause" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10" Click="Play_Click" RenderTransformOrigin="0.568,5.982" />
-            <Button Style="{StaticResource UploadButton}" Content="Upload" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10" Click="Playback_Click" RenderTransformOrigin="0.568,5.982" />
-            <GroupBox Header="Shoulders" Height="150" Width="249">
+            <Button Style="{StaticResource ScreenshotButton}" Content="Screenshot " Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10" Click="ScreenshotButton_Click" RenderTransformOrigin="0.568,5.982" />
+            <Button Style="{StaticResource PlayButton}" Content="Play/Pause" Height="37" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10" Click="Play_Click" RenderTransformOrigin="0.568,5.982" />
+            <Button Style="{StaticResource UploadButton}" Content="Upload      " Height="40" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10" Click="Playback_Click" RenderTransformOrigin="0.568,5.982" />
+            <GroupBox Foreground="Purple" Header="Shoulders" Height="150" Width="249">
                 <StackPanel HorizontalAlignment="Left" Height="140" Margin="0,0,-2,-10" VerticalAlignment="Top" Width="239">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -114,8 +114,8 @@
                     <Label x:Name="tblShoulderTimer" FontSize="10" Content="Timer: 00:00"/>
                 </StackPanel>
             </GroupBox>
-            
-            <GroupBox Header="Neck" Height="110" Width="249">
+
+            <GroupBox Foreground="Purple" Header="Neck" Height="110" Width="249">
                 <StackPanel HorizontalAlignment="Left" Height="100" Margin="0,0,-2,-10" VerticalAlignment="Top" Width="239">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -124,13 +124,13 @@
                         </Grid.ColumnDefinitions>
                         <CheckBox Margin="0,5,0,5" Grid.Column="0" Content="Neck Symmetry" FontSize="10"/>
                     </Grid>
-                    <TextBlock x:Name="tblNeckFlexion" FontSize="10" Margin="3" ><Run Text="Neck Flexion: N/A"/></TextBlock>
-                    <TextBlock x:Name="tblNeckExtension" FontSize="10" Margin="3" ><Run Text="Neck Extension: N/A"/></TextBlock>
+                    <TextBlock Foreground="Black" x:Name="tblNeckFlexion" FontSize="10" Margin="3" ><Run Text="Neck Flexion: N/A"/></TextBlock>
+                    <TextBlock Foreground="Black" x:Name="tblNeckExtension" FontSize="10" Margin="3" ><Run Text="Neck Extension: N/A"/></TextBlock>
                     <Label x:Name="tblNeckTimer" FontSize="10" Content="Timer: 00:00"/>
                 </StackPanel>
             </GroupBox>
-            
-            <GroupBox Header="Trunk" Height="110" Width="250">
+
+            <GroupBox Foreground="Purple" Header="Trunk" Height="110" Width="250">
                 <StackPanel HorizontalAlignment="Left" Height="100" Margin="0,0,-2,-10" VerticalAlignment="Top" Width="239">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -140,18 +140,19 @@
                         <CheckBox Margin="0,5,0,5" Grid.Column="0" Content="Rectified Spine" FontSize="10"/>
                         <CheckBox Margin="0,5,0,5" Grid.Column="3" Content="Trunk Symetry" FontSize="10"/>
                     </Grid>
-                    <TextBlock x:Name="tblTrunk" FontSize="10" Margin="3" ><Run Text="Trunk Flexion: N/A"/></TextBlock>
-                    <TextBlock x:Name="tblAngleRight" FontSize="10" Margin="3" ><Run Text="HipAngle Flexion: N/A"/></TextBlock>
+                    <TextBlock Foreground="Black" x:Name="tblTrunk" FontSize="10" Margin="3" ><Run Text="Trunk Flexion: N/A"/></TextBlock>
+                    <TextBlock Foreground="Black" x:Name="tblAngleRight" FontSize="10" Margin="3" ><Run Text="HipAngle Flexion: N/A"/></TextBlock>
                     <Label x:Name="tblTrunkTimer" FontSize="10" Content="Timer: 00:00"/>
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Header="Positions" Height="110" Width="249">
+            <GroupBox Foreground="Purple" Header="Positions" Height="110" Width="249">
                 <StackPanel HorizontalAlignment="Left" Height="100" Margin="0,0,-2,-10" VerticalAlignment="Top" Width="239">
-                    <TextBlock x:Name="tblHeight" FontSize="10" Margin="0" ><Run Text="He"/><Run Text="ight: "/><Run Text="N/A"/></TextBlock>
-                    <TextBlock Name="tblLeft" Text="Left Hand: N/A" FontSize="10" Margin="3" />
-                    <TextBlock Name="tblRight" Text="Right Hand: N/A" FontSize="10" Margin="3" />
-                    <TextBlock x:Name="tblPositionHeaderX" FontSize="10" Margin="3" ><Run Text="Posit"/><Run Text="i"/><Run Text="on Header "/><Run Text="X: N/A"/></TextBlock>
+                    <Label/>
+                    <TextBlock Foreground="Black" x:Name="tblHeight" FontSize="10" Margin="0" ><Run Text="He"/><Run Text="ight: "/><Run Text="N/A"/></TextBlock>
+                    <TextBlock Foreground="Black" Name="tblLeft" Text="Left Hand: N/A" FontSize="10" Margin="3" />
+                    <TextBlock Foreground="Black" Name="tblRight" Text="Right Hand: N/A" FontSize="10" Margin="3" />
+                    <TextBlock Foreground="Black" x:Name="tblPositionHeaderX" FontSize="10" Margin="3" ><Run Text="Posit"/><Run Text="i"/><Run Text="on Header "/><Run Text="X: N/A"/></TextBlock>
 
                     <!-- <TextBlock Name="tblPositionHeaderY" Text="Position Header Y: N/A" FontSize="10" Margin="3" />
                     <TextBlock Name="tblPositionHeaderZ" Text="Position Header Z: N/A" FontSize="10" Margin="3" />
