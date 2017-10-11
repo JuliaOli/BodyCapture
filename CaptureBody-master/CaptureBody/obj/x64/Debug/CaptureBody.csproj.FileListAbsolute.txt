@@ -275,3 +275,27 @@ C:\Users\ESC - 1\Desktop\BodyCapture\CaptureBody-master\CaptureBody\obj\x64\Debu
 C:\Users\ESC - 1\Desktop\BodyCapture\CaptureBody-master\CaptureBody\obj\x64\Debug\CaptureBody.csproj.GenerateResource.Cache
 C:\Users\ESC - 1\Desktop\BodyCapture\CaptureBody-master\CaptureBody\obj\x64\Debug\CaptureBody.exe
 C:\Users\ESC - 1\Desktop\BodyCapture\CaptureBody-master\CaptureBody\obj\x64\Debug\CaptureBody.pdb
+C:\Users\felip\Documents\Body\2\BodyCapture\CaptureBody-master\CaptureBody\bin\x64\Debug\CaptureBody.exe.config
+C:\Users\felip\Documents\Body\2\BodyCapture\CaptureBody-master\CaptureBody\bin\x64\Debug\CaptureBody.exe
+C:\Users\felip\Documents\Body\2\BodyCapture\CaptureBody-master\CaptureBody\bin\x64\Debug\CaptureBody.pdb
+C:\Users\felip\Documents\Body\2\BodyCapture\CaptureBody-master\CaptureBody\bin\x64\Debug\Microsoft.Kinect.dll
+C:\Users\felip\Documents\Body\2\BodyCapture\CaptureBody-master\CaptureBody\bin\x64\Debug\Microsoft.Kinect.Tools.dll
+C:\Users\felip\Documents\Body\2\BodyCapture\CaptureBody-master\CaptureBody\bin\x64\Debug\XnaGeometry.dll
+C:\Users\felip\Documents\Body\2\BodyCapture\CaptureBody-master\CaptureBody\bin\x64\Debug\Microsoft.Kinect.xml
+C:\Users\felip\Documents\Body\2\BodyCapture\CaptureBody-master\CaptureBody\bin\x64\Debug\Microsoft.Kinect.Tools.xml
+C:\Users\felip\Documents\Body\2\BodyCapture\CaptureBody-master\CaptureBody\bin\x64\Debug\XnaGeometry.pdb
+C:\Users\felip\Documents\Body\2\BodyCapture\CaptureBody-master\CaptureBody\obj\x64\Debug\CaptureBody.csprojResolveAssemblyReference.cache
+C:\Users\felip\Documents\Body\2\BodyCapture\CaptureBody-master\CaptureBody\obj\x64\Debug\KinectViewer.g.cs
+C:\Users\felip\Documents\Body\2\BodyCapture\CaptureBody-master\CaptureBody\obj\x64\Debug\MainWindow.g.cs
+C:\Users\felip\Documents\Body\2\BodyCapture\CaptureBody-master\CaptureBody\obj\x64\Debug\App.g.cs
+C:\Users\felip\Documents\Body\2\BodyCapture\CaptureBody-master\CaptureBody\obj\x64\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\felip\Documents\Body\2\BodyCapture\CaptureBody-master\CaptureBody\obj\x64\Debug\CaptureBody_MarkupCompile.cache
+C:\Users\felip\Documents\Body\2\BodyCapture\CaptureBody-master\CaptureBody\obj\x64\Debug\CaptureBody_MarkupCompile.lref
+C:\Users\felip\Documents\Body\2\BodyCapture\CaptureBody-master\CaptureBody\obj\x64\Debug\KinectViewer.baml
+C:\Users\felip\Documents\Body\2\BodyCapture\CaptureBody-master\CaptureBody\obj\x64\Debug\MainWindow.baml
+C:\Users\felip\Documents\Body\2\BodyCapture\CaptureBody-master\CaptureBody\obj\x64\Debug\CaptureBody.g.resources
+C:\Users\felip\Documents\Body\2\BodyCapture\CaptureBody-master\CaptureBody\obj\x64\Debug\CaptureBody.Properties.Resources.resources
+C:\Users\felip\Documents\Body\2\BodyCapture\CaptureBody-master\CaptureBody\obj\x64\Debug\CaptureBody.csproj.GenerateResource.Cache
+C:\Users\felip\Documents\Body\2\BodyCapture\CaptureBody-master\CaptureBody\obj\x64\Debug\CaptureBody.csproj.CoreCompileInputs.cache
+C:\Users\felip\Documents\Body\2\BodyCapture\CaptureBody-master\CaptureBody\obj\x64\Debug\CaptureBody.exe
+C:\Users\felip\Documents\Body\2\BodyCapture\CaptureBody-master\CaptureBody\obj\x64\Debug\CaptureBody.pdb
