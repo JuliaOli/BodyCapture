@@ -335,6 +335,42 @@ namespace CaptureBody
             //tblTimer.Content = timerMin.ToString() + ":" + timerSec.ToString();
 
         }
+        
+        private void UploadButton_Click(object sender, RoutedEvent e)
+        {
+
+        }
+
+        private void PlayButton_Click(object sender, RoutedEvent e)
+        {
+
+        }
+        
+
+        /*        <Style TargetType="{x:Type Button}" x:Key="StopButton" >
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal" Background="Transparent">
+                                <TextBlock x:Name="StopText" Text="{TemplateBinding Content}" TextAlignment="Left"  VerticalAlignment="Center" Foreground="{StaticResource KinectPurpleBrush}" FontSize="15" />
+                                <Grid Margin="9,0,0,0">
+                                    <Image x:Name="StopNormal" Source="src\stoppurple.png" Stretch="None" HorizontalAlignment="Center" />
+                                    <Image x:Name="StopHover" Source="src\stopblue.png" Stretch="None" HorizontalAlignment="Center" Visibility="Collapsed" />
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="StopNormal" />
+                                <Setter Property="Visibility" Value="Visible" TargetName="StopHover" />
+                                <Setter Property="Foreground" Value="{StaticResource KinectBlueBrush}" TargetName="StopText" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>*/
 
 
         private void ScreenshotButton_Click(object sender, RoutedEventArgs e)
@@ -434,9 +470,7 @@ namespace CaptureBody
 
         }
 
-
-
-
+        
         private void Play_Click(object sender, RoutedEventArgs e)
         {
             viewer.playPause();

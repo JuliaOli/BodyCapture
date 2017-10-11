@@ -141,6 +141,24 @@
     <Resource Include="src\ScreenshotHover.png" />
     <Resource Include="src\ScreenshotNormal.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="src\uploadpurple.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="src\uploadblue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="src\stopblue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="src\stoppurple.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="src\runblue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="src\run.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
