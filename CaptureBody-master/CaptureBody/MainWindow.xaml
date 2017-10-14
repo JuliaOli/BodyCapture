@@ -104,8 +104,8 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <CheckBox Margin="0,5,0,5" Grid.Column="0" Content="Shoulder Elevation" FontSize="10"/>
-                        <CheckBox Margin="0,5,0,5" Grid.Column="3" Content="Inadequate Posture" FontSize="10"/>
+                        <CheckBox x:Name="ElevationS" Margin="0,5,0,5" Grid.Column="0" Content="Shoulder Elevation" FontSize="10"/>
+                        <CheckBox x:Name="InadequateS" Margin="0,5,0,5" Grid.Column="3" Content="Inadequate Posture" FontSize="10"/>
                     </Grid>
                     <TextBlock Foreground="{Binding Path=DataContext.ForegroundColor}" x:Name="tblRightShoulderFlexion" FontSize="10" Margin="3" ><Run Text="Right Shoulder Flexion: N/A"/></TextBlock>
                     <TextBlock Foreground="{Binding DataContext.ForegroundColor}" x:Name="tblLeftShoulderFlexion" FontSize="10" Margin="3,3,-23,3" ><Run Text="Left Shoulder Flexion: N/A"/></TextBlock>
@@ -122,7 +122,7 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <CheckBox Margin="0,5,0,5" Grid.Column="0" Content="Neck Symmetry" FontSize="10"/>
+                        <CheckBox x:Name="SymetryN" Margin="0,5,0,5" Grid.Column="0" Content="Neck Symmetry" FontSize="10"/>
                     </Grid>
                     <TextBlock Foreground="Black" x:Name="tblNeckFlexion" FontSize="10" Margin="3" ><Run Text="Neck Flexion: N/A"/></TextBlock>
                     <TextBlock Foreground="Black" x:Name="tblNeckExtension" FontSize="10" Margin="3" ><Run Text="Neck Extension: N/A"/></TextBlock>
@@ -137,8 +137,8 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <CheckBox Margin="0,5,0,5" Grid.Column="0" Content="Rectified Spine" FontSize="10"/>
-                        <CheckBox Margin="0,5,0,5" Grid.Column="3" Content="Trunk Symetry" FontSize="10"/>
+                        <CheckBox x:Name="RectifinedT" Margin="0,5,0,5" Grid.Column="0" Content="Rectified Spine" FontSize="10"/>
+                        <CheckBox x:Name="SymetryT" Margin="0,5,0,5" Grid.Column="3" Content="Trunk Symetry" FontSize="10"/>
                     </Grid>
                     <TextBlock Foreground="Black" x:Name="tblTrunk" FontSize="10" Margin="3" ><Run Text="Trunk Flexion: N/A"/></TextBlock>
                     <TextBlock Foreground="Black" x:Name="tblAngleRight" FontSize="10" Margin="3" ><Run Text="HipAngle Flexion: N/A"/></TextBlock>
@@ -153,10 +153,10 @@
                     <TextBlock Foreground="Black" Name="tblLeft" Text="Left Hand: N/A" FontSize="10" Margin="3" />
                     <TextBlock Foreground="Black" Name="tblRight" Text="Right Hand: N/A" FontSize="10" Margin="3" />
                     <TextBlock Foreground="Black" x:Name="tblPositionHeaderX" FontSize="10" Margin="3" ><Run Text="Posit"/><Run Text="i"/><Run Text="on Header "/><Run Text="X: N/A"/></TextBlock>
-
-                    <!-- <TextBlock Name="tblPositionHeaderY" Text="Position Header Y: N/A" FontSize="10" Margin="3" />
+                    <TextBlock Name="tblPositionHeaderY" Text="Position Header Y: N/A" FontSize="10" Margin="3" />
                     <TextBlock Name="tblPositionHeaderZ" Text="Position Header Z: N/A" FontSize="10" Margin="3" />
-                    <TextBlock Name="tblPositionShoulderLeftX" Text="Position Shoulder Right X: N/A" FontSize="10" Margin="3" />
+                    
+                    <!-- <TextBlock Name="tblPositionShoulderLeftX" Text="Position Shoulder Right X: N/A" FontSize="10" Margin="3" />
                     <TextBlock Name="tblPositionShoulderLeftY" Text="Position Shoulder Right Y: N/A" FontSize="10" Margin="3" />
                     <TextBlock Name="tblPositionShoulderLeftZ" Text="Position Shoulder Right Z: N/A" FontSize="10" Margin="3" />
                     <TextBlock Name="tblPositionElbowLeftX" Text="Position Elbow RigthX: N/A" FontSize="10" Margin="3" />

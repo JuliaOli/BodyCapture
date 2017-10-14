@@ -32,7 +32,62 @@ namespace CaptureBody
         double rightShoulderFlexion = 0;
         double leftShoulderFlexion = 0;
 
+        //Checkbox
+        bool elevationS;
+        bool inadequateS;
+        bool symetryN;
+        bool rectifinedT;
+        bool symetryT;
 
+        //Timers
+        string incrementStimer;
+        string incrementNtimer;
+        string incrementTtimer;
+
+
+        //Get and Set
+        public string IncrementSTimer
+        {
+            get => this.incrementStimer;
+            set => this.incrementStimer = value;
+        }
+        public string IncrementNTimer
+        {
+            get => this.incrementNtimer;
+            set => this.incrementNtimer = value;
+        }
+        public string IncrementTTimer
+        {
+            get => this.incrementTtimer;
+            set => this.incrementTtimer = value;
+        }
+
+        public bool ElevationS
+        {
+            get => this.elevationS;
+            set => this.elevationS = value;
+        }
+        public bool InadequateS
+        {
+            get => this.inadequateS;
+            set => this.inadequateS = value;
+        }
+        public bool SymetryN
+        {
+            get => this.symetryN;
+            set => this.symetryN = value;
+        }
+        public bool RectifinedT
+        {
+            get => this.rectifinedT;
+            set => this.rectifinedT = value;
+        }
+        public bool SymetryT
+        {
+            get => this.symetryT;
+            set => this.symetryT = value;
+        }
+        
         /// <Body Angles Variables>
         /// Here the formulas to calculate the angles of the body parts are setted
         /// This variables will be used in the MainWindow class, where they will be plotted on the screen
