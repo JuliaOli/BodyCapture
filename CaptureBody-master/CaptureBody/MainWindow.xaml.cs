@@ -49,6 +49,9 @@ namespace CaptureBody
         private int incrementTMinuts = 0;
 
         //Timer Checker
+        bool recorrenceTrunk = false; //Globalcheck
+        bool recorrenceNeck = false; //Globalcheck
+        bool recorrenceShoulder = false; //Globalcheck
         bool incrementTrunk = false;
         bool incrementHip = false;
         bool incrementFlex = false;
@@ -61,7 +64,6 @@ namespace CaptureBody
             InitializeComponent();
             viewer.ChangesMethods += viewer_ChangesMethods;
             viewer.startKinect();
-            Checkboxes();
         }
 
         /// <summary>
@@ -89,8 +91,6 @@ namespace CaptureBody
             //Abducao de ombro
             rightShoulderAbduction = Math.Round(body.RightShoulderAbduction(), 2);
             leftShoulderAbduction = Math.Round(body.LeftShoulderAbduction(), 2);
-            
-            Debug.WriteLine(leftShoulderFlexion);
         }
 
         void Sensor_SkeletonFrameReady()
@@ -98,6 +98,14 @@ namespace CaptureBody
 
             AngleVariables(body);
             anglesrules = new AngleRules(body);
+            try
+            {
+                Checkboxes();
+            }
+            catch (NullReferenceException)
+            {
+                Debug.WriteLine("Variables wasn't atributed");
+            }
             Color colorAux1;
             Color colorAux2;
 
@@ -131,10 +139,16 @@ namespace CaptureBody
 
             if(incrementHip || incrementTrunk)
             {
-                TrunkTimer();
+                if(recorrenceTrunk == false)
+                {
+                    TrunkTimer();
+                    recorrenceTrunk = true;
+                }
+                
             }
             else
             {
+                recorrenceTrunk = false;
                 incrementTMinuts = 0;
                 incrementTSeconds = 0;
             }
@@ -161,10 +175,15 @@ namespace CaptureBody
 
             if(incrementFlex || incrementAbd)
             {
-                ShoulderTimer();
+                if (recorrenceShoulder == false)
+                {
+                    ShoulderTimer();
+                    recorrenceShoulder = true;
+                }
             }
             else
             {
+                recorrenceShoulder = false;
                 incrementSSeconds = 0;
                 incrementSMinuts = 0;
             }
@@ -182,15 +201,19 @@ namespace CaptureBody
 
             if (incrementNeckFlex || incrementNeckExt)
             {
-                NeckTimer();
+                if (recorrenceNeck == false)
+                {
+                    NeckTimer();
+                    recorrenceNeck = true;
+                }
             }
             else
             {
+                recorrenceNeck = false;
                 incrementNSeconds = 0;
                 incrementNMinuts = 0;
             }
-
-
+            
             //Display bodyPositions
             //Display Head positions
             tblPositionHeaderX.Text = "Position Head X: " + body.Joints[JointType.Head].Position.X;
@@ -234,6 +257,15 @@ namespace CaptureBody
         /// There must be an optimized way of doing it without replicate all the timer code
         /// for all the variables, but they must be setted separately
         /// </Timers Code>
+        
+        private void CheckTimers()
+        {
+
+
+
+
+
+        }
         private void ShoulderTimer()
         {
             DispatcherTimer dt = new DispatcherTimer();
@@ -309,9 +341,9 @@ namespace CaptureBody
 
         private void dtTTicker(object sender, EventArgs e)
         {
+            ++incrementTSeconds;
             string timerSec = incrementTSeconds.ToString();
             string timerMin = incrementTMinuts.ToString();
-            ++incrementTSeconds;
 
             if (incrementTSeconds == 60)
             {
@@ -328,7 +360,7 @@ namespace CaptureBody
             }
 
             tblTrunkTimer.Content = timerMin.ToString() + ":" + timerSec.ToString();
-            anglesrules.IncrementTTimer = timerMin.ToString() + ":" + timerSec.ToString();
+            //anglesrules.IncrementTTimer = timerMin.ToString() + ":" + timerSec.ToString();
 
         }
         
@@ -351,11 +383,10 @@ namespace CaptureBody
 
         public void Checkboxes(){
 
+            
             if ((bool)ElevationS.IsChecked == true) //왜 이레...
             {
-                Debug.WriteLine(ElevationS.IsChecked);
                 anglesrules.ElevationS = true;
-                Debug.WriteLine(anglesrules.ElevationS);
             }
             else
             {
