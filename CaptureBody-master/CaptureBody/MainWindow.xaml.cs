@@ -258,14 +258,6 @@ namespace CaptureBody
         /// for all the variables, but they must be setted separately
         /// </Timers Code>
         
-        private void CheckTimers()
-        {
-
-
-
-
-
-        }
         private void ShoulderTimer()
         {
             DispatcherTimer dt = new DispatcherTimer();
