@@ -27,24 +27,20 @@ namespace CaptureBody
         //abducao de ombro
         double rightShoulderAbduction = 0;
         double leftShoulderAbduction = 0;
-
         //flexao de ombro
         double rightShoulderFlexion = 0;
         double leftShoulderFlexion = 0;
-
         //Checkbox
         bool elevationS;
         bool inadequateS;
         bool symetryN;
         bool rectifinedT;
         bool symetryT;
-
         //Timers
         string incrementStimer;
         string incrementNtimer;
         string incrementTtimer;
-
-
+        
         //Get and Set
         public string IncrementSTimer
         {
@@ -130,8 +126,7 @@ namespace CaptureBody
                 return Colors.Green;
             }
         }
-
-
+        
         ///Change color based on risks
         ///
         public Color getRiskColor(double shoulderFlextion, double neckFlexion, double neckExtension) {
@@ -214,6 +209,90 @@ namespace CaptureBody
             StringBuilder csvContent = new StringBuilder();
             string aux;
 
+            //Shoulders csv printer
+            if (elevationS)
+            {
+                aux = "Shoulder Elevation:; Not recommended";
+            }
+            else
+            {
+                aux = "Shoulder Elevation:; Acceptable";
+            }
+            csvContent.AppendLine(aux);
+
+            if (inadequateS)
+            {
+                aux = "Inadequate Arm Posture:; Not recommended";
+            }
+            else
+            {
+                aux = "Inadequate Arm Posture:; Acceptable";
+            }
+            csvContent.AppendLine(aux);
+
+            if (this.abductionRisk(rightShoulderAbduction) == Colors.Red)
+            {
+                aux = "Right Shoulder Abduction:;" + rightShoulderAbduction.ToString() + "°;" + "Time:" + incrementStimer ;
+            }
+            else
+            {
+                aux = "Right Shoulder Abduction:;" + rightShoulderAbduction.ToString() + "°;";
+            }
+            csvContent.AppendLine(aux);
+
+            if (this.abductionRisk(leftShoulderAbduction) == Colors.Red)
+            {
+                aux = "Left Shoulder Abduction:;" + leftShoulderAbduction.ToString() + "°;" + "Time:" + incrementStimer;
+            }
+            else
+            {
+                aux = "Left Shoulder Abduction:;" + leftShoulderAbduction.ToString() + "°;";
+            }
+            csvContent.AppendLine(aux);
+            
+            aux = "Right Shoulder Flexion:;" + rightShoulderFlexion.ToString() + "°";
+            csvContent.AppendLine(aux);
+            aux = "Left Shoulder Flexion:;" + leftShoulderFlexion.ToString() + "°";
+            csvContent.AppendLine(aux);
+
+
+            //Neck
+            if (symetryN)
+            {
+                aux = "Neck Symmetry: Not recommended";
+            }
+            else
+            {
+                aux = "Neck Symmetry: Acceptable";
+            }
+
+            aux = "Neck Flexion;" + neckFlexion.ToString() + " graus";
+            csvContent.AppendLine(aux);
+            aux = "Neck Extension;" + neckExtension.ToString() + " graus";
+            csvContent.AppendLine(aux);
+
+            //Trunk
+            if (rectifinedT)
+            {
+                aux = "Rectified Spine: Not recommended";
+            }
+            else
+            {
+                aux = "Rectified Spine: Acceptable";
+            }
+            if (symetryT)
+            {
+                aux = "Trunk Symmetry: Not recommended";
+            }
+            else
+            {
+                aux = "Trunk Symmetry: Acceptable";
+            }
+            aux = "Trunk Flexion;" + rightHipAngle.ToString() + " graus";
+            csvContent.AppendLine(aux);
+            aux = "Angle Hip Right;" + rightHipAngle.ToString() + " graus";
+            csvContent.AppendLine(aux);
+
             // Display height.
             aux = "Height;" + height.ToString() + "m";
             csvContent.AppendLine(aux);
@@ -223,29 +302,8 @@ namespace CaptureBody
             csvContent.AppendLine(aux);
             aux = "Right;" + right.ToString() + "m";
             csvContent.AppendLine(aux);
-
-            //tblAngleLeft.Text = "Relative Angle Left: " + leftArmRelativeAngle.ToString() + "º";
-            aux = "Angle Hip Right;" + rightHipAngle.ToString() + " graus";
-            csvContent.AppendLine(aux);
-
-            //flexion
-            aux = "Right Shoulder Flexion;" + rightShoulderFlexion.ToString() + " graus";
-            csvContent.AppendLine(aux);
-            aux = "Left Shoulder Flexion;" + leftShoulderFlexion.ToString() + " graus";
-            csvContent.AppendLine(aux);
-
-            //abduction
-            aux = "Right Shoulder Abduction;" + rightShoulderAbduction.ToString() + " graus";
-            csvContent.AppendLine(aux);
-            aux = "Left Shoulder Abduction;" + leftShoulderAbduction.ToString() + " graus";
-            csvContent.AppendLine(aux);
-
-            //Neck
-            aux = "Neck Flexion;" + neckFlexion.ToString() + " graus";
-            csvContent.AppendLine(aux);
-            aux = "Neck Extension;" + neckExtension.ToString() + " graus";
-            csvContent.AppendLine(aux);
-
+            
+            
             //Display bodyPositions
             //Display LeftArmPositions
             try
@@ -259,7 +317,7 @@ namespace CaptureBody
                 csvContent.AppendLine(aux);
 
                 //Left Shoulder and Elbow Positions
-                aux = "Position Left Shoulder X;" + body.Joints[JointType.ShoulderLeft].Position.X.ToString();
+                /*aux = "Position Left Shoulder X;" + body.Joints[JointType.ShoulderLeft].Position.X.ToString();
                 csvContent.AppendLine(aux);
                 aux = "Position Left Shoulder Y;" + body.Joints[JointType.ShoulderLeft].Position.Y.ToString();
                 csvContent.AppendLine(aux);
@@ -270,9 +328,10 @@ namespace CaptureBody
                 aux = "Position Left Elbow Y;" + body.Joints[JointType.ElbowLeft].Position.Y.ToString();
                 csvContent.AppendLine(aux);
                 aux = "Position Left Elbow Z;" + body.Joints[JointType.ElbowLeft].Position.Z.ToString();
-                csvContent.AppendLine(aux);
+                csvContent.AppendLine(aux);*/
 
                 //Right Shoulder and Elbow Positions
+                /*
                 aux = "Position Right Shoulder Y;" + body.Joints[JointType.ShoulderRight].Position.X.ToString();
                 csvContent.AppendLine(aux);
                 aux = "Position Right Shoulder X;" + body.Joints[JointType.ShoulderRight].Position.Y.ToString();
@@ -285,7 +344,7 @@ namespace CaptureBody
                 csvContent.AppendLine(aux);
                 aux = "Position Rigth Elbow Y;" + body.Joints[JointType.ElbowRight].Position.Z.ToString();
 
-                csvContent.AppendLine(aux);
+                csvContent.AppendLine(aux);*/
             }
             catch (NullReferenceException)
             {
