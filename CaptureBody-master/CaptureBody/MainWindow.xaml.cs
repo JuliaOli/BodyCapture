@@ -98,6 +98,9 @@ namespace CaptureBody
 
             AngleVariables(body);
             anglesrules = new AngleRules(body);
+            Color colorAux1;
+            Color colorAux2;
+
             try
             {
                 Checkboxes();
@@ -106,9 +109,6 @@ namespace CaptureBody
             {
                 Debug.WriteLine("Variables wasn't atributed");
             }
-            Color colorAux1;
-            Color colorAux2;
-
             //As variáveis que estão sendo usadas no display não são as mesmas usadas no csv?
             //talvez tenha um atraso ou um adiantamento nas variaveis usadas pois elas são diferentes...
             //precisa analisar se isso é um problema ou só redundância...
