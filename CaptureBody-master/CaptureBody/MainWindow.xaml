@@ -6,13 +6,37 @@
         xmlns:controls="clr-namespace:CaptureBody"
         mc:Ignorable="d"
         Unloaded="Page_Unloaded"
-        Title="BodyCapture" Height="700" Width="1090">
+        Title="Body Track" Height="900" Width="1400">
     <Window.Resources>
         <SolidColorBrush x:Key="MediumGreyBrush" Color="#ff6e6e6e" />
         <SolidColorBrush x:Key="KinectPurpleBrush" Color="#ff52318f" />
         <SolidColorBrush x:Key="KinectBlueBrush" Color="#ff00BCF2" />
         <Style TargetType="{x:Type Image}">
             <Setter Property="SnapsToDevicePixels" Value="True" />
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="UploadButton" >
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal" Background="Transparent">
+                                <TextBlock x:Name="UploadText" Text="{TemplateBinding Content}" TextAlignment="Left"  VerticalAlignment="Center" Foreground="{StaticResource KinectPurpleBrush}" FontSize="15" />
+                                <Grid Margin="9,0,0,0">
+                                    <Image x:Name="UploadNormal" Source="src\uploadpurple.png" Stretch="None" HorizontalAlignment="Center" />
+                                    <Image x:Name="UploadHover" Source="src\uploadblue.png" Stretch="None" HorizontalAlignment="Center" Visibility="Collapsed" />
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="UploadNormal" />
+                                <Setter Property="Visibility" Value="Visible" TargetName="UploadHover" />
+                                <Setter Property="Foreground" Value="{StaticResource KinectBlueBrush}" TargetName="UploadText" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
         <Style TargetType="{x:Type Button}" x:Key="ScreenshotButton" >
             <Setter Property="Template">
@@ -38,35 +62,114 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style TargetType="{x:Type Button}" x:Key="PlayButton" >
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal" Background="Transparent">
+                                <TextBlock x:Name="PlayText" Text="{TemplateBinding Content}" TextAlignment="Left"  VerticalAlignment="Center" Foreground="{StaticResource KinectPurpleBrush}" FontSize="15" />
+                                <Grid Margin="9,0,0,0">
+                                    <Image x:Name="PlayNormal" Source="src\run.png" Stretch="None" HorizontalAlignment="Center" />
+                                    <Image x:Name="PlayHover" Source="src\runblue.png" Stretch="None" HorizontalAlignment="Center" Visibility="Collapsed" />
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="PlayNormal" />
+                                <Setter Property="Visibility" Value="Visible" TargetName="PlayHover" />
+                                <Setter Property="Foreground" Value="{StaticResource KinectBlueBrush}" TargetName="PlayText" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
     <Grid Grid.Row="1" Margin="0,10,0,10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.3*" />
-            <ColumnDefinition Width="0.7*" />
+            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="19*" />
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0" Margin="30,0">
-            <TextBlock Text="Playback" Margin="0,20" />
-            <Button Content="Playback" HorizontalAlignment="Stretch" Click="Playback_Click" Height="30" />
-            <Button Content="PLAY" Margin="0,10" HorizontalAlignment="Stretch" Click="Play_Click" Height="30" />
-            <TextBlock x:Name="ResultsName" FontSize="25" Margin="0,10" Text="Results"><Run Text="N/A"/></TextBlock>
-            <TextBlock x:Name="tblHeight" FontSize="10" Margin="0" ><Run Text="He"/><Run Text="ight: "/><Run Text="N/A"/></TextBlock>
-            <TextBlock Name="tblLeft" Text="Left: N/A" FontSize="10" Margin="3" />
-            <TextBlock Name="tblRight" Text="Right: N/A" FontSize="10" Margin="3" />
-            <TextBlock x:Name="tblAngleRight" FontSize="10" Margin="3" ><Run Text="Trunk Flexion: N/A"/></TextBlock>
-            <TextBlock x:Name="tblShoulderFlexion" FontSize="10" Margin="3" ><Run Text="Shoulder Flexion: N/A"/></TextBlock>
-            <TextBlock x:Name="tblNeckFlexion" FontSize="10" Margin="3" ><Run Text="Neck Flexion: N/A"/></TextBlock>
-            <TextBlock x:Name="tblNeckExtension" FontSize="10" Margin="3" ><Run Text="Neck Extension: N/A"/></TextBlock>
-            <TextBlock Name="tblPositionHeaderX" Text="Position Header X: N/A" FontSize="10" Margin="3" />
-            <TextBlock Name="tblPositionHeaderY" Text="Position Header Y: N/A" FontSize="10" Margin="3" />
-            <TextBlock Name="tblPositionHeaderZ" Text="Position Header Z: N/A" FontSize="10" Margin="3" />
-            <TextBlock Name="tblPositionShoulderRightX" Text="Position Shoulder Right X: N/A" FontSize="10" Margin="3" />
-            <TextBlock Name="tblPositionShoulderRightY" Text="Position Shoulder Right Y: N/A" FontSize="10" Margin="3" />
-            <TextBlock Name="tblPositionShoulderRightZ" Text="Position Shoulder Right Z: N/A" FontSize="10" Margin="3" />
-            <TextBlock Name="tblPositionElbowRightX" Text="Position Elbow RigthX: N/A" FontSize="10" Margin="3" />
-            <TextBlock Name="tblPositionElbowRightY" Text="Position Elbow RigthY: N/A" FontSize="10" Margin="3" />
-            <TextBlock x:Name="tblPositionElbowRightZ" FontSize="10" Margin="3" ><Run Text="Position Elbow RigthZ"/><Run Text=": N/A"/></TextBlock>
-            <Button Style="{StaticResource ScreenshotButton}" Content="Screenshot" Height="Auto" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,10" Click="ScreenshotButton_Click" RenderTransformOrigin="0.568,5.982" />
+        <StackPanel Grid.Column="0" Margin="30,0,0,0" HorizontalAlignment="Left" Width="250">
+            <Button Style="{StaticResource ScreenshotButton}" Content="Screenshot " Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10" Click="ScreenshotButton_Click" RenderTransformOrigin="0.568,5.982" />
+            <Button Style="{StaticResource PlayButton}" Content="Play/Pause" Height="37" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10" Click="Play_Click" RenderTransformOrigin="0.568,5.982" />
+            <Button Style="{StaticResource UploadButton}" Content="Upload      " Height="40" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10" Click="Playback_Click" RenderTransformOrigin="0.568,5.982" />
+            <GroupBox Foreground="Purple" Header="Shoulders" Height="150" Width="249">
+                <StackPanel HorizontalAlignment="Left" Height="140" Margin="0,0,-2,-10" VerticalAlignment="Top" Width="239">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <CheckBox x:Name="ElevationS" Margin="0,5,0,5" Grid.Column="0" Content="Shoulder Elevation" FontSize="10"/>
+                        <CheckBox x:Name="InadequateS" Margin="0,5,0,5" Grid.Column="3" Content="Inadequate Posture" FontSize="10"/>
+                    </Grid>
+                    <TextBlock Foreground="{Binding Path=DataContext.ForegroundColor}" x:Name="tblRightShoulderFlexion" FontSize="10" Margin="3" ><Run Text="Right Shoulder Flexion: N/A"/></TextBlock>
+                    <TextBlock Foreground="{Binding DataContext.ForegroundColor}" x:Name="tblLeftShoulderFlexion" FontSize="10" Margin="3,3,-23,3" ><Run Text="Left Shoulder Flexion: N/A"/></TextBlock>
+                    <TextBlock Foreground="{Binding DataContext.ForegroundColor}" x:Name="tblRightShoulderAbduction" FontSize="10" Margin="3,3,-23,3" ><Run Text="Right Shoulder Abduction: N/A"/></TextBlock>
+                    <TextBlock Foreground="{Binding Path=DataContext.ForegroundColor}" x:Name="tblLeftShoulderAbduction" FontSize="10" Margin="3" ><Run Text="Left ShoulderAbduction: N/A"/></TextBlock>
+                    <Label x:Name="tblShoulderTimer" FontSize="10" Content="Timer: 00:00"/>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Foreground="Purple" Header="Neck" Height="110" Width="249">
+                <StackPanel HorizontalAlignment="Left" Height="100" Margin="0,0,-2,-10" VerticalAlignment="Top" Width="239">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <CheckBox x:Name="SymetryN" Margin="0,5,0,5" Grid.Column="0" Content="Neck Symmetry" FontSize="10"/>
+                    </Grid>
+                    <TextBlock Foreground="Black" x:Name="tblNeckFlexion" FontSize="10" Margin="3" ><Run Text="Neck Flexion: N/A"/></TextBlock>
+                    <TextBlock Foreground="Black" x:Name="tblNeckExtension" FontSize="10" Margin="3" ><Run Text="Neck Extension: N/A"/></TextBlock>
+                    <Label x:Name="tblNeckTimer" FontSize="10" Content="Timer: 00:00"/>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Foreground="Purple" Header="Trunk" Height="110" Width="250">
+                <StackPanel HorizontalAlignment="Left" Height="100" Margin="0,0,-2,-10" VerticalAlignment="Top" Width="239">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <CheckBox x:Name="RectifinedT" Margin="0,5,0,5" Grid.Column="0" Content="Rectified Spine" FontSize="10"/>
+                        <CheckBox x:Name="SymetryT" Margin="0,5,0,5" Grid.Column="3" Content="Trunk Symetry" FontSize="10"/>
+                    </Grid>
+                    <TextBlock Foreground="Black" x:Name="tblTrunk" FontSize="10" Margin="3" ><Run Text="Trunk Flexion: N/A"/></TextBlock>
+                    <TextBlock Foreground="Black" x:Name="tblAngleRight" FontSize="10" Margin="3" ><Run Text="HipAngle Flexion: N/A"/></TextBlock>
+                    <Label x:Name="tblTrunkTimer" FontSize="10" Content="Timer: 00:00"/>
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Foreground="Purple" Header="Positions" Height="110" Width="249">
+                <StackPanel HorizontalAlignment="Left" Height="100" Margin="0,0,-2,-10" VerticalAlignment="Top" Width="239">
+                    <Label/>
+                    <TextBlock Foreground="Black" x:Name="tblHeight" FontSize="10" Margin="0" ><Run Text="He"/><Run Text="ight: "/><Run Text="N/A"/></TextBlock>
+                    <TextBlock Foreground="Black" Name="tblLeft" Text="Left Hand: N/A" FontSize="10" Margin="3" />
+                    <TextBlock Foreground="Black" Name="tblRight" Text="Right Hand: N/A" FontSize="10" Margin="3" />
+                    <TextBlock Foreground="Black" x:Name="tblPositionHeaderX" FontSize="10" Margin="3" ><Run Text="Posit"/><Run Text="i"/><Run Text="on Header "/><Run Text="X: N/A"/></TextBlock>
+                    <TextBlock Name="tblPositionHeaderY" Text="Position Header Y: N/A" FontSize="10" Margin="3" />
+                    <TextBlock Name="tblPositionHeaderZ" Text="Position Header Z: N/A" FontSize="10" Margin="3" />
+                    
+                    <!-- <TextBlock Name="tblPositionShoulderLeftX" Text="Position Shoulder Right X: N/A" FontSize="10" Margin="3" />
+                    <TextBlock Name="tblPositionShoulderLeftY" Text="Position Shoulder Right Y: N/A" FontSize="10" Margin="3" />
+                    <TextBlock Name="tblPositionShoulderLeftZ" Text="Position Shoulder Right Z: N/A" FontSize="10" Margin="3" />
+                    <TextBlock Name="tblPositionElbowLeftX" Text="Position Elbow RigthX: N/A" FontSize="10" Margin="3" />
+                    <TextBlock Name="tblPositionElbowLeftY" Text="Position Elbow RigthY: N/A" FontSize="10" Margin="3" />
+                    <TextBlock x:Name="tblPositionElbowLeftZ" FontSize="10" Margin="3" ><Run Text="Position Elbow RigthZ"/><Run Text=": N/A"/></TextBlock>
+                    <TextBlock Name="tblPositionShoulderRightX" Text="Position Shoulder Right X: N/A" FontSize="10" Margin="3" />
+                    <TextBlock Name="tblPositionShoulderRightY" Text="Position Shoulder Right Y: N/A" FontSize="10" Margin="3" />
+                    <TextBlock Name="tblPositionShoulderRightZ" Text="Position Shoulder Right Z: N/A" FontSize="10" Margin="3" />
+                    <TextBlock Name="tblPositionElbowRightX" Text="Position Elbow RigthX: N/A" FontSize="10" Margin="3" />
+                    <TextBlock Name="tblPositionElbowRightY" Text="Position Elbow RigthY: N/A" FontSize="10" Margin="3" />
+                    <TextBlock x:Name="tblPositionElbowRightZ" FontSize="10" Margin="3" ><Run Text="Position Elbow RigthZ"/><Run Text=": N/A"/></TextBlock>-->
+                </StackPanel>
+            </GroupBox>
         </StackPanel>
         <Grid Grid.Column="1" Margin="0,0,30,0">
             <Grid.RowDefinitions>

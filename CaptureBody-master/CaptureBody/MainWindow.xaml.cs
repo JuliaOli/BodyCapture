@@ -9,6 +9,7 @@ using System.Globalization;
 using Microsoft.Kinect.Tools;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace CaptureBody
 {
@@ -17,14 +18,46 @@ namespace CaptureBody
     /// </summary>
     public partial class MainWindow : Window
     {
+        AngleRules anglesrules;
         private Body body = null;
         double height = 0;
         double left = 0;
         double right = 0;
         double rightHipAngle = 0;
-        double shoulderFlexion = 0;
+
+        //Trunk
+        double trunk = 0;
+
+        //neck flexion
         double neckFlexion = 0;
         double neckExtension = 0;
+        
+        //abducao de ombro
+        double rightShoulderAbduction = 0;
+        double leftShoulderAbduction = 0;
+
+        //flexao de ombro
+        double rightShoulderFlexion = 0;
+        double leftShoulderFlexion = 0;
+
+        //Timer
+        private int incrementSSeconds = 0;
+        private int incrementSMinuts = 0;
+        private int incrementNSeconds = 0;
+        private int incrementNMinuts = 0;
+        private int incrementTSeconds = 0;
+        private int incrementTMinuts = 0;
+
+        //Timer Checker
+        bool recorrenceTrunk = false; //Globalcheck
+        bool recorrenceNeck = false; //Globalcheck
+        bool recorrenceShoulder = false; //Globalcheck
+        bool incrementTrunk = false;
+        bool incrementHip = false;
+        bool incrementFlex = false;
+        bool incrementAbd = false;
+        bool incrementNeckFlex = false;
+        bool incrementNeckExt = false;
 
         public MainWindow()
         {
@@ -33,6 +66,11 @@ namespace CaptureBody
             viewer.startKinect();
         }
 
+        /// <summary>
+        /// Método redundante... ele é implementado em angleRules
+        /// mas as variáveis de angleRules não estão sendo usadas na interface...
+        /// </summary>
+        /// <param name="body"></param>
         void AngleVariables(Body body)
         {
             // Calculate angles.
@@ -40,15 +78,41 @@ namespace CaptureBody
             left = Math.Round(body.LeftHand(), 2);
             right = Math.Round(body.RightHand(), 2);
             rightHipAngle = Math.Round(body.HipRelativeAngle(), 2);
-            shoulderFlexion = Math.Round(body.ShoulderFlexion(), 2);
+            trunk = Math.Round(body.TrunkFlexion(), 2);
+
+            //Flexao de ombro
+            rightShoulderFlexion = Math.Round(body.RightShoulderFlexion(), 2);
+            leftShoulderFlexion = Math.Round(body.LeftShoulderFlexion(), 2);
+
+            //Neck
             neckFlexion = Math.Round(body.neckFlexion(), 2);
             neckExtension = Math.Round(body.neckExtension(), 2);
+
+            //Abducao de ombro
+            rightShoulderAbduction = Math.Round(body.RightShoulderAbduction(), 2);
+            leftShoulderAbduction = Math.Round(body.LeftShoulderAbduction(), 2);
         }
 
         void Sensor_SkeletonFrameReady()
         {
 
             AngleVariables(body);
+            anglesrules = new AngleRules(body);
+            Color colorAux1;
+            Color colorAux2;
+
+            try
+            {
+                Checkboxes();
+            }
+            catch (NullReferenceException)
+            {
+                Debug.WriteLine("Variables wasn't atributed");
+            }
+            //As variáveis que estão sendo usadas no display não são as mesmas usadas no csv?
+            //talvez tenha um atraso ou um adiantamento nas variaveis usadas pois elas são diferentes...
+            //precisa analisar se isso é um problema ou só redundância...
+
 
             // Display height.
             tblHeight.Text = "Height: " + height.ToString() + "m";
@@ -57,53 +121,119 @@ namespace CaptureBody
             tblLeft.Text = "Left: " + left.ToString() + "m";
             tblRight.Text = "Right: " + right.ToString() + "m";
             //tblAngleLeft.Text = "Relative Angle Left: " + leftArmRelativeAngle.ToString() + "º";
+
+            //Hip Angle
+            colorAux1 = anglesrules.hipRisk(rightHipAngle);
+            colorAux2 = anglesrules.hipRisk(rightHipAngle);
             tblAngleRight.Text = "Angle Hip Right: " + rightHipAngle.ToString() + "º";
-            tblShoulderFlexion.Text = "Shoulder Flexion: " + shoulderFlexion.ToString() + "º";
+            tblAngleRight.Foreground = new SolidColorBrush(colorAux1);
+            incrementHip = anglesrules.colorCheck(colorAux1, colorAux1);
+
+            //Trunk
+
+            colorAux1 = anglesrules.trunkRisk(trunk);
+            colorAux2 = anglesrules.trunkRisk(trunk);
+            tblTrunk.Text = "Anterior trunk inclination" + trunk.ToString() + "º";
+            tblTrunk.Foreground = new SolidColorBrush(colorAux1);
+            incrementTrunk = anglesrules.colorCheck(colorAux1, colorAux1);
+
+            if(incrementHip || incrementTrunk)
+            {
+                if(recorrenceTrunk == false)
+                {
+                    TrunkTimer();
+                    recorrenceTrunk = true;
+                }
+                
+            }
+            else
+            {
+                recorrenceTrunk = false;
+                incrementTMinuts = 0;
+                incrementTSeconds = 0;
+            }
+            
+            //Flexion
+            tblRightShoulderFlexion.Text = "Right Shoulder Flexion: " + rightShoulderFlexion.ToString() + "º";
+            tblLeftShoulderFlexion.Text = "Left Shoulder Flexion: " + leftShoulderFlexion.ToString() + "º";
+            colorAux1 = anglesrules.getRiskColor(rightShoulderFlexion, neckFlexion, neckExtension);
+            colorAux2 = anglesrules.getRiskColor(leftShoulderFlexion, neckFlexion, neckExtension);
+            incrementFlex = anglesrules.colorCheck(anglesrules.getRiskColor(rightShoulderFlexion, neckFlexion, neckExtension), 
+                anglesrules.getRiskColor(rightShoulderFlexion, neckFlexion, neckExtension));
+            tblRightShoulderFlexion.Foreground = new SolidColorBrush(colorAux1);
+            tblLeftShoulderFlexion.Foreground = new SolidColorBrush(colorAux2);
+
+            //abduction
+            tblRightShoulderAbduction.Text = "Right Shoulder Abduction: " + rightShoulderAbduction.ToString() + "º";
+            tblLeftShoulderAbduction.Text = "Left Shoulder Abduction: " + leftShoulderAbduction.ToString() + "º";
+            colorAux1 = anglesrules.abductionRisk(leftShoulderAbduction);
+            colorAux2 = anglesrules.abductionRisk(rightShoulderAbduction);
+            incrementAbd = anglesrules.colorCheck(anglesrules.abductionRisk(leftShoulderAbduction),
+                anglesrules.abductionRisk(rightShoulderAbduction));
+            tblLeftShoulderAbduction.Foreground = new SolidColorBrush(colorAux1);
+            tblRightShoulderAbduction.Foreground = new SolidColorBrush(colorAux2);
+
+            if(incrementFlex || incrementAbd)
+            {
+                if (recorrenceShoulder == false)
+                {
+                    ShoulderTimer();
+                    recorrenceShoulder = true;
+                }
+            }
+            else
+            {
+                recorrenceShoulder = false;
+                incrementSSeconds = 0;
+                incrementSMinuts = 0;
+            }
+
+            //Neck 
             tblNeckFlexion.Text = "Neck Flexion: " + neckFlexion.ToString() + "º";
             tblNeckExtension.Text = "Neck Extension: " + neckExtension.ToString() + "º";
+            colorAux1 = anglesrules.getRiskColor(rightShoulderFlexion, neckFlexion, neckExtension);
+            colorAux2 = anglesrules.getRiskColor(rightShoulderFlexion, neckFlexion, neckExtension);
+            //Só vou confiar que está certo
+            incrementNeckFlex = anglesrules.colorCheck(colorAux1, colorAux1);
+            incrementNeckExt = anglesrules.colorCheck(colorAux2, colorAux2);
+            tblNeckFlexion.Foreground = new SolidColorBrush(anglesrules.getRiskColor(rightShoulderFlexion, neckFlexion, neckExtension));
+            tblNeckExtension.Foreground = new SolidColorBrush(anglesrules.getRiskColor(leftShoulderFlexion, neckFlexion, neckExtension));
 
+            if (incrementNeckFlex || incrementNeckExt)
+            {
+                if (recorrenceNeck == false)
+                {
+                    NeckTimer();
+                    recorrenceNeck = true;
+                }
+            }
+            else
+            {
+                recorrenceNeck = false;
+                incrementNSeconds = 0;
+                incrementNMinuts = 0;
+            }
+            
             //Display bodyPositions
-            //Display LeftArmPositions
+            //Display Head positions
             tblPositionHeaderX.Text = "Position Head X: " + body.Joints[JointType.Head].Position.X;
             tblPositionHeaderY.Text = "Position Head Y: " + body.Joints[JointType.Head].Position.Y;
             tblPositionHeaderZ.Text = "Position Head Z: " + body.Joints[JointType.Head].Position.Z;
-            tblPositionShoulderRightX.Text = "Position Right Shoulder Y: " + body.Joints[JointType.ShoulderRight].Position.Y;
-            tblPositionShoulderRightY.Text = "Position Right Shoulder X: " + body.Joints[JointType.ShoulderRight].Position.X;
-            tblPositionShoulderRightZ.Text = "Position Right Shoulder Y: " + body.Joints[JointType.ShoulderRight].Position.Y;
-            tblPositionElbowRightX.Text = "Position Rigth Elbow Y: " + body.Joints[JointType.ElbowRight].Position.Y;
-            tblPositionElbowRightY.Text = "Position Rigth Elbow X: " + body.Joints[JointType.ElbowRight].Position.X;
-            tblPositionElbowRightZ.Text = "Position Rigth Elbow Y: " + body.Joints[JointType.ElbowRight].Position.Y;
-      
+            
         }
 
         private void viewer_ChangesMethods(object sender, EventArgs e)
         {
-
             UpdateBody();
         }
 
         private void UpdateBody()
         {
-            //if (viewer.Playback == null) return;
             this.body = viewer.BodyTracked;
             if (body == null) return;
             Sensor_SkeletonFrameReady();
-            
-
         }
-        /*<Button x:Name="btnRecord" Content="Record" HorizontalAlignment="Left" Margin="0,10" VerticalAlignment="Top" Width="200" Height="20" ToolTip="Gravar" Click="btnRecord_Click"/>
-            <Button x:Name="btnStop" Content="Stop" HorizontalAlignment="Left" Margin="0,10" VerticalAlignment="Top" Width="200" Height="20" ToolTip="Gravar" IsEnabled="False"  Click="btnStop_Click"/>
-        private void btnRecord_Click(object sender, RoutedEventArgs e)
-        {
-            btnStop.IsEnabled = true;
-            Sensor_SkeletonFrameReady();
-        }
-        private void btnStop_Click(object sender, RoutedEventArgs e)
-        {
-            btnRecord.Focus();
-            btnStop.IsEnabled = false;
-        }*/
-
+        
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
             viewer.stopPlayback();
@@ -123,163 +253,174 @@ namespace CaptureBody
         }
 
 
-
-        //FUNCTION DIRECT TO NEW CLASSE (CONSTRUCTOR RECIEVE VARIABLE BODY) 
-
-        private void AngleString(StringBuilder csvContent, Body body)
+        /// <Timers>
+        /// There must be an optimized way of doing it without replicate all the timer code
+        /// for all the variables, but they must be setted separately
+        /// </Timers Code>
+        
+        private void ShoulderTimer()
         {
-            string aux;
-            aux = "Height;" + height.ToString() + "m";
-            csvContent.AppendLine(aux);
-            // Display height.
+            DispatcherTimer dt = new DispatcherTimer();
+            dt.Interval = TimeSpan.FromSeconds(1);
+            dt.Tick += dtSTicker;
+            dt.Start();
+        }
 
-            //Display Arms
-            aux = "Left;" + left.ToString() + "m";
-            csvContent.AppendLine(aux);
-            aux = "Right;" + right.ToString() + "m";
-            csvContent.AppendLine(aux);
+        private void dtSTicker(object sender, EventArgs e)
+        {
+            string timerSec = incrementSSeconds.ToString();
+            string timerMin = incrementSMinuts.ToString();
+            ++incrementSSeconds;
+            
+            if(incrementSSeconds == 60)
+            {
+                incrementSSeconds = 0;
+                ++incrementSMinuts;
+            }
+            if(incrementSMinuts < 10)
+            {
+                timerMin = '0' + incrementSMinuts.ToString();
+            }
+            if (incrementSSeconds < 10)
+            {
+                timerSec = '0' + incrementSSeconds.ToString();
+            }
 
-            //tblAngleLeft.Text = "Relative Angle Left: " + leftArmRelativeAngle.ToString() + "º";
-            aux = "Angle Hip Right;" + rightHipAngle.ToString() + " graus";
-            csvContent.AppendLine(aux);
-            aux = "Shoulder Flexion;" + shoulderFlexion.ToString() + " graus";
-            csvContent.AppendLine(aux);
-            aux = "Neck Flexion;" + neckFlexion.ToString() + " graus";
-            csvContent.AppendLine(aux);
-            aux = "Neck Extension;" + neckExtension.ToString() + " graus";
-            csvContent.AppendLine(aux);
+            tblShoulderTimer.Content = timerMin.ToString() + ":" + timerSec.ToString();
+            anglesrules.IncrementSTimer = timerMin.ToString() + ":" + timerSec.ToString();
+        }
 
-            //Display bodyPositions
-            //Display LeftArmPositions
+        private void NeckTimer()
+        {
+            DispatcherTimer dt = new DispatcherTimer();
+            dt.Interval = TimeSpan.FromSeconds(1);
+            dt.Tick += dtTTicker;
+            dt.Start();
+        }
+
+        private void dtNTicker(object sender, EventArgs e)
+        {
+            string timerSec = incrementNSeconds.ToString();
+            string timerMin = incrementNMinuts.ToString();
+            ++incrementNSeconds;
+
+            if (incrementNSeconds == 60)
+            {
+                incrementNSeconds = 0;
+                ++incrementNMinuts;
+            }
+            if (incrementNMinuts < 10)
+            {
+                timerMin = '0' + incrementNMinuts.ToString();
+            }
+            if (incrementNSeconds < 10)
+            {
+                timerSec = '0' + incrementNSeconds.ToString();
+            }
+
+            tblNeckTimer.Content = timerMin.ToString() + ":" + timerSec.ToString();
+            anglesrules.IncrementNTimer = timerMin.ToString() + ":" + timerSec.ToString();
+
+        }
+
+        private void TrunkTimer()
+        {
+            DispatcherTimer dt = new DispatcherTimer();
+            dt.Interval = TimeSpan.FromSeconds(1);
+            dt.Tick += dtTTicker;
+            dt.Start();
+        }
+
+        private void dtTTicker(object sender, EventArgs e)
+        {
+            ++incrementTSeconds;
+            string timerSec = incrementTSeconds.ToString();
+            string timerMin = incrementTMinuts.ToString();
+
+            if (incrementTSeconds == 60)
+            {
+                incrementTSeconds = 0;
+                ++incrementTMinuts;
+            }
+            if (incrementTMinuts < 10)
+            {
+                timerMin = '0' + incrementTMinuts.ToString();
+            }
+            if (incrementTSeconds < 10)
+            {
+                timerSec = '0' + incrementTSeconds.ToString();
+            }
+
+            tblTrunkTimer.Content = timerMin.ToString() + ":" + timerSec.ToString();
+            //anglesrules.IncrementTTimer = timerMin.ToString() + ":" + timerSec.ToString();
+
+        }
+        
+        private void ScreenshotButton_Click(object sender, RoutedEventArgs e)
+        {
             try
             {
-                // FileStream is IDisposable
-                aux = "Position Head X;" + body.Joints[JointType.Head].Position.X.ToString();
-                csvContent.AppendLine(aux);
-                aux = "Position Head Y;" + body.Joints[JointType.Head].Position.Y.ToString();
-                csvContent.AppendLine(aux);
-                aux = "Position Head Z," + body.Joints[JointType.Head].Position.Z.ToString();
-                csvContent.AppendLine(aux);
-                aux = "Position Right Shoulder Y;" + body.Joints[JointType.ShoulderRight].Position.Y.ToString();
-                csvContent.AppendLine(aux);
-                aux = "Position Right Shoulder X;" + body.Joints[JointType.ShoulderRight].Position.X.ToString();
-                csvContent.AppendLine(aux);
-                aux = "Position Right Shoulder Y;" + body.Joints[JointType.ShoulderRight].Position.Y.ToString();
-                csvContent.AppendLine(aux).ToString();
-                aux = "Position Rigth Elbow Y;" + body.Joints[JointType.ElbowRight].Position.Y.ToString();
-                csvContent.AppendLine(aux);
-                aux = "Position Rigth Elbow X;" + body.Joints[JointType.ElbowRight].Position.X.ToString();
-                csvContent.AppendLine(aux);
-                aux = "Position Rigth Elbow Y;" + body.Joints[JointType.ElbowRight].Position.Y.ToString();
-                csvContent.AppendLine(aux);
+                anglesrules.CsvBuilder(body, viewer);
             }
             catch (NullReferenceException)
             {
-                Debug.WriteLine("Erro loading the file. " + "Variable body hasn't been set yet");
+                Debug.WriteLine("Variables wasn't atributed");
             }
-            
         }
-
-        private void ScreenshotButton_Click(object sender, RoutedEventArgs e)
-        {
-            
-            StringBuilder csvContent = new StringBuilder();
-            if(body != null && viewer.Camera != null)
-            {
-                csvContent.AppendLine("Type;Angle/Lenght/Position");
-                AngleString(csvContent, body);
-                
-                string time = System.DateTime.UtcNow.ToString("hh'-'mm'-'ss", CultureInfo.CurrentUICulture.DateTimeFormat);
-                string myPhotos = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                
-                // create a png bitmap encoder which knows how to save a .png file
-                BitmapEncoder encoder = new PngBitmapEncoder();
-                BitmapEncoder encoderCanvas = new PngBitmapEncoder();
-
-                // create frame from the writable bitmap and add to encoder
-                encoder.Frames.Add(BitmapFrame.Create((BitmapSource)viewer.Camera.Source));
-                
-                Int32 width = (Int32)viewer.Skeleton.ActualWidth;
-                Int32 height = (Int32)viewer.Skeleton.ActualHeight;
-                
-                RenderTargetBitmap renderBitmap = new RenderTargetBitmap(width, height, 96d, 96d, PixelFormats.Pbgra32);
-                renderBitmap.Render(viewer.Skeleton);
-
-                //JpegBitmapEncoder encoder = new JpegBitmapEncoder();
-                PngBitmapEncoder pngEncoder = new PngBitmapEncoder();
-                pngEncoder.Frames.Add(BitmapFrame.Create(renderBitmap));
-                
-                //Create a new folder
-                string folderName = "KinectSaveBodyInformation-BodyIndex-" + time;
-                string subFolder = Path.Combine(myPhotos, folderName);
-
-                try
-                {
-                    // Determine whether the directory exists.
-                    if (Directory.Exists(subFolder))
-                    {
-                        Console.WriteLine("That path exists already.");
-                        return;
-                    }
-
-                    // Try to create the directory.
-                    DirectoryInfo di = Directory.CreateDirectory(subFolder);
-                    Console.WriteLine("The directory was created successfully at {0}.", Directory.GetCreationTime(subFolder));
-                    
-                }
-                catch (IOException)
-                {
-                    Console.WriteLine("The process failed: {0}", e.ToString());
-                }
-                finally { }
-                
-
         
-                //Name of the files (csv,png,png(canvas))
-                string path = Path.Combine(subFolder, "KinectSaveBodyInformation-" + time + ".csv");
-
-                //Debug.WriteLine(subFolder);
-                
-                string imagePath = Path.Combine(subFolder, "CameraImage-" + time + ".png");
-
-                //canvas
-
-                string imagePathCanvas = Path.Combine(subFolder, "Skeleton-" + time + ".png");
-
-                Debug.WriteLine(imagePath);
-
-
-                try
-                {
-                    using (FileStream fs = new FileStream(imagePath, FileMode.Create))
-                    {
-                        encoder.Save(fs);
-                    }
-
-                    using (FileStream fs = new FileStream(imagePathCanvas, FileMode.Create))
-                    {
-                        pngEncoder.Save(fs);
-                    }
-
-                    File.AppendAllText(path, csvContent.ToString());
-                }
-                catch (IOException)
-                {
-                    Debug.WriteLine("Erro writing the file");
-                }
-            }
-
-        }
-
-
-
-
         private void Play_Click(object sender, RoutedEventArgs e)
         {
             viewer.playPause();
         }
 
+        public void Checkboxes(){
 
+            
+            if ((bool)ElevationS.IsChecked == true) //왜 이레...
+            {
+                anglesrules.ElevationS = true;
+            }
+            else
+            {
+                anglesrules.ElevationS = false;
+            }
+
+            if ((bool)InadequateS.IsChecked == true) //왜 이레...
+            {
+                anglesrules.InadequateS = true;
+            }
+            else
+            {
+                anglesrules.InadequateS = false;
+            }
+
+            if ((bool)SymetryN.IsChecked == true) //왜 이레...
+            {
+                anglesrules.SymetryN = true;
+            }
+            else
+            {
+                anglesrules.SymetryN = false;
+            }
+
+            if ((bool)RectifinedT.IsChecked == true) //왜 이레...
+            {
+                anglesrules.RectifinedT = true;
+            }
+            else
+            {
+                anglesrules.RectifinedT = false;
+            }
+
+            if ((bool)SymetryT.IsChecked == true) //왜 이레...
+            {
+                anglesrules.SymetryT = true;
+            }
+            else
+            {
+                anglesrules.SymetryT = false;
+            }
+        }
 
     }
 

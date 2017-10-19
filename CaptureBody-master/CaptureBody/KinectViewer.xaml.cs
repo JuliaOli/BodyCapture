@@ -610,20 +610,37 @@ namespace CaptureBody
                 using (_client = KStudio.CreateClient())
                 {
                     _client.ConnectToService();
-                    
-                    using (_playback = _client.CreatePlayback(filePath))
-                    {
-                        _playback.LoopCount = loopCount;
-                        _playback.Start();
 
-                        while (_playback.State == KStudioPlaybackState.Playing || _playback.State == KStudioPlaybackState.Paused)
+                    try
+                    {
+                        using (_playback = _client.CreatePlayback(filePath))
                         {
-                            System.Threading.Thread.Sleep(500);
+                            _playback.LoopCount = loopCount;
+                            _playback.Start();
+
+                            while (_playback.State == KStudioPlaybackState.Playing || _playback.State == KStudioPlaybackState.Paused)
+                            {
+                                System.Threading.Thread.Sleep(500);
+                            }
+                            _playback.Dispose();
+                            _playback = null;
                         }
-                        _playback.Dispose();
-                        _playback = null;
+                        _client.DisconnectFromService();
                     }
-                    _client.DisconnectFromService();
+                    catch (NullReferenceException)
+                    {
+                        Debug.WriteLine("Don't know why");
+                    }
+                    catch (ArgumentException)
+                    {
+                        Debug.WriteLine("Don't know why");
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        Debug.WriteLine("Same video can't be loaded at the same time");
+                    }
+
+                    
                 }
             }).Start();
         }
@@ -636,16 +653,16 @@ namespace CaptureBody
                 {
                     Pause();
                 }
+                else
+                {
+                    Play();
+                }
                 return;
             }
             if (_kinect != null)
             {
                 Pause();
                 return;
-            }
-            else
-            {
-                Play();
             }
         }
 
