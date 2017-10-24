@@ -65,7 +65,7 @@ namespace CaptureBody
             viewer.ChangesMethods += viewer_ChangesMethods;
             viewer.startKinect();
         }
-
+        /*
         /// <summary>
         /// Método redundante... ele é implementado em angleRules
         /// mas as variáveis de angleRules não estão sendo usadas na interface...
@@ -91,12 +91,12 @@ namespace CaptureBody
             //Abducao de ombro
             rightShoulderAbduction = Math.Round(body.RightShoulderAbduction(), 2);
             leftShoulderAbduction = Math.Round(body.LeftShoulderAbduction(), 2);
-        }
+        }*/
 
         void Sensor_SkeletonFrameReady()
         {
 
-            AngleVariables(body);
+            //AngleVariables(body);
             anglesrules = new AngleRules(body);
             Color colorAux1;
             Color colorAux2;
@@ -124,7 +124,6 @@ namespace CaptureBody
 
             //Hip Angle
             colorAux1 = anglesrules.hipRisk(hipFlexionRight);
-            colorAux2 = anglesrules.hipRisk(hipFlexionRight);
             tblAngleRight.Text = "Angle Hip Right: " + hipFlexionRight.ToString() + "º";
             tblAngleRight.Foreground = new SolidColorBrush(colorAux1);
             incrementHip = anglesrules.colorCheck(colorAux1, colorAux1);
@@ -132,7 +131,6 @@ namespace CaptureBody
             //Trunk
 
             colorAux1 = anglesrules.trunkRisk(trunk);
-            colorAux2 = anglesrules.trunkRisk(trunk);
             tblTrunk.Text = "Anterior trunk inclination" + trunk.ToString() + "º";
             tblTrunk.Foreground = new SolidColorBrush(colorAux1);
             incrementTrunk = anglesrules.colorCheck(colorAux1, colorAux1);
@@ -150,7 +148,7 @@ namespace CaptureBody
             {
                 recorrenceTrunk = false;
                 incrementTMinuts = 0;
-                incrementTSeconds = 0;
+                incrementTSeconds = 0;  
             }
             
             //Flexion

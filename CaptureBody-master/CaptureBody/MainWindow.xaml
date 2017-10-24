@@ -107,11 +107,27 @@
                         <CheckBox x:Name="ElevationS" Margin="0,5,0,5" Grid.Column="0" Content="Shoulder Elevation" FontSize="10"/>
                         <CheckBox x:Name="InadequateS" Margin="0,5,0,5" Grid.Column="3" Content="Inadequate Posture" FontSize="10"/>
                     </Grid>
-                    <TextBlock Foreground="{Binding Path=DataContext.ForegroundColor}" x:Name="tblRightShoulderFlexion" FontSize="10" Margin="3" ><Run Text="Right Shoulder Flexion: N/A"/></TextBlock>
-                    <TextBlock Foreground="{Binding DataContext.ForegroundColor}" x:Name="tblLeftShoulderFlexion" FontSize="10" Margin="3,3,-23,3" ><Run Text="Left Shoulder Flexion: N/A"/></TextBlock>
+                    <Grid RenderTransformOrigin="0.544,0.522">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Foreground="{Binding Path=DataContext.ForegroundColor}" Grid.Column="0" x:Name="tblRightShoulderFlexion" FontSize="10" Margin="0,5,109,5" Grid.ColumnSpan="2" ><Run Text="Right Shoulder Flexion: N/A"/></TextBlock>
+                        <Label x:Name="tblShoulderTimer" Grid.Column="1" FontSize="10" Content="Timer: 00:00" Margin="10,0,0,0"/>
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Foreground="{Binding DataContext.ForegroundColor}" x:Name="tblLeftShoulderFlexion" Grid.Column="0" FontSize="10" Margin="3,3,-23,3" ><Run Text="Left Shoulder Flexion: N/A"/></TextBlock>
+                        <Label x:Name="tblShoulderTimerLeft" Grid.Column="3" FontSize="10" Content="Timer: 00:00" Margin="10,0,0,0"/>
+                    </Grid>
+                    <!--<TextBlock Foreground="{Binding Path=DataContext.ForegroundColor}" x:Name="tblRightShoulderFlexion" FontSize="10" Margin="3" ><Run Text="Right Shoulder Flexion: N/A"/></TextBlock>-->
+                    
                     <TextBlock Foreground="{Binding DataContext.ForegroundColor}" x:Name="tblRightShoulderAbduction" FontSize="10" Margin="3,3,-23,3" ><Run Text="Right Shoulder Abduction: N/A"/></TextBlock>
                     <TextBlock Foreground="{Binding Path=DataContext.ForegroundColor}" x:Name="tblLeftShoulderAbduction" FontSize="10" Margin="3" ><Run Text="Left ShoulderAbduction: N/A"/></TextBlock>
-                    <Label x:Name="tblShoulderTimer" FontSize="10" Content="Timer: 00:00"/>
+                    <!--<Label x:Name="tblShoulderTimer" FontSize="10" Content="Timer: 00:00"/>-->
                 </StackPanel>
             </GroupBox>
 
@@ -155,7 +171,7 @@
                     <TextBlock Foreground="Black" x:Name="tblPositionHeaderX" FontSize="10" Margin="3" ><Run Text="Posit"/><Run Text="i"/><Run Text="on Header "/><Run Text="X: N/A"/></TextBlock>
                     <TextBlock Name="tblPositionHeaderY" Text="Position Header Y: N/A" FontSize="10" Margin="3" />
                     <TextBlock Name="tblPositionHeaderZ" Text="Position Header Z: N/A" FontSize="10" Margin="3" />
-                    
+
                     <!-- <TextBlock Name="tblPositionShoulderLeftX" Text="Position Shoulder Right X: N/A" FontSize="10" Margin="3" />
                     <TextBlock Name="tblPositionShoulderLeftY" Text="Position Shoulder Right Y: N/A" FontSize="10" Margin="3" />
                     <TextBlock Name="tblPositionShoulderLeftZ" Text="Position Shoulder Right Z: N/A" FontSize="10" Margin="3" />
