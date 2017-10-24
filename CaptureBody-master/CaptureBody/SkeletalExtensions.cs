@@ -140,13 +140,34 @@ namespace CaptureBody
             return ThetaInDegrees;
         }
 
+        /// <Neck Flexion>
+        /// Trunk flexion calculus
+        /// A point based in the X and Z axis of SpineShoulder variable and Y axi of Head is projected in order to calculate the neck flexion
+        /// </Flexion>
+        /// <param name="body"></param>
+        /// <Angle></Angle>
         public static double neckFlexion(this Body body)
         {
             Joint head = body.Joints[JointType.Head];
-            Joint shoulderCenter = body.Joints[JointType.SpineShoulder]; //Shoulder = SpineShoulder
-            Joint spine = body.Joints[JointType.SpineMid]; // Spine = SpineMid
+            Joint spineShoulder = body.Joints[JointType.SpineShoulder];
+            Joint spineShoulder2 = new Joint();
 
-            return scalarProduct(head, shoulderCenter, spine);
+            spineShoulder2.Position.X = spineShoulder.Position.X;
+            spineShoulder2.Position.Z = spineShoulder.Position.Z;
+            spineShoulder2.Position.Y = head.Position.Y;
+            
+            Vector3 u = new Vector3(spineShoulder.Position.X - spineShoulder2.Position.X, spineShoulder.Position.Y - spineShoulder2.Position.Y,
+                0);
+            Vector3 v = new Vector3(spineShoulder.Position.X - head.Position.X, spineShoulder.Position.Y - head.Position.Y,
+                0);
+
+            Double cosTheta = Vector3.Dot(Vector3.Normalize(u), Vector3.Normalize(v));
+
+            Double ThetaInDegrees = Math.Acos(cosTheta) * 180 / Math.PI;
+
+            return ThetaInDegrees;
+
+            //return scalarProduct(head, shoulderCenter, spine);
         }
 
         public static double neckExtension(this Body body)
@@ -168,7 +189,12 @@ namespace CaptureBody
             return ThetaInDegrees;
         }
 
-
+        /// <Trunk Flexion>
+        /// Trunk flexion calculus
+        /// A point based in the X and Z axis of SpineBase variable and Y axi of SpineShoulder is projected in order to calculate the trunk flexion
+        /// </Flexion>
+        /// <param name="body"></param>
+        /// <Angle></Angle>
         public static double TrunkFlexion(this Body body)
         {
             Joint spineBase = body.Joints[JointType.SpineBase];
@@ -179,8 +205,6 @@ namespace CaptureBody
             spineShoulder2.Position.Z = spineBase.Position.Z;
             spineShoulder2.Position.Y = spineShoulder.Position.Y;
             
-
-            //Vector3 v = new Vector3(3,3,3);
             Vector3 u = new Vector3(spineBase.Position.X - spineShoulder2.Position.X, spineBase.Position.Y - spineShoulder2.Position.Y,
                 0);
             Vector3 v = new Vector3(spineBase.Position.X - spineShoulder.Position.X, spineBase.Position.Y - spineShoulder.Position.Y, 
@@ -194,7 +218,12 @@ namespace CaptureBody
 
         }
 
-        //eixos y e z
+        /// <Shoulder Flexion>
+        /// Abduction calculus
+        /// Use only Y and Z axis
+        /// </Flexion>
+        /// <param name="body"></param>
+        /// <Angle></Angle>
         public static double RightShoulderFlexion(this Body body)
         {
             Joint rightElbow = body.Joints[JointType.ElbowRight];
@@ -215,7 +244,12 @@ namespace CaptureBody
             return ThetaInDegrees;
         }
 
-        //eixos y e z
+        /// <Shoulder Flexion>
+        /// Abduction calculus
+        /// Use only Y and Z axis
+        /// </Flexion>
+        /// <param name="body"></param>
+        /// <Angle></Angle>
         public static double LeftShoulderFlexion(this Body body)
         {
             Joint leftElbow = body.Joints[JointType.ElbowLeft];
@@ -236,8 +270,12 @@ namespace CaptureBody
             return ThetaInDegrees;
         }
 
-        //Adicionando abducao
-        //eixos x e y
+        /// <Shoulder Abduction>
+        /// Abduction calculus
+        /// Use only X and Y axis
+        /// </Abduction>
+        /// <param name="body"></param>
+        /// <Angle></Angle>
         public static double RightShoulderAbduction(this Body body)
         {
             Joint rightElbow = body.Joints[JointType.ElbowRight];
@@ -259,10 +297,12 @@ namespace CaptureBody
 
             
         }
-
-
-        //Adicionando abducao
-        //eixos x e y
+        /// <Shoulder Abduction>
+        /// Abduction calculus
+        /// Use only X and Y axis
+        /// </Abduction>
+        /// <param name="body"></param>
+        /// <Angle></Angle>
         public static double LeftShoulderAbduction(this Body body)
         {
             Joint leftElbow = body.Joints[JointType.ElbowLeft];
@@ -285,7 +325,7 @@ namespace CaptureBody
 
         //Baseado no artigo:http://www.efdeportes.com/efd182/condicoes-de-trabalho-de-um-setor-de-secretaria.htm
         //Figura: Avaliação postural por meio do Software de Avaliação Postura
-        public static double HipRelativeAngle(this Body body)
+        public static double HipFlexionRight(this Body body)
         {
             Joint shoulder = body.Joints[JointType.ShoulderRight];
             Joint hipRight = body.Joints[JointType.HipRight];
@@ -307,6 +347,27 @@ namespace CaptureBody
             return ThetaInDegrees;
         }
 
+        public static double HipFlexionLeft(this Body body)
+        {
+            Joint shoulder = body.Joints[JointType.ShoulderLeft];
+            Joint hipLeft = body.Joints[JointType.HipLeft];
+            Joint kneeLeft = body.Joints[JointType.KneeLeft];
+
+
+            //Vector3 v = new Vector3(3,3,3);
+            Vector3 u = new Vector3(shoulder.Position.X - hipLeft.Position.X, shoulder.Position.Y - hipLeft.Position.Y,
+                shoulder.Position.Z - hipLeft.Position.Z);
+            Vector3 v = new Vector3(kneeLeft.Position.X - hipLeft.Position.X, kneeLeft.Position.Y - hipLeft.Position.Y,
+                kneeLeft.Position.Z - hipLeft.Position.Z);
+
+            Double cosTheta = Vector3.Dot(Vector3.Normalize(u), Vector3.Normalize(v));
+
+
+
+            Double ThetaInDegrees = Math.Acos(cosTheta) * 180 / Math.PI;
+
+            return ThetaInDegrees;
+        }
 
         public static double RightHand(this Body body)
         {

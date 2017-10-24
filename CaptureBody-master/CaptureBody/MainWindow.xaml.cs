@@ -23,7 +23,7 @@ namespace CaptureBody
         double height = 0;
         double left = 0;
         double right = 0;
-        double rightHipAngle = 0;
+        double hipFlexionRight = 0;
 
         //Trunk
         double trunk = 0;
@@ -77,7 +77,7 @@ namespace CaptureBody
             height = Math.Round(body.UpperHeight(), 2);
             left = Math.Round(body.LeftHand(), 2);
             right = Math.Round(body.RightHand(), 2);
-            rightHipAngle = Math.Round(body.HipRelativeAngle(), 2);
+            hipFlexionRight = Math.Round(body.HipFlexionRight(), 2);
             trunk = Math.Round(body.TrunkFlexion(), 2);
 
             //Flexao de ombro
@@ -123,9 +123,9 @@ namespace CaptureBody
             //tblAngleLeft.Text = "Relative Angle Left: " + leftArmRelativeAngle.ToString() + "º";
 
             //Hip Angle
-            colorAux1 = anglesrules.hipRisk(rightHipAngle);
-            colorAux2 = anglesrules.hipRisk(rightHipAngle);
-            tblAngleRight.Text = "Angle Hip Right: " + rightHipAngle.ToString() + "º";
+            colorAux1 = anglesrules.hipRisk(hipFlexionRight);
+            colorAux2 = anglesrules.hipRisk(hipFlexionRight);
+            tblAngleRight.Text = "Angle Hip Right: " + hipFlexionRight.ToString() + "º";
             tblAngleRight.Foreground = new SolidColorBrush(colorAux1);
             incrementHip = anglesrules.colorCheck(colorAux1, colorAux1);
 

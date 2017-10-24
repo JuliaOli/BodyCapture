@@ -19,8 +19,8 @@ namespace CaptureBody
         double left = 0;
         double right = 0;
         double trunk = 0;
-        double rightHipAngle = 0;
-        double shoulderFlexion = 0; //replace 
+        double hipFlexionRight = 0;
+        double hipFlexionLeft = 0;
         //neck 
         double neckFlexion = 0;
         double neckExtension = 0;
@@ -95,9 +95,11 @@ namespace CaptureBody
             height = Math.Round(body.UpperHeight(), 2);
             left = Math.Round(body.LeftHand(), 2);
             right = Math.Round(body.RightHand(), 2);
-            rightHipAngle = Math.Round(body.HipRelativeAngle(), 2);
+            //Hip flexion
+            hipFlexionRight = Math.Round(body.HipFlexionRight(), 2);
+            hipFlexionLeft = Math.Round(body.HipFlexionLeft(), 2);
+            //Trunk
             trunk = Math.Round(body.TrunkFlexion(), 2);
-            shoulderFlexion = Math.Round(body.RightShoulderFlexion(), 2);
 
             //Flexao de ombro
             rightShoulderFlexion = Math.Round(body.RightShoulderFlexion(), 2);
@@ -115,9 +117,9 @@ namespace CaptureBody
         //Postura ombro e braco
         //Se postura inadequada o braço e abdução do braço &gt;60° e ombro elevado então
         //não recomendado
-        public Color abductionRisk(double shoulderAbduction)
+        public Color shoulferAbductionRisk(double shoulderAbduction)
         {
-            if(shoulderAbduction > 60)
+            if(shoulderAbduction > 20)
             {
                 return Colors.Purple;
             }
@@ -126,7 +128,21 @@ namespace CaptureBody
                 return Colors.Green;
             }
         }
-        
+
+        public Color shoulderFlexionRisk(double shoulderFlextion)
+        {
+
+            if (shoulderFlextion > 35)
+            {
+                return Colors.Red;
+            }
+            else
+            {
+                return Colors.Green;
+            }
+        }
+
+
         ///Change color based on risks
         ///
         public Color getRiskColor(double shoulderFlextion, double neckFlexion, double neckExtension) {
@@ -157,11 +173,23 @@ namespace CaptureBody
             }
         }
 
+        public Color neckFlexionRisk(double neckFlextion)
+        {
+
+            if (neckFlexion > 25 || neckFlexion < 0)
+            {
+                return Colors.Red;
+            }
+            else
+            {
+                return Colors.Green;
+            }
+        }
+
         public Color trunkRisk(double trunk)
         {
             //Inclinação de tronco anterior <20° (verde), > 20° (vermelho)
-            //Inclinação de tronco posterior < 20°(verde), > 20(vermelho) NÃO TEM
-            //Extensão / flexão de fêmur < 90 - 110° (verde) < 90° ou > 110° (vermelho)
+            //Inclinação de tronco posterior < 20°(verde), > 20(vermelho)
 
             if (trunk > 20)
             {
@@ -173,16 +201,14 @@ namespace CaptureBody
             }
         }
 
-        public Color hipRisk(double hightHipAngle)
+        public Color hipRisk(double hipAngle)
         {
-            //Inclinação de tronco anterior <20° (verde), > 20° (vermelho)
-            //Inclinação de tronco posterior < 20°(verde), > 20(vermelho) NÃO TEM
             //Extensão / flexão de fêmur < 90 - 110° (verde) < 90° ou > 110° (vermelho)
 
-            if (hightHipAngle > 20)
+            if (hipAngle > 110 || hipAngle < 90)
             {
                 return Colors.Red;
-            }
+            } 
             else
             {
                 return Colors.Green;
@@ -288,9 +314,9 @@ namespace CaptureBody
             {
                 aux = "Trunk Symmetry: Acceptable";
             }
-            aux = "Trunk Flexion;" + rightHipAngle.ToString() + " graus";
+            aux = "Trunk Flexion;" + hipFlexionRight.ToString() + " graus";
             csvContent.AppendLine(aux);
-            aux = "Angle Hip Right;" + rightHipAngle.ToString() + " graus";
+            aux = "Angle Hip Right;" + hipFlexionRight.ToString() + " graus";
             csvContent.AppendLine(aux);
 
             // Display height.
