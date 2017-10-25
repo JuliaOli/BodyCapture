@@ -18,9 +18,11 @@ namespace CaptureBody
         double height = 0;
         double left = 0;
         double right = 0;
+        //trunk
         double trunk = 0;
-        double hipFlexionRight = 0;
-        double hipFlexionLeft = 0;
+        //hip flexion
+        double rightHipFlexion = 0;
+        double leftHipFlexion = 0;
         //neck 
         double neckFlexion = 0;
         double neckExtension = 0;
@@ -40,50 +42,7 @@ namespace CaptureBody
         string incrementStimer;
         string incrementNtimer;
         string incrementTtimer;
-        
-        //Get and Set
-        public string IncrementSTimer
-        {
-            get => this.incrementStimer;
-            set => this.incrementStimer = value;
-        }
-        public string IncrementNTimer
-        {
-            get => this.incrementNtimer;
-            set => this.incrementNtimer = value;
-        }
-        public string IncrementTTimer
-        {
-            get => this.incrementTtimer;
-            set => this.incrementTtimer = value;
-        }
 
-        public bool ElevationS
-        {
-            get => this.elevationS;
-            set => this.elevationS = value;
-        }
-        public bool InadequateS
-        {
-            get => this.inadequateS;
-            set => this.inadequateS = value;
-        }
-        public bool SymetryN
-        {
-            get => this.symetryN;
-            set => this.symetryN = value;
-        }
-        public bool RectifinedT
-        {
-            get => this.rectifinedT;
-            set => this.rectifinedT = value;
-        }
-        public bool SymetryT
-        {
-            get => this.symetryT;
-            set => this.symetryT = value;
-        }
-        
         /// <Body Angles Variables>
         /// Here the formulas to calculate the angles of the body parts are setted
         /// This variables will be used in the MainWindow class, where they will be plotted on the screen
@@ -96,28 +55,29 @@ namespace CaptureBody
             left = Math.Round(body.LeftHand(), 2);
             right = Math.Round(body.RightHand(), 2);
             //Hip flexion
-            hipFlexionRight = Math.Round(body.HipFlexionRight(), 2);
-            hipFlexionLeft = Math.Round(body.HipFlexionLeft(), 2);
+            rightHipFlexion = Math.Round(body.RightHipFlexion(), 2);
+            leftHipFlexion = Math.Round(body.LeftHipFlexion(), 2);
             //Trunk
             trunk = Math.Round(body.TrunkFlexion(), 2);
-
             //Flexao de ombro
             rightShoulderFlexion = Math.Round(body.RightShoulderFlexion(), 2);
             leftShoulderFlexion = Math.Round(body.LeftShoulderFlexion(), 2);
-
-            //Neck
-            neckFlexion = Math.Round(body.neckFlexion(), 2);
-            neckExtension = Math.Round(body.neckExtension(), 2);
-
             //Abducao de ombro
             rightShoulderAbduction = Math.Round(body.RightShoulderAbduction(), 2);
             leftShoulderAbduction = Math.Round(body.LeftShoulderAbduction(), 2);
+            //Neck
+            neckFlexion = Math.Round(body.NeckFlexion(), 2);
+            neckExtension = Math.Round(body.NeckExtension(), 2);
+
         }
 
-        //Postura ombro e braco
-        //Se postura inadequada o braço e abdução do braço &gt;60° e ombro elevado então
-        //não recomendado
-        public Color shoulferAbductionRisk(double shoulderAbduction)
+        /// <Risks>
+        /// Risks based on given angles that changes the variable color into the interface
+        /// </Risks>
+        /// <param name="variables"></param>
+        /// <Colors></Colors>
+
+        public Color shoulderAbductionRisk(double shoulderAbduction)
         {
             if(shoulderAbduction > 20)
             {
@@ -135,37 +95,6 @@ namespace CaptureBody
             if (shoulderFlextion > 35)
             {
                 return Colors.Red;
-            }
-            else
-            {
-                return Colors.Green;
-            }
-        }
-
-
-        ///Change color based on risks
-        ///
-        public Color getRiskColor(double shoulderFlextion, double neckFlexion, double neckExtension) {
-
-            //Risco 1
-            //flexao do ombro > 35
-            //flexao do pescoco > 25
-            //extensao do pescoco < 0
-
-            //Risco2
-            //flexao do ombro > 35 e flexao do pescoco > 30
-            //flexao do ombro > 35 e extensao do pescoco < 0
-
-            if (shoulderFlextion > 35)
-            {
-                if (neckFlexion > 30 || neckExtension < 0)
-                {
-                    return Colors.Purple;
-                }
-                else
-                {
-                    return Colors.Red;
-                }
             }
             else
             {
@@ -473,7 +402,132 @@ namespace CaptureBody
             }
 
         }
+        
+        //Get and Set
 
+        public double Height
+        {
+            get => this.height;
+        }
+        public double Left
+        {
+            get => this.left;
+        }
+        public double Right
+        {
+            get => this.right;
+        }
+        public double Trunk
+        {
+            get => this.trunk;
+        }
+        public double RightHipFlexion
+        {
+            get => this.rightHipFlexion;
+        }
+        public double LeftHipFlexion
+        {
+            get => this.leftHipFlexion;
+        }
+        public double NeckFlexion
+        {
+            get => this.neckFlexion;
+        }
+        public double NeckExtension
+        {
+            get => this.neckExtension;
+        }
+        public double RightShoulderFlexion
+        {
+            get => this.rightShoulderFlexion;
+        }
+        public double LeftShoulderFlexion
+        {
+            get => this.leftShoulderFlexion;
+        }
+        public double RightShoulderAbduction
+        {
+            get => this.rightShoulderAbduction;
+        }
+        public double LeftShoulderAbduction
+        {
+            get => this.leftShoulderAbduction;
+        }
 
+        public string IncrementSTimer
+        {
+            get => this.incrementStimer;
+            set => this.incrementStimer = value;
+        }
+        public string IncrementNTimer
+        {
+            get => this.incrementNtimer;
+            set => this.incrementNtimer = value;
+        }
+        public string IncrementTTimer
+        {
+            get => this.incrementTtimer;
+            set => this.incrementTtimer = value;
+        }
+
+        public bool ElevationS
+        {
+            get => this.elevationS;
+            set => this.elevationS = value;
+        }
+        public bool InadequateS
+        {
+            get => this.inadequateS;
+            set => this.inadequateS = value;
+        }
+        public bool SymetryN
+        {
+            get => this.symetryN;
+            set => this.symetryN = value;
+        }
+        public bool RectifinedT
+        {
+            get => this.rectifinedT;
+            set => this.rectifinedT = value;
+        }
+        public bool SymetryT
+        {
+            get => this.symetryT;
+            set => this.symetryT = value;
+        }
+
+        
+
+        ///Change color based on risks
+        ///
+        /*
+        public Color getRiskColor(double shoulderFlextion, double neckFlexion, double neckExtension) {
+
+            //Risco 1
+            //flexao do ombro > 35
+            //flexao do pescoco > 25
+            //extensao do pescoco < 0
+
+            //Risco2
+            //flexao do ombro > 35 e flexao do pescoco > 30
+            //flexao do ombro > 35 e extensao do pescoco < 0
+
+            if (shoulderFlextion > 35)
+            {
+                if (neckFlexion > 30 || neckExtension < 0)
+                {
+                    return Colors.Purple;
+                }
+                else
+                {
+                    return Colors.Red;
+                }
+            }
+            else
+            {
+                return Colors.Green;
+            }
+        }
+        */
     }
 }

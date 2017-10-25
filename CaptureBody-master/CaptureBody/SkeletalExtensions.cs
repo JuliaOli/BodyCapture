@@ -146,7 +146,7 @@ namespace CaptureBody
         /// </Flexion>
         /// <param name="body"></param>
         /// <Angle></Angle>
-        public static double neckFlexion(this Body body)
+        public static double NeckFlexion(this Body body)
         {
             Joint head = body.Joints[JointType.Head];
             Joint spineShoulder = body.Joints[JointType.SpineShoulder];
@@ -170,7 +170,7 @@ namespace CaptureBody
             //return scalarProduct(head, shoulderCenter, spine);
         }
 
-        public static double neckExtension(this Body body)
+        public static double NeckExtension(this Body body)
         {
             return neckFlexion(body) - 180;
         }
@@ -325,45 +325,35 @@ namespace CaptureBody
 
         //Baseado no artigo:http://www.efdeportes.com/efd182/condicoes-de-trabalho-de-um-setor-de-secretaria.htm
         //Figura: Avaliação postural por meio do Software de Avaliação Postura
-        public static double HipFlexionRight(this Body body)
+        public static double RightHipFlexion(this Body body)
         {
             Joint shoulder = body.Joints[JointType.ShoulderRight];
             Joint hipRight = body.Joints[JointType.HipRight];
             Joint kneeRight = body.Joints[JointType.KneeRight];
-
-
-            //Vector3 v = new Vector3(3,3,3);
+            
             Vector3 u = new Vector3(shoulder.Position.X - hipRight.Position.X, shoulder.Position.Y - hipRight.Position.Y,
                 shoulder.Position.Z - hipRight.Position.Z);
             Vector3 v = new Vector3(kneeRight.Position.X - hipRight.Position.X, kneeRight.Position.Y - hipRight.Position.Y,
                 kneeRight.Position.Z - hipRight.Position.Z);
 
             Double cosTheta = Vector3.Dot(Vector3.Normalize(u), Vector3.Normalize(v));
-
-            
-
             Double ThetaInDegrees = Math.Acos(cosTheta) * 180 / Math.PI;
 
             return ThetaInDegrees;
         }
 
-        public static double HipFlexionLeft(this Body body)
+        public static double LeftHipFlexion(this Body body)
         {
             Joint shoulder = body.Joints[JointType.ShoulderLeft];
             Joint hipLeft = body.Joints[JointType.HipLeft];
             Joint kneeLeft = body.Joints[JointType.KneeLeft];
-
-
-            //Vector3 v = new Vector3(3,3,3);
+            
             Vector3 u = new Vector3(shoulder.Position.X - hipLeft.Position.X, shoulder.Position.Y - hipLeft.Position.Y,
                 shoulder.Position.Z - hipLeft.Position.Z);
             Vector3 v = new Vector3(kneeLeft.Position.X - hipLeft.Position.X, kneeLeft.Position.Y - hipLeft.Position.Y,
                 kneeLeft.Position.Z - hipLeft.Position.Z);
 
             Double cosTheta = Vector3.Dot(Vector3.Normalize(u), Vector3.Normalize(v));
-
-
-
             Double ThetaInDegrees = Math.Acos(cosTheta) * 180 / Math.PI;
 
             return ThetaInDegrees;

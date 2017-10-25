@@ -41,14 +41,25 @@ namespace CaptureBody
         double leftShoulderFlexion = 0;
 
         //Timer
-        private int incrementSSeconds = 0;
+        Timer rightHipTimer = new Timer();
+        Timer leftHipTimer = new Timer();
+        Timer trunkTimer = new Timer();
+        Timer rightShoulderFlexionTimer = new Timer();
+        Timer leftShoulderFlexionTimer = new Timer();
+        Timer rightShoulderAbductionTimer = new Timer();
+        Timer leftShoulderAbductionTimer = new Timer();
+        Timer neckFlexionTimer = new Timer();
+
+        /*private int incrementSSeconds = 0;
         private int incrementSMinuts = 0;
         private int incrementNSeconds = 0;
         private int incrementNMinuts = 0;
         private int incrementTSeconds = 0;
-        private int incrementTMinuts = 0;
+        private int incrementTMinuts = 0;*/
 
         //Timer Checker
+        private bool recorrenceLeftHip;
+        private bool recorrencerightHip;
         bool recorrenceTrunk = false; //Globalcheck
         bool recorrenceNeck = false; //Globalcheck
         bool recorrenceShoulder = false; //Globalcheck
@@ -95,8 +106,6 @@ namespace CaptureBody
 
         void Sensor_SkeletonFrameReady()
         {
-
-            //AngleVariables(body);
             anglesrules = new AngleRules(body);
             Color colorAux1;
             Color colorAux2;
@@ -109,48 +118,76 @@ namespace CaptureBody
             {
                 Debug.WriteLine("Variables wasn't atributed");
             }
-            //As variáveis que estão sendo usadas no display não são as mesmas usadas no csv?
-            //talvez tenha um atraso ou um adiantamento nas variaveis usadas pois elas são diferentes...
-            //precisa analisar se isso é um problema ou só redundância...
-
 
             // Display height.
-            tblHeight.Text = "Height: " + height.ToString() + "m";
+            tblHeight.Text = "Height: " + anglesrules.Height.ToString() + "m";
 
             //Display Arms
-            tblLeft.Text = "Left: " + left.ToString() + "m";
-            tblRight.Text = "Right: " + right.ToString() + "m";
-            //tblAngleLeft.Text = "Relative Angle Left: " + leftArmRelativeAngle.ToString() + "º";
+            tblLeft.Text = "Left: " + anglesrules.Left.ToString() + "m";
+            tblRight.Text = "Right: " + anglesrules.Right.ToString() + "m";
 
-            //Hip Angle
-            colorAux1 = anglesrules.hipRisk(hipFlexionRight);
-            tblAngleRight.Text = "Angle Hip Right: " + hipFlexionRight.ToString() + "º";
+            //Right Hip Flexion
+            tblAngleRight.Text = "Right Hip Angle: " + anglesrules.RightHipFlexion.ToString() + "º";
+            colorAux1 = anglesrules.hipRisk(anglesrules.RightHipFlexion);
             tblAngleRight.Foreground = new SolidColorBrush(colorAux1);
-            incrementHip = anglesrules.colorCheck(colorAux1, colorAux1);
+
+            if (anglesrules.colorCheck(colorAux1, colorAux1))
+            {
+                if (recorrenceTrunk == false)
+                {
+                    rightHipTimer.StartTimer();
+                    recorrencerightHip = true;
+                }
+
+            }
+            else
+            {
+                recorrencerightHip = false;
+                rightHipTimer.ResetTimer();
+            }
+
+            //Left Hip Flexion
+            tblAngleRight.Text = "Right Hip Angle: " + anglesrules.LeftHipFlexion.ToString() + "º";
+            colorAux1 = anglesrules.hipRisk(hipFlexionRight);
+            tblAngleRight.Foreground = new SolidColorBrush(colorAux1);
+
+            if (anglesrules.colorCheck(colorAux1, colorAux1))
+            {
+                if (recorrenceTrunk == false)
+                {
+                    leftHipTimer.StartTimer();
+                    recorrenceLeftHip = true;
+                }
+
+            }
+            else
+            {
+                recorrenceLeftHip = false;
+                leftHipTimer.ResetTimer();
+            }
 
             //Trunk
-
+            
+            tblTrunk.Text = "Anterior trunk inclination" + anglesrules.Trunk.ToString() + "º";
             colorAux1 = anglesrules.trunkRisk(trunk);
-            tblTrunk.Text = "Anterior trunk inclination" + trunk.ToString() + "º";
             tblTrunk.Foreground = new SolidColorBrush(colorAux1);
-            incrementTrunk = anglesrules.colorCheck(colorAux1, colorAux1);
-
-            if(incrementHip || incrementTrunk)
+            
+            if (anglesrules.colorCheck(colorAux1, colorAux1))
             {
-                if(recorrenceTrunk == false)
+                if (recorrenceTrunk == false)
                 {
-                    TrunkTimer();
+                    trunkTimer.StartTimer();
                     recorrenceTrunk = true;
                 }
-                
+
             }
             else
             {
                 recorrenceTrunk = false;
-                incrementTMinuts = 0;
-                incrementTSeconds = 0;  
+                trunkTimer.ResetTimer();
             }
-            
+
+
             //Flexion
             tblRightShoulderFlexion.Text = "Right Shoulder Flexion: " + rightShoulderFlexion.ToString() + "º";
             tblLeftShoulderFlexion.Text = "Left Shoulder Flexion: " + leftShoulderFlexion.ToString() + "º";

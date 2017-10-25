@@ -9,14 +9,13 @@ namespace CaptureBody
 {
     class Timer
     {
-        int incrementSeconds = 0;
-        int incrementMinuts = 0;
+        int incrementSeconds;
+        int incrementMinuts;
         string timerVar;
 
-        public string TimerVar
+        public Timer()
         {
-            get => this.timerVar;
-            set => this.timerVar = value;
+            ResetTimer();
         }
 
         public void StartTimer()
@@ -28,13 +27,9 @@ namespace CaptureBody
         }
         public void ResetTimer()
         {
+            timerVar = "00:00";
             incrementMinuts = 0;
             incrementSeconds = 0;
-        }
-
-        public Timer()
-        {
-            StartTimer();
         }
 
         private void dtTTicker(object sender, EventArgs e)
@@ -58,6 +53,12 @@ namespace CaptureBody
             }
 
             timerVar = timerMin.ToString() + ":" + timerSec.ToString();
+        }
+
+        public string TimerVar
+        {
+            get => this.timerVar;
+            set => this.timerVar = value;
         }
     }
 }
