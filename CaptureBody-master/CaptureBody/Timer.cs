@@ -27,7 +27,7 @@ namespace CaptureBody
         }
         public void ResetTimer()
         {
-            timerVar = "00:00";
+            timerVar = "Timer: 00:00";
             incrementMinuts = 0;
             incrementSeconds = 0;
         }
@@ -52,7 +52,7 @@ namespace CaptureBody
                 timerSec = '0' + incrementSeconds.ToString();
             }
 
-            timerVar = timerMin.ToString() + ":" + timerSec.ToString();
+            timerVar = "Timer: " + timerMin.ToString() + ":" + timerSec.ToString();
         }
 
         public string TimerVar
