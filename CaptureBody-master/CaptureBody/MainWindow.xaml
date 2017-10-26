@@ -144,7 +144,7 @@
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Foreground="Purple" Header="Positions" Height="140" Width="249">
+            <GroupBox Foreground="Purple" Header="Positions" Height="154" Width="249">
                 <StackPanel HorizontalAlignment="Left" Height="130" Margin="0,0,-2,-10" VerticalAlignment="Top" Width="239">
                     <Label/>
                     <TextBlock Foreground="Black" x:Name="tblHeight" FontSize="10" Margin="3" ><Run Text="He"/><Run Text="ight: "/><Run Text="N/A"/></TextBlock>

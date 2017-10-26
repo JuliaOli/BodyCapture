@@ -172,7 +172,9 @@ namespace CaptureBody
 
         public static double NeckExtension(this Body body)
         {
-            return NeckFlexion(body) - 180;
+            double aux = NeckFlexion(body) - 180;
+            
+            return Math.Abs(aux);
         }
 
         public static double scalarProduct(Joint x, Joint y, Joint z)

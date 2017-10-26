@@ -91,7 +91,7 @@ namespace CaptureBody
                 recorrenceRightHip = false;
                 rightHipTimer.ResetTimer();
             }
-            tblRightHipFlexion.Text = "Right Hip Angle: " + anglesrules.RightHipFlexion.ToString() + "º  " + rightHipTimer.TimerVar;
+            tblRightHipFlexion.Text = "Right Hip Angle: " + anglesrules.RightHipFlexion.ToString() + "°  " + rightHipTimer.TimerVar;
 
             //Left Hip Flexion
             colorAux1 = anglesrules.hipRisk(anglesrules.LeftHipFlexion);
@@ -110,7 +110,7 @@ namespace CaptureBody
                 recorrenceLeftHip = false;
                 leftHipTimer.ResetTimer();
             }
-            tblLeftHipFlexion.Text = "Left Hip Angle: " + anglesrules.LeftHipFlexion.ToString() + "º " + leftHipTimer.TimerVar;
+            tblLeftHipFlexion.Text = "Left Hip Angle: " + anglesrules.LeftHipFlexion.ToString() + "° " + leftHipTimer.TimerVar;
 
             //Trunk
             colorAux1 = anglesrules.trunkRisk(anglesrules.Trunk);
@@ -130,7 +130,7 @@ namespace CaptureBody
                 recorrenceTrunk = false;
                 trunkTimer.ResetTimer();
             }
-            tblTrunk.Text = "Anterior trunk inclination" + anglesrules.Trunk.ToString() + "º " + trunkTimer.TimerVar;
+            tblTrunk.Text = "Anterior trunk inclination" + anglesrules.Trunk.ToString() + "° " + trunkTimer.TimerVar;
 
             //Right Shoulder Flexion
             colorAux1 = anglesrules.shoulderFlexionRisk(anglesrules.RightShoulderFlexion);
@@ -149,7 +149,7 @@ namespace CaptureBody
                 recorrenceRightShoulderFlexion = false;
                 rightShoulderFlexionTimer.ResetTimer();
             }
-            tblRightShoulderFlexion.Text = "Right Shoulder Flexion: " + anglesrules.RightShoulderFlexion.ToString() + "º " + rightShoulderFlexionTimer.TimerVar;
+            tblRightShoulderFlexion.Text = "Right Shoulder Flexion: " + anglesrules.RightShoulderFlexion.ToString() + "° " + rightShoulderFlexionTimer.TimerVar;
 
             //Left Shoulder Flexion
             colorAux1 = anglesrules.shoulderFlexionRisk(anglesrules.LeftShoulderFlexion);
@@ -168,7 +168,7 @@ namespace CaptureBody
                 recorrenceLeftShoulderFlexion = false;
                 leftShoulderFlexionTimer.ResetTimer();
             }
-            tblLeftShoulderFlexion.Text = "Left Shoulder Flexion: " + anglesrules.LeftShoulderFlexion.ToString() + "º " + leftShoulderFlexionTimer.TimerVar;
+            tblLeftShoulderFlexion.Text = "Left Shoulder Flexion: " + anglesrules.LeftShoulderFlexion.ToString() + "° " + leftShoulderFlexionTimer.TimerVar;
 
             //Right Shoulder Abduction
             colorAux1 = anglesrules.shoulderFlexionRisk(anglesrules.RightShoulderAbduction);
@@ -187,11 +187,11 @@ namespace CaptureBody
                 recorrenceRightShoulderAbduction = false;
                 rightShoulderAbductionTimer.ResetTimer();
             }
-            tblRightShoulderAbduction.Text = "Right Shoulder Abduction: " + anglesrules.RightShoulderAbduction.ToString() + "º " + rightShoulderAbductionTimer.TimerVar;
+            tblRightShoulderAbduction.Text = "Right Shoulder Abduction: " + anglesrules.RightShoulderAbduction.ToString() + "° " + rightShoulderAbductionTimer.TimerVar;
 
             //Left Shoulder Abduction
             colorAux1 = anglesrules.shoulderFlexionRisk(anglesrules.LeftShoulderAbduction);
-            tblLeftShoulderFlexion.Foreground = new SolidColorBrush(colorAux1);
+            tblLeftShoulderAbduction.Foreground = new SolidColorBrush(colorAux1);
             if (anglesrules.colorCheck(colorAux1))
             {
                 if (recorrenceLeftShoulderAbduction == false)
@@ -206,7 +206,7 @@ namespace CaptureBody
                 recorrenceLeftShoulderAbduction = false;
                 leftShoulderFlexionTimer.ResetTimer();
             }
-            tblLeftShoulderAbduction.Text = "Left Shoulder Flexion: " + anglesrules.LeftShoulderFlexion.ToString() + "º " + leftShoulderFlexionTimer.TimerVar;
+            tblLeftShoulderAbduction.Text = "Left Shoulder Flexion: " + anglesrules.LeftShoulderFlexion.ToString() + "° " + leftShoulderFlexionTimer.TimerVar;
 
             //Neck
             colorAux1 = anglesrules.neckFlexionRisk(anglesrules.NeckFlexion);
@@ -225,10 +225,10 @@ namespace CaptureBody
                 recorrenceNeck = false;
                 neckFlexionTimer.ResetTimer();
             }
-            tblNeckFlexion.Text = "Neck Flexion: " + anglesrules.NeckFlexion.ToString() + "º " + neckFlexionTimer.TimerVar;
+            tblNeckFlexion.Text = "Neck Flexion: " + anglesrules.NeckFlexion.ToString() + "° " + neckFlexionTimer.TimerVar;
             
             //Neck Extension
-            tblNeckExtension.Text = "Neck Extension: " + anglesrules.NeckExtension.ToString() + "º";
+            tblNeckExtension.Text = "Neck Extension: " + anglesrules.NeckExtension.ToString() + "°";
             
             if(neckFlexionTimer.TimerVar == "Timer: 08:30" || trunkTimer.TimerVar == "Timer: 03:00"
                 || leftShoulderAbductionTimer.TimerVar == "Timer: 04:00" || rightShoulderAbductionTimer.TimerVar == "Timer: 04:00")
@@ -385,12 +385,13 @@ namespace CaptureBody
             //Neck
             if (anglesrules.SymetryN)
             {
-                aux = "Neck Symmetry: Acceptable";
+                aux = "Neck Symmetry:; Acceptable";
             }
             else
             {
-                aux = "Neck Symmetry: Not recommended"; 
+                aux = "Neck Symmetry:; Not recommended"; 
             }
+            csvContent.AppendLine(aux);
 
             aux = tblNeckFlexion.Text.ToString();
             csvContent.AppendLine(aux);
@@ -400,20 +401,23 @@ namespace CaptureBody
             //Trunk
             if (anglesrules.RectifinedT)
             {
-                aux = "Rectified Spine: Acceptable"; 
+                aux = "Rectified Spine:; Acceptable"; 
             }
             else
             {
-                aux = "Rectified Spine: Not recommended";
+                aux = "Rectified Spine:; Not recommended";
             }
+            csvContent.AppendLine(aux);
             if (anglesrules.SymetryT)
             {
-                aux = "Trunk Symmetry: Acceptable";
+                aux = "Trunk Symmetry:; Acceptable";
             }
             else
             {
-                aux = "Trunk Symmetry: Not recommended"; 
+                aux = "Trunk Symmetry:; Not recommended"; 
             }
+            csvContent.AppendLine(aux);
+
             aux = tblTrunk.Text.ToString();
             csvContent.AppendLine(aux);
             aux = tblRightHipFlexion.Text.ToString();
@@ -435,7 +439,8 @@ namespace CaptureBody
             aux = tblPositionHeaderY.Text.ToString();
             csvContent.AppendLine(aux);
             aux = tblPositionHeaderZ.Text.ToString();
-            
+            csvContent.AppendLine(aux);
+
             return csvContent;
         }
 
@@ -473,7 +478,7 @@ namespace CaptureBody
                 pngEncoder.Frames.Add(BitmapFrame.Create(renderBitmap));
 
                 //Create a new folder
-                string folderName = "KinectSaveBodyInformation-BodyIndex-" + time;
+                string folderName = "CaptureBody-Screenshot" + time;
                 string subFolder = Path.Combine(myPhotos, folderName);
 
                 try
