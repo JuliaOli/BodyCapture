@@ -4,28 +4,16 @@
 winexe
 C#
 .cs
-<<<<<<< HEAD
 C:\Users\ESC - 1\Desktop\body\BodyCapture\CaptureBody-master\CaptureBody\obj\x64\Debug\
-=======
-C:\Users\ESC - 1\Documents\Body\BodyCapture\CaptureBody-master\CaptureBody\obj\x64\Debug\
->>>>>>> master
 CaptureBody
 none
 false
 DEBUG;TRACE
-<<<<<<< HEAD
 C:\Users\ESC - 1\Desktop\body\BodyCapture\CaptureBody-master\CaptureBody\App.xaml
 2-1624147735
 
-9-1734795258
+10-1549449392
 18-1274942285
-=======
-C:\Users\ESC - 1\Documents\Body\BodyCapture\CaptureBody-master\CaptureBody\App.xaml
-2-1624147735
-
-9-1734795258
-181026563644
->>>>>>> master
 KinectViewer.xaml;MainWindow.xaml;
 
 False

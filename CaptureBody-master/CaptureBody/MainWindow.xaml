@@ -107,11 +107,10 @@
                         <CheckBox x:Name="ElevationS" Margin="0,5,0,5" Grid.Column="0" Content="Shoulder Elevation" FontSize="10"/>
                         <CheckBox x:Name="InadequateS" Margin="0,5,0,5" Grid.Column="3" Content="Inadequate Posture" FontSize="10"/>
                     </Grid>
-                    <TextBlock Foreground="{Binding Path=DataContext.ForegroundColor}" x:Name="tblRightShoulderFlexion" FontSize="10" Margin="3" ><Run Text="Right Shoulder Flexion: N/A"/></TextBlock>
-                    <TextBlock Foreground="{Binding DataContext.ForegroundColor}" x:Name="tblLeftShoulderFlexion" FontSize="10" Margin="3,3,-23,3" ><Run Text="Left Shoulder Flexion: N/A"/></TextBlock>
-                    <TextBlock Foreground="{Binding DataContext.ForegroundColor}" x:Name="tblRightShoulderAbduction" FontSize="10" Margin="3,3,-23,3" ><Run Text="Right Shoulder Abduction: N/A"/></TextBlock>
-                    <TextBlock Foreground="{Binding Path=DataContext.ForegroundColor}" x:Name="tblLeftShoulderAbduction" FontSize="10" Margin="3" ><Run Text="Left ShoulderAbduction: N/A"/></TextBlock>
-                    <Label x:Name="tblShoulderTimer" FontSize="10" Content="Timer: 00:00"/>
+                    <TextBlock Foreground="{Binding Path=DataContext.ForegroundColor}" Grid.Column="0" x:Name="tblRightShoulderFlexion" FontSize="10" Margin="3" ><Run Text="Right Shoulder Flexion: N/A       Timer: 00:00"/></TextBlock>
+                    <TextBlock Foreground="{Binding DataContext.ForegroundColor}" x:Name="tblLeftShoulderFlexion" Grid.Column="0" FontSize="10" Margin="3" ><Run Text="Left Shoulder Flexion: N/A          Timer: 00:00"/></TextBlock>
+                    <TextBlock Foreground="{Binding DataContext.ForegroundColor}" x:Name="tblRightShoulderAbduction" FontSize="10" Margin="3,3,-23,3" ><Run Text="Right Shoulder Abduction: N/A   Timer: 00:00"/></TextBlock>
+                    <TextBlock Foreground="{Binding Path=DataContext.ForegroundColor}" x:Name="tblLeftShoulderAbduction" FontSize="10" Margin="3" ><Run Text="Left ShoulderAbduction: N/A      Timer: 00:00"/></TextBlock>
                 </StackPanel>
             </GroupBox>
 
@@ -124,9 +123,8 @@
                         </Grid.ColumnDefinitions>
                         <CheckBox x:Name="SymetryN" Margin="0,5,0,5" Grid.Column="0" Content="Neck Symmetry" FontSize="10"/>
                     </Grid>
-                    <TextBlock Foreground="Black" x:Name="tblNeckFlexion" FontSize="10" Margin="3" ><Run Text="Neck Flexion: N/A"/></TextBlock>
-                    <TextBlock Foreground="Black" x:Name="tblNeckExtension" FontSize="10" Margin="3" ><Run Text="Neck Extension: N/A"/></TextBlock>
-                    <Label x:Name="tblNeckTimer" FontSize="10" Content="Timer: 00:00"/>
+                    <TextBlock Foreground="Black" x:Name="tblNeckFlexion" FontSize="10" Margin="3" ><Run Text="Neck Flexion: N/A       Timer: 00:00"/></TextBlock>
+                    <TextBlock Foreground="Black" x:Name="tblNeckExtension" FontSize="10" Margin="3" ><Run Text="Neck Extension: N/A   Timer: 00:00"/></TextBlock>
                 </StackPanel>
             </GroupBox>
 
@@ -140,34 +138,21 @@
                         <CheckBox x:Name="RectifinedT" Margin="0,5,0,5" Grid.Column="0" Content="Rectified Spine" FontSize="10"/>
                         <CheckBox x:Name="SymetryT" Margin="0,5,0,5" Grid.Column="3" Content="Trunk Symetry" FontSize="10"/>
                     </Grid>
-                    <TextBlock Foreground="Black" x:Name="tblTrunk" FontSize="10" Margin="3" ><Run Text="Trunk Flexion: N/A"/></TextBlock>
-                    <TextBlock Foreground="Black" x:Name="tblAngleRight" FontSize="10" Margin="3" ><Run Text="HipAngle Flexion: N/A"/></TextBlock>
-                    <Label x:Name="tblTrunkTimer" FontSize="10" Content="Timer: 00:00"/>
+                    <TextBlock Foreground="Black" x:Name="tblTrunk" FontSize="10" Margin="3" ><Run Text="Trunk Flexion: N/A         Timer: 00:00"/></TextBlock>
+                    <TextBlock Foreground="Black" x:Name="tblRightHipFlexion" FontSize="10" Margin="3" ><Run Text="HipAngle Flexion: N/A   Timer: 00:00"/></TextBlock>
+                    <TextBlock Foreground="Black" x:Name="tblLeftHipFlexion" FontSize="10" Margin="3" ><Run Text="HipAngle Flexion: N/A   Timer: 00:00"/></TextBlock>
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Foreground="Purple" Header="Positions" Height="110" Width="249">
-                <StackPanel HorizontalAlignment="Left" Height="100" Margin="0,0,-2,-10" VerticalAlignment="Top" Width="239">
+            <GroupBox Foreground="Purple" Header="Positions" Height="154" Width="249">
+                <StackPanel HorizontalAlignment="Left" Height="130" Margin="0,0,-2,-10" VerticalAlignment="Top" Width="239">
                     <Label/>
-                    <TextBlock Foreground="Black" x:Name="tblHeight" FontSize="10" Margin="0" ><Run Text="He"/><Run Text="ight: "/><Run Text="N/A"/></TextBlock>
+                    <TextBlock Foreground="Black" x:Name="tblHeight" FontSize="10" Margin="3" ><Run Text="He"/><Run Text="ight: "/><Run Text="N/A"/></TextBlock>
                     <TextBlock Foreground="Black" Name="tblLeft" Text="Left Hand: N/A" FontSize="10" Margin="3" />
                     <TextBlock Foreground="Black" Name="tblRight" Text="Right Hand: N/A" FontSize="10" Margin="3" />
                     <TextBlock Foreground="Black" x:Name="tblPositionHeaderX" FontSize="10" Margin="3" ><Run Text="Posit"/><Run Text="i"/><Run Text="on Header "/><Run Text="X: N/A"/></TextBlock>
-                    <TextBlock Name="tblPositionHeaderY" Text="Position Header Y: N/A" FontSize="10" Margin="3" />
-                    <TextBlock Name="tblPositionHeaderZ" Text="Position Header Z: N/A" FontSize="10" Margin="3" />
-                    
-                    <!-- <TextBlock Name="tblPositionShoulderLeftX" Text="Position Shoulder Right X: N/A" FontSize="10" Margin="3" />
-                    <TextBlock Name="tblPositionShoulderLeftY" Text="Position Shoulder Right Y: N/A" FontSize="10" Margin="3" />
-                    <TextBlock Name="tblPositionShoulderLeftZ" Text="Position Shoulder Right Z: N/A" FontSize="10" Margin="3" />
-                    <TextBlock Name="tblPositionElbowLeftX" Text="Position Elbow RigthX: N/A" FontSize="10" Margin="3" />
-                    <TextBlock Name="tblPositionElbowLeftY" Text="Position Elbow RigthY: N/A" FontSize="10" Margin="3" />
-                    <TextBlock x:Name="tblPositionElbowLeftZ" FontSize="10" Margin="3" ><Run Text="Position Elbow RigthZ"/><Run Text=": N/A"/></TextBlock>
-                    <TextBlock Name="tblPositionShoulderRightX" Text="Position Shoulder Right X: N/A" FontSize="10" Margin="3" />
-                    <TextBlock Name="tblPositionShoulderRightY" Text="Position Shoulder Right Y: N/A" FontSize="10" Margin="3" />
-                    <TextBlock Name="tblPositionShoulderRightZ" Text="Position Shoulder Right Z: N/A" FontSize="10" Margin="3" />
-                    <TextBlock Name="tblPositionElbowRightX" Text="Position Elbow RigthX: N/A" FontSize="10" Margin="3" />
-                    <TextBlock Name="tblPositionElbowRightY" Text="Position Elbow RigthY: N/A" FontSize="10" Margin="3" />
-                    <TextBlock x:Name="tblPositionElbowRightZ" FontSize="10" Margin="3" ><Run Text="Position Elbow RigthZ"/><Run Text=": N/A"/></TextBlock>-->
+                    <TextBlock Foreground="Black" Name="tblPositionHeaderY" Text="Position Header Y: N/A" FontSize="10" Margin="3" />
+                    <TextBlock Foreground="Black" Name="tblPositionHeaderZ" Text="Position Header Z: N/A" FontSize="10" Margin="3" />
                 </StackPanel>
             </GroupBox>
         </StackPanel>

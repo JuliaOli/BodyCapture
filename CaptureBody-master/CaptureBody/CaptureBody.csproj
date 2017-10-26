@@ -91,6 +91,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AngleRules.cs" />
+    <Compile Include="Timer.cs" />
     <Compile Include="Visualization.cs" />
     <Compile Include="KinectViewer.xaml.cs">
       <DependentUpon>KinectViewer.xaml</DependentUpon>
