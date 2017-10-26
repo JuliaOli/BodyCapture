@@ -172,7 +172,7 @@ namespace CaptureBody
 
         public static double NeckExtension(this Body body)
         {
-            return neckFlexion(body) - 180;
+            return NeckFlexion(body) - 180;
         }
 
         public static double scalarProduct(Joint x, Joint y, Joint z)

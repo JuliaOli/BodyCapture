@@ -497,38 +497,5 @@ public void CsvBuilder(Body body, KinectViewer viewer)
 
 }
 */
-
-
-        ///Change color based on risks
-        ///
-        /*
-        public Color getRiskColor(double shoulderFlextion, double neckFlexion, double neckExtension) {
-
-            //Risco 1
-            //flexao do ombro > 35
-            //flexao do pescoco > 25
-            //extensao do pescoco < 0
-
-            //Risco2
-            //flexao do ombro > 35 e flexao do pescoco > 30
-            //flexao do ombro > 35 e extensao do pescoco < 0
-
-            if (shoulderFlextion > 35)
-            {
-                if (neckFlexion > 30 || neckExtension < 0)
-                {
-                    return Colors.Purple;
-                }
-                else
-                {
-                    return Colors.Red;
-                }
-            }
-            else
-            {
-                return Colors.Green;
-            }
-        }
-        */
     }
 }
