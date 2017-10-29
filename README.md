@@ -1,5 +1,5 @@
 # BodyCapture
-Aplicativo que captura de dimensões do corpo humano com o Kinect for Windows v2
+Application that captures human body dimensions and calculate angles based on ABNT regulamentation given in the data collected with Kinect for Windows v2  for study proposal.
 
 ## System Requirements Recommended
 
