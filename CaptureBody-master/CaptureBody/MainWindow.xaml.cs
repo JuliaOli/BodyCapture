@@ -171,14 +171,14 @@ namespace CaptureBody
             tblLeftShoulderFlexion.Text = "Left Shoulder Flexion: " + anglesrules.LeftShoulderFlexion.ToString() + "° " + leftShoulderFlexionTimer.TimerVar;
 
             //Right Shoulder Abduction
-            colorAux1 = anglesrules.shoulderFlexionRisk(anglesrules.RightShoulderAbduction);
+            colorAux1 = anglesrules.shoulderAbductionRisk(anglesrules.RightShoulderAbduction);
             tblRightShoulderAbduction.Foreground = new SolidColorBrush(colorAux1);
             if (anglesrules.colorCheck(colorAux1))
             {
                 if (recorrenceRightShoulderAbduction == false)
                 {
                     rightShoulderAbductionTimer.StartTimer();
-                    recorrenceRightShoulderFlexion = true;
+                    recorrenceRightShoulderAbduction = true;
                 }
 
             }
@@ -190,7 +190,7 @@ namespace CaptureBody
             tblRightShoulderAbduction.Text = "Right Shoulder Abduction: " + anglesrules.RightShoulderAbduction.ToString() + "° " + rightShoulderAbductionTimer.TimerVar;
 
             //Left Shoulder Abduction
-            colorAux1 = anglesrules.shoulderFlexionRisk(anglesrules.LeftShoulderAbduction);
+            colorAux1 = anglesrules.shoulderAbductionRisk(anglesrules.LeftShoulderAbduction);
             tblLeftShoulderAbduction.Foreground = new SolidColorBrush(colorAux1);
             if (anglesrules.colorCheck(colorAux1))
             {
@@ -204,9 +204,9 @@ namespace CaptureBody
             else
             {
                 recorrenceLeftShoulderAbduction = false;
-                leftShoulderFlexionTimer.ResetTimer();
+                leftShoulderAbductionTimer.ResetTimer();
             }
-            tblLeftShoulderAbduction.Text = "Left Shoulder Flexion: " + anglesrules.LeftShoulderFlexion.ToString() + "° " + leftShoulderFlexionTimer.TimerVar;
+            tblLeftShoulderAbduction.Text = "Left Shoulder Abduction: " + anglesrules.LeftShoulderAbduction.ToString() + "° " + leftShoulderAbductionTimer.TimerVar;
 
             //Neck
             colorAux1 = anglesrules.neckFlexionRisk(anglesrules.NeckFlexion);
@@ -355,21 +355,21 @@ namespace CaptureBody
             //Shoulders csv printer
             if (anglesrules.ElevationS)
             {
-                aux = "Shoulder Elevation:; Acceptable";
+                aux = "Shoulder Elevation:; Not recommended"; 
             }
             else
             {
-                aux = "Shoulder Elevation:; Not recommended";
+                aux = "Shoulder Elevation:; Acceptable";
             }
             csvContent.AppendLine(aux);
 
             if (anglesrules.InadequateS)
             {
-                aux = "Inadequate Arm Posture:; Acceptable";
+                aux = "Inadequate Arm Posture:; Not recommended"; 
             }
             else
             {
-                aux = "Inadequate Arm Posture:; Not recommended"; 
+                aux = "Inadequate Arm Posture:; Acceptable";
             }
             csvContent.AppendLine(aux);
 
@@ -385,11 +385,11 @@ namespace CaptureBody
             //Neck
             if (anglesrules.SymetryN)
             {
-                aux = "Neck Symmetry:; Acceptable";
+                aux = "Neck Symmetry:; Not recommended"; 
             }
             else
             {
-                aux = "Neck Symmetry:; Not recommended"; 
+                aux = "Neck Symmetry:; Acceptable";
             }
             csvContent.AppendLine(aux);
 
@@ -401,20 +401,20 @@ namespace CaptureBody
             //Trunk
             if (anglesrules.RectifinedT)
             {
-                aux = "Rectified Spine:; Acceptable"; 
+                aux = "Rectified Spine:; Not recommended"; 
             }
             else
             {
-                aux = "Rectified Spine:; Not recommended";
+                aux = "Rectified Spine:; Acceptable";
             }
             csvContent.AppendLine(aux);
             if (anglesrules.SymetryT)
             {
-                aux = "Trunk Symmetry:; Acceptable";
+                aux = "Trunk Symmetry:; Not recommended"; 
             }
             else
             {
-                aux = "Trunk Symmetry:; Not recommended"; 
+                aux = "Trunk Symmetry:; Acceptable";
             }
             csvContent.AppendLine(aux);
 
