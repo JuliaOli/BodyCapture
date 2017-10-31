@@ -32,8 +32,8 @@ namespace CaptureBody
         Timer neckFlexionTimer = new Timer();
 
         //Timer Checker
-        private bool recorrenceLeftHip = false;
-        private bool recorrenceRightHip = false;
+        //private bool recorrenceLeftHip = false;
+        //private bool recorrenceRightHip = false;
         private bool recorrenceRightShoulderFlexion = false;
         private bool recorrenceLeftShoulderFlexion = false;
         private bool recorrenceRightShoulderAbduction = false;
@@ -236,8 +236,11 @@ namespace CaptureBody
             
             //Neck Extension
             tblNeckExtension.Text = "Neck Extension: " + anglesrules.NeckExtension.ToString() + "°";
-            
-            if(neckFlexionTimer.IncrementMinuts == 8 || trunkTimer.IncrementMinuts == 3
+
+            bool auxTimer = neckFlexionTimer.IncrementMinuts == 8 && neckFlexionTimer.IncrementSeconds == 30;
+
+
+            if (auxTimer || trunkTimer.IncrementMinuts == 3
                 || leftShoulderAbductionTimer.IncrementMinuts == 4 || rightShoulderAbductionTimer.IncrementMinuts == 4)
             {
                 try
