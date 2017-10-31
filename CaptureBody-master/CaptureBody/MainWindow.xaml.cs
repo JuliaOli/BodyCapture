@@ -230,8 +230,8 @@ namespace CaptureBody
             //Neck Extension
             tblNeckExtension.Text = "Neck Extension: " + anglesrules.NeckExtension.ToString() + "°";
             
-            if(neckFlexionTimer.TimerVar == "Timer: 08:30" || trunkTimer.TimerVar == "Timer: 03:00"
-                || leftShoulderAbductionTimer.TimerVar == "Timer: 04:00" || rightShoulderAbductionTimer.TimerVar == "Timer: 04:00")
+            if(neckFlexionTimer.IncrementMinuts == 8 || trunkTimer.IncrementMinuts == 3
+                || leftShoulderAbductionTimer.IncrementMinuts == 4 || rightShoulderAbductionTimer.IncrementMinuts == 4)
             {
                 try
                 {

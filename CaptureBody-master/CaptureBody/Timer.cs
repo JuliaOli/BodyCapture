@@ -58,7 +58,15 @@ namespace CaptureBody
         public string TimerVar
         {
             get => this.timerVar;
-            set => this.timerVar = value;
+            //set => this.timerVar = value;
+        }
+        public int IncrementSeconds
+        {
+            get => this.incrementSeconds;
+        }
+        public int IncrementMinuts
+        {
+            get => this.incrementMinuts;
         }
     }
 }
