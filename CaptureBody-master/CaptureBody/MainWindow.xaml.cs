@@ -73,7 +73,7 @@ namespace CaptureBody
             //Display Arms
             tblLeft.Text = "Left: " + anglesrules.Left.ToString() + "m";
             tblRight.Text = "Right: " + anglesrules.Right.ToString() + "m";
-
+            /*
             //Right Hip Flexion
             colorAux1 = anglesrules.hipRisk(anglesrules.RightHipFlexion);
             tblRightHipFlexion.Foreground = new SolidColorBrush(colorAux1);
@@ -111,7 +111,7 @@ namespace CaptureBody
                 leftHipTimer.ResetTimer();
             }
             tblLeftHipFlexion.Text = "Left Hip Angle: " + anglesrules.LeftHipFlexion.ToString() + "° " + leftHipTimer.TimerVar;
-
+            */
             //Trunk
             colorAux1 = anglesrules.trunkRisk(anglesrules.Trunk);
             tblTrunk.Foreground = new SolidColorBrush(colorAux1);
@@ -420,10 +420,10 @@ namespace CaptureBody
 
             aux = tblTrunk.Text.ToString();
             csvContent.AppendLine(aux);
-            aux = tblRightHipFlexion.Text.ToString();
+            /*aux = tblRightHipFlexion.Text.ToString();
             csvContent.AppendLine(aux);
             aux = tblLeftHipFlexion.Text.ToString();
-            csvContent.AppendLine(aux);
+            csvContent.AppendLine(aux);*/
 
             // Display height.
             aux = tblHeight.Text.ToString();
