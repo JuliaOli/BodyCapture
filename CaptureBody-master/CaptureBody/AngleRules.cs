@@ -81,7 +81,7 @@ namespace CaptureBody
         {
             if(shoulderAbduction > 20)
             {
-                return Colors.Purple;
+                return Colors.Red;
             }
             else
             {

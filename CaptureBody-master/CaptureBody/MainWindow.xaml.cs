@@ -112,6 +112,7 @@ namespace CaptureBody
             }
             tblLeftHipFlexion.Text = "Left Hip Angle: " + anglesrules.LeftHipFlexion.ToString() + "° " + leftHipTimer.TimerVar;
             */
+
             //Trunk
             colorAux1 = anglesrules.trunkRisk(anglesrules.Trunk);
             tblTrunk.Foreground = new SolidColorBrush(colorAux1);
@@ -130,7 +131,8 @@ namespace CaptureBody
                 recorrenceTrunk = false;
                 trunkTimer.ResetTimer();
             }
-            tblTrunk.Text = "Anterior trunk inclination" + anglesrules.Trunk.ToString() + "° " + trunkTimer.TimerVar;
+            tblTrunk.Text = "Anterior trunk inclination" + anglesrules.Trunk.ToString() + "° " 
+                + trunkTimer.TimerVar;
 
             //Right Shoulder Flexion
             colorAux1 = anglesrules.shoulderFlexionRisk(anglesrules.RightShoulderFlexion);
@@ -149,7 +151,8 @@ namespace CaptureBody
                 recorrenceRightShoulderFlexion = false;
                 rightShoulderFlexionTimer.ResetTimer();
             }
-            tblRightShoulderFlexion.Text = "Right Shoulder Flexion: " + anglesrules.RightShoulderFlexion.ToString() + "° " + rightShoulderFlexionTimer.TimerVar;
+            tblRightShoulderFlexion.Text = "Right Shoulder Flexion: " + anglesrules.RightShoulderFlexion.ToString() + "° " 
+                + rightShoulderFlexionTimer.TimerVar;
 
             //Left Shoulder Flexion
             colorAux1 = anglesrules.shoulderFlexionRisk(anglesrules.LeftShoulderFlexion);
@@ -168,7 +171,8 @@ namespace CaptureBody
                 recorrenceLeftShoulderFlexion = false;
                 leftShoulderFlexionTimer.ResetTimer();
             }
-            tblLeftShoulderFlexion.Text = "Left Shoulder Flexion: " + anglesrules.LeftShoulderFlexion.ToString() + "° " + leftShoulderFlexionTimer.TimerVar;
+            tblLeftShoulderFlexion.Text = "Left Shoulder Flexion: " + anglesrules.LeftShoulderFlexion.ToString() + "° " 
+                + leftShoulderFlexionTimer.TimerVar;
 
             //Right Shoulder Abduction
             colorAux1 = anglesrules.shoulderAbductionRisk(anglesrules.RightShoulderAbduction);
@@ -187,7 +191,8 @@ namespace CaptureBody
                 recorrenceRightShoulderAbduction = false;
                 rightShoulderAbductionTimer.ResetTimer();
             }
-            tblRightShoulderAbduction.Text = "Right Shoulder Abduction: " + anglesrules.RightShoulderAbduction.ToString() + "° " + rightShoulderAbductionTimer.TimerVar;
+            tblRightShoulderAbduction.Text = "Right Shoulder Abduction: " + anglesrules.RightShoulderAbduction.ToString() + "° " 
+                + rightShoulderAbductionTimer.TimerVar;
 
             //Left Shoulder Abduction
             colorAux1 = anglesrules.shoulderAbductionRisk(anglesrules.LeftShoulderAbduction);
@@ -206,7 +211,8 @@ namespace CaptureBody
                 recorrenceLeftShoulderAbduction = false;
                 leftShoulderAbductionTimer.ResetTimer();
             }
-            tblLeftShoulderAbduction.Text = "Left Shoulder Abduction: " + anglesrules.LeftShoulderAbduction.ToString() + "° " + leftShoulderAbductionTimer.TimerVar;
+            tblLeftShoulderAbduction.Text = "Left Shoulder Abduction: " + anglesrules.LeftShoulderAbduction.ToString() + "° " 
+                + leftShoulderAbductionTimer.TimerVar;
 
             //Neck
             colorAux1 = anglesrules.neckFlexionRisk(anglesrules.NeckFlexion);
@@ -225,7 +231,8 @@ namespace CaptureBody
                 recorrenceNeck = false;
                 neckFlexionTimer.ResetTimer();
             }
-            tblNeckFlexion.Text = "Neck Flexion: " + anglesrules.NeckFlexion.ToString() + "° " + neckFlexionTimer.TimerVar;
+            tblNeckFlexion.Text = "Neck Flexion: " + anglesrules.NeckFlexion.ToString() + "° " 
+                + neckFlexionTimer.TimerVar;
             
             //Neck Extension
             tblNeckExtension.Text = "Neck Extension: " + anglesrules.NeckExtension.ToString() + "°";
