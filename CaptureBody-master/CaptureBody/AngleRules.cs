@@ -145,12 +145,11 @@ namespace CaptureBody
         }
 
         public bool colorCheck(Color color1)
-        {
+        { 
             if (color1 == Colors.Red)
-            {
                 return true;
-            }
-            return false;
+            else
+                return false;
         }
 
         //Get and Set

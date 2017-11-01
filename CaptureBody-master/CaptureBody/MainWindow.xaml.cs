@@ -22,14 +22,14 @@ namespace CaptureBody
         private Body body = null;
         
         //Timer
-        Timer rightHipTimer = new Timer();
-        Timer leftHipTimer = new Timer();
-        Timer trunkTimer = new Timer();
-        Timer rightShoulderFlexionTimer = new Timer();
-        Timer leftShoulderFlexionTimer = new Timer();
-        Timer rightShoulderAbductionTimer = new Timer();
-        Timer leftShoulderAbductionTimer = new Timer();
-        Timer neckFlexionTimer = new Timer();
+        TimerCounter rightHipTimer = new TimerCounter();
+        TimerCounter leftHipTimer = new TimerCounter();
+        TimerCounter trunkTimer = new TimerCounter();
+        TimerCounter rightShoulderFlexionTimer = new TimerCounter();
+        TimerCounter leftShoulderFlexionTimer = new TimerCounter();
+        TimerCounter rightShoulderAbductionTimer = new TimerCounter();
+        TimerCounter leftShoulderAbductionTimer = new TimerCounter();
+        TimerCounter neckFlexionTimer = new TimerCounter();
 
         //Timer Checker
         //private bool recorrenceLeftHip = false;
@@ -211,7 +211,7 @@ namespace CaptureBody
                 recorrenceLeftShoulderAbduction = false;
                 leftShoulderAbductionTimer.ResetTimer();
             }
-            tblLeftShoulderAbduction.Text = "Left Shoulder Abduction: " + anglesrules.LeftShoulderAbduction.ToString() + "° " 
+            tblLeftShoulderAbduction.Text = "Left Shoulder Abduction: " + anglesrules.LeftShoulderAbduction.ToString() + "° "
                 + leftShoulderAbductionTimer.TimerVar;
 
             //Neck
