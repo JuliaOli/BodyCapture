@@ -63,7 +63,7 @@ namespace CaptureBody
             }
 
             // Display height.
-            tblHeight.Text = "Height: " + anglesrules.Height.ToString() + "m";
+            tblHeight.Text = "Height:  " + anglesrules.Height.ToString() + "m";
             
             //Display Head positions
             tblPositionHeaderX.Text = "Position Head X: " + body.Joints[JointType.Head].Position.X;
@@ -71,8 +71,8 @@ namespace CaptureBody
             tblPositionHeaderZ.Text = "Position Head Z: " + body.Joints[JointType.Head].Position.Z;
 
             //Display Arms
-            tblLeft.Text = "Left: " + anglesrules.Left.ToString() + "m";
-            tblRight.Text = "Right: " + anglesrules.Right.ToString() + "m";
+            tblLeft.Text = "Left:  " + anglesrules.Left.ToString() + "m";
+            tblRight.Text = "Right:  " + anglesrules.Right.ToString() + "m";
             /*
             //Right Hip Flexion
             colorAux1 = anglesrules.hipRisk(anglesrules.RightHipFlexion);
@@ -131,7 +131,7 @@ namespace CaptureBody
                 recorrenceTrunk = false;
                 trunkTimer.ResetTimer();
             }
-            tblTrunk.Text = "Anterior trunk inclination" + anglesrules.Trunk.ToString() + "° " 
+            tblTrunk.Text = "Anterior trunk inclination:  " + anglesrules.Trunk.ToString() + "° " 
                 + trunkTimer.TimerVar;
 
             //Right Shoulder Flexion
@@ -151,7 +151,7 @@ namespace CaptureBody
                 recorrenceRightShoulderFlexion = false;
                 rightShoulderFlexionTimer.ResetTimer();
             }
-            tblRightShoulderFlexion.Text = "Right Shoulder Flexion: " + anglesrules.RightShoulderFlexion.ToString() + "° " 
+            tblRightShoulderFlexion.Text = "Right Shoulder Flexion:  " + anglesrules.RightShoulderFlexion.ToString() + "° " 
                 + rightShoulderFlexionTimer.TimerVar;
 
             //Left Shoulder Flexion
@@ -171,7 +171,7 @@ namespace CaptureBody
                 recorrenceLeftShoulderFlexion = false;
                 leftShoulderFlexionTimer.ResetTimer();
             }
-            tblLeftShoulderFlexion.Text = "Left Shoulder Flexion: " + anglesrules.LeftShoulderFlexion.ToString() + "° " 
+            tblLeftShoulderFlexion.Text = "Left Shoulder Flexion:  " + anglesrules.LeftShoulderFlexion.ToString() + "° " 
                 + leftShoulderFlexionTimer.TimerVar;
 
             //Right Shoulder Abduction
@@ -191,7 +191,7 @@ namespace CaptureBody
                 recorrenceRightShoulderAbduction = false;
                 rightShoulderAbductionTimer.ResetTimer();
             }
-            tblRightShoulderAbduction.Text = "Right Shoulder Abduction: " + anglesrules.RightShoulderAbduction.ToString() + "° " 
+            tblRightShoulderAbduction.Text = "Right Shoulder Abduction:  " + anglesrules.RightShoulderAbduction.ToString() + "° " 
                 + rightShoulderAbductionTimer.TimerVar;
 
             //Left Shoulder Abduction
@@ -211,7 +211,7 @@ namespace CaptureBody
                 recorrenceLeftShoulderAbduction = false;
                 leftShoulderAbductionTimer.ResetTimer();
             }
-            tblLeftShoulderAbduction.Text = "Left Shoulder Abduction: " + anglesrules.LeftShoulderAbduction.ToString() + "° "
+            tblLeftShoulderAbduction.Text = "Left Shoulder Abduction:  " + anglesrules.LeftShoulderAbduction.ToString() + "° "
                 + leftShoulderAbductionTimer.TimerVar;
 
             //Neck
@@ -231,17 +231,17 @@ namespace CaptureBody
                 recorrenceNeck = false;
                 neckFlexionTimer.ResetTimer();
             }
-            tblNeckFlexion.Text = "Neck Flexion: " + anglesrules.NeckFlexion.ToString() + "° " 
+            tblNeckFlexion.Text = "Neck Flexion:  " + anglesrules.NeckFlexion.ToString() + "° " 
                 + neckFlexionTimer.TimerVar;
             
             //Neck Extension
-            tblNeckExtension.Text = "Neck Extension: " + anglesrules.NeckExtension.ToString() + "°";
+            tblNeckExtension.Text = "Neck Extension:  " + anglesrules.NeckExtension.ToString() + "°";
 
-            bool auxTimer = neckFlexionTimer.IncrementMinuts == 8 && neckFlexionTimer.IncrementSeconds == 30;
-
-
-            if (auxTimer || trunkTimer.IncrementMinuts == 3
-                || leftShoulderAbductionTimer.IncrementMinuts == 4 || rightShoulderAbductionTimer.IncrementMinuts == 4)
+            bool auxTimerN = neckFlexionTimer.IncrementMinuts == 8 && neckFlexionTimer.IncrementSeconds == 30;
+            bool auxTimerT = trunkTimer.IncrementMinuts == 3 && trunkTimer.IncrementSeconds == 0;
+            bool auxTimerLS = leftShoulderAbductionTimer.IncrementMinuts == 4 && leftShoulderAbductionTimer.IncrementSeconds == 0;
+            bool auxTimerRS = rightShoulderAbductionTimer.IncrementMinuts == 4 && rightShoulderAbductionTimer.IncrementSeconds == 0;
+            if (auxTimerN || auxTimerT || auxTimerLS || auxTimerRS)
             {
                 try
                 {
